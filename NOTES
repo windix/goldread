@@ -1,0 +1,58 @@
+freekindlecn
+
+https://github.com/hakanensari/vacuum
+
+https://github.com/phoet/asin
+
+http://www.ereaderiq.com/pricewatch
+
+https://github.com/sferik/twitter
+
+
+
+
+商品销售榜 付费排行榜
+
+http://www.amazon.cn/gp/rss/bestsellers/digital-text/
+
+商品销售榜 免费排行榜
+
+http://www.amazon.cn/gp/rss/top-free/digital-text/
+
+http://www.amazon.cn/gp/bestsellers/digital-text/
+
+新品排行榜
+
+http://www.amazon.cn/gp/new-releases/digital-text/
+
+销售飙升榜
+
+http://www.amazon.cn/gp/movers-and-shakers/digital-text/
+
+http://www.amazon.cn/gp/rss/movers-and-shakers/digital-text/
+
+
+www.amazon.cn/dp/B009ZQB8VA
+
+http://www.amazon.cn/gp/aw/d/B009ZQB8VA
+
+
+curl --user-agent "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.37 Safari/537.36" http://www.amazon.cn/gp/aw/d/B009ZQB8VA > item_mobile.html
+
+curl --user-agent "Mozilla/5.0 (iPhone; U; CPU iPhone OS 5_1_1 like Mac OS X; en-gb) AppleWebKit/534.46.0 (KHTML, like Gecko) CriOS/19.0.1084.60 Mobile/9B206 Safari/7534.48.3" http://www.amazon.cn/gp/aw/d/B009ZQB8VA > item_mobile1.html
+
+
+
+
+
+span.listPrice
+
+span.kindlePrice
+
+span.youSave
+
+
+http://www.amazon.cn/gp/movers-and-shakers/digital-text/?ie=UTF8&pg=2&ajax=1
+http://www.amazon.cn/gp/movers-and-shakers/digital-text/?ie=UTF8&pg=2&ajax=1&isAboveTheFold=0
+
+curl 'http://www.amazon.cn/gp/movers-and-shakers/digital-text/ref=zg_bsms_digital-text_pg_2?ie=UTF8&pg=2&ajax=1' -H $'Cookie: lc-acbcn=zh_CN; x-wl-uid=1zudXylQg6l/Sgf/8rqhey6DKXU4hFwREwo7YujwnGnaoJxJuYxROn4BqGx/zmgNPtCdfcruF+BAYVMZ09Jp3sIhuXcrDVfSPO+rfacq2HnLCCzR9p4y0yUR4WGBQgZNJLOwR86x6qaE=; s_pers=%20s_dl%3D1%7C1370953792594%3B%20gpv_page%3DAS%253Asell-on-amazon%253Ahow-it-works%7C1370953792611%3B%20s_ev15%3D%255B%255B\'AZCNSOAFooter\'%252C\'1370951956461\'%255D%252C%255B\'AZCNSOAFooter\'%252C\'1370951991205\'%255D%252C%255B\'kaidian.amazon.cn\'%252C\'1370951992615\'%255D%255D%7C1528718392615%3B%20s_eVar26%3DAmazon%2520Services%2520CN%7C1373543992630%3B; 5SnMamzvowels.time.4=1370985154959; 5SnMamzvowels.time.0=1370985225618; 5SnMamzvowels.time.1=1371038662094; __utma=164006624.1800399841.1370945604.1370953821.1371038718.4; __utmc=164006624; __utmz=164006624.1371038718.4.4.utmccn=(referral)|utmcsr=amazon.cn|utmcct=/%E6%98%8E%E6%9C%9D%E9%82%A3%E4%BA%9B%E4%BA%8B%E5%84%BF/dp/B00CIHXOOM/ref=pd_ms_zgc_kinc_digital-text_1|utmcmd=referral; UserPref=svU19ACCLaS3pZ40V12GutWknL7NK9/PXnK6KeMI3I0LEsnIpBOnM/2nR9inIWwTRk/TWgFxwnNSsZD0ZYgJgdNDKgKmAot7lGWGdKFZgT569qQ0a6/ZpzkW22evY1HaUCllvniJCoQQ+ovoIqUW5bHG90QQQEJkKYpFRap4Wpyc0Mowk/erfA73e8YtAVx84bGfUm5pzTa+cDiQ1Pn9UmiUDe0SDuhtWKSswrmDmXYg8U0FfUtWk2xKMODD8GrtSJNMkv/eydxW35T87FB9O1sa/sxpY3y96owxKL6Di4AwluX9WZSAB2+Zzb7PmaHSkR9H99rr3rpTJgefAGmq9ExvJqqcToQ8ijdX63QpHgnJllsizjOxzF92dpveBKx5dsdW/qdFPjyxx9yRgrOafyZEp9eXzdzcKfQl9fJA3qc0k7X013vGGsEv9lTWGazxNcwOOMR6CnE=; session-token="JsxAo0ZlvhZZLnSIaJ0UIkpSrE+uQCEbckF2xCcOU9rGMfyNGRDaEBaGYWvOtuiq/gs9rN4DfajZQLwrZhiF5vPjRoCfficz7a3nSPtaE20aMjzgW2cLy1NUdz5VMvTnILXPM5L0oRbnNtcRpq5ROHkiJO40taVXBZONJOrKjqvuzeSkJW4w/VcpuISbiAT7cJ7hGGJP52YRubHRbLv7TAttiFpI66X3XN7pcapBIeQ="; x-acbcn="yj33tTdvuIDIS0I289o8@F8ts3msbnAAZcIBghGnbTlGqzs4Dr6AyGWAv6YDONzr"; __utmv=164006624.***REMOVED***; 5SnMamzvowels.time.2=1371038853661; 5SnMamzvowels.pos=4; 5SnMamzvowels.time.3=1371039550226; csm-hit=96.63|1371041873109; ubid-acbcn=477-3816484-1004707; session-id-time=2082729601l; session-id=477-7971944-4975207' -H 'Accept-Encoding: gzip,deflate,sdch' -H 'Host: www.amazon.cn' -H 'Accept-Language: en-US,en;q=0.8' -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_8_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.37 Safari/537.36' -H 'Accept: text/html, */*' -H 'Referer: http://www.amazon.cn/gp/movers-and-shakers/digital-text/' -H 'X-Requested-With: XMLHttpRequest' -H 'Connection: keep-alive' --compressed
