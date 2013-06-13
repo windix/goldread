@@ -1,0 +1,9 @@
+
+
+E, [2013-06-13T21:25:38.172903 #32566] ERROR -- : got response='<?xml version="1.0"?>
+<ItemLookupErrorResponse xmlns="http://ecs.amazonaws.com/doc/2011-08-01/"><Error><Code>RequestThrottled</Code><Message>Request from AUYNW5YGUSFFD is throttled.</Message></Error><RequestId>5fe807be-9114-4bf5-9833-065b1c5d73ab</RequestId></ItemLookupErrorResponse>'
+/Users/wfeng/git/asin/lib/asin/client.rb:381:in `call': request failed with response-code='503' (RuntimeError)
+  from /Users/wfeng/git/asin/lib/asin/client.rb:158:in `lookup'
+  from /Users/wfeng/git/freekindlecn/item.rb:25:in `fetch_info'
+  from freekindlecn.rb:18:in `<module:FreeKindleCN>'
+  from freekindlecn.rb:12:in `<main>'

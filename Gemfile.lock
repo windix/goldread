@@ -1,11 +1,15 @@
-GEM
-  remote: https://rubygems.org/
+PATH
+  remote: ~/git/asin
   specs:
     asin (1.1.2)
       confiture (>= 0.1)
       crack (>= 0.3)
       hashie (>= 1.1)
       httpi (>= 0.9)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
     confiture (0.1.4)
     crack (0.4.0)
       safe_yaml (~> 0.9.0)
@@ -23,6 +27,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  asin
+  asin!
   httpclient
   nokogiri

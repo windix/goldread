@@ -1,0 +1,122 @@
+<?xml version="1.0" ?>
+<ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01">
+  <OperationRequest>
+    <HTTPHeaders>
+      <Header Name="UserAgent" Value="HTTPClient/1.0 (2.3.3, ruby 1.9.3 (2013-02-06))"/>
+    </HTTPHeaders>
+    <RequestId>cb7871db-58de-4f67-bc88-b118a7e9cd09</RequestId>
+    <Arguments>
+      <Argument Name="Operation" Value="ItemLookup"/>
+      <Argument Name="Service" Value="AWSECommerceService"/>
+      <Argument Name="Signature" Value="/QyClt8CFniHalU6jjXwbdm8wS1OQHV66BdSfvAR8e4="/>
+      <Argument Name="AssociateTag" Value="***REMOVED***"/>
+      <Argument Name="Version" Value="2011-08-01"/>
+      <Argument Name="ItemId" Value="B009ZQB8VA"/>
+      <Argument Name="AWSAccessKeyId" Value="***REMOVED***"/>
+      <Argument Name="Timestamp" Value="2013-06-11T11:06:07Z"/>
+      <Argument Name="ResponseGroup" Value="Medium"/>
+    </Arguments>
+    <RequestProcessingTime>0.0972780000000000</RequestProcessingTime>
+  </OperationRequest>
+  <Items>
+    <Request>
+      <IsValid>True</IsValid>
+      <ItemLookupRequest>
+        <IdType>ASIN</IdType>
+        <ItemId>B009ZQB8VA</ItemId>
+        <ResponseGroup>Medium</ResponseGroup>
+        <VariationPage>All</VariationPage>
+      </ItemLookupRequest>
+    </Request>
+    <Item>
+      <ASIN>B009ZQB8VA</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E9%87%8D%E8%AF%B4%E4%B8%AD%E5%9B%BD%E8%BF%91%E4%BB%A3%E5%8F%B2/dp/B009ZQB8VA?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B009ZQB8VA</DetailPageURL>
+      <SalesRank>1</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/51HQe24l-vL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">52</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/51HQe24l-vL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">112</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/51HQe24l-vL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">349</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/51HQe24l-vL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">21</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/51HQe24l-vL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">52</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/51HQe24l-vL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">52</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/51HQe24l-vL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">77</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/51HQe24l-vL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">112</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/51HQe24l-vL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">349</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>张鸣</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>数字时代</Brand>
+        <Creator Role="作者">张鸣</Creator>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <Label>中国致公出版社</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>中国致公出版社</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <NumberOfPages>203</NumberOfPages>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <Publisher>中国致公出版社</Publisher>
+        <ReleaseDate>2012-12-13</ReleaseDate>
+        <Studio>中国致公出版社</Studio>
+        <Title>重说中国近代史</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>《重说中国近代史》源自人大的一门热门选修课，即张鸣老师开设的政治史公开课，它靠同学们口碑相传而走红校园，最终使更多的人对这段看起来枯燥无比的历史重新认真审视起来。&lt;br /&gt;这门课为什么如此受欢迎？原来在张鸣老师的还原下，中国近代史变得如此复杂、精彩，又是如此的颠覆，它与我们记忆里的古板印象迥然不同，绝非教科书上的忠奸两列、黑白分明。当诸多人物与史实呈现在我们面前时，难以用一句简单的是非作判定，在正视一段被扭曲的中国近代史的同时，我们也能发现国人今日问题的精神根源。&lt;br /&gt;基于此，我们将这门课的讲课稿集结成书，希望与更多的人分享这段充满矛盾与悖论的真实历史：中国与西方、清廷与民间、满族与汉族士人、洋教与本土信仰、枪杆与笔杆、造反和维新、科举与革命……是的，那段历史，除去屈辱与仇恨，还有着太多的内容值得重新去回望和反思。&lt;br /&gt;正如张鸣教授所说：如果我们不知道或者完全无视这个过程，就很难在历史长河中找到自己的位置，很难安放好自己的位置，在世界格局中也定位不好自己的位置。诚如斯言。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《重说中国近代史》源自人大的一门热门选修课，即张鸣老师开设的政治史公开课，它靠同学们口碑相传而走红校园，最终使更多的人对这段看起来枯燥无比的历史重新认真审视起来。&lt;br /&gt;这门课为什么如此受欢迎？原来在张鸣老师的还原下，中国近代史变得如此复杂、精彩，又是如此的颠覆，它与我们记忆里的古板印象迥然不同，绝非教科书上的忠奸两列、黑白分明。当诸多人物与史实呈现在我们面前时，难以用一句简单的是非作判定，在正视一段被扭曲的中国近代史的同时，我们也能发现国人今日问题的精神根源。&lt;br /&gt;基于此，我们将这门课的讲课稿集结成书，希望与更多的人分享这段充满矛盾与悖论的真实历史：中国与西方、清廷与民间、满族与汉族士人、洋教与本土信仰、枪杆与笔杆、造反和维新、科举与革命……是的，那段历史，除去屈辱与仇恨，还有着太多的内容值得重新去回望和反思。&lt;br /&gt;正如张鸣教授所说：如果我们不知道或者完全无视这个过程，就很难在历史长河中找到自己的位置，很难安放好自己的位置，在世界格局中也定位不好自己的位置。诚如斯言。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+  </Items>
+</ItemLookupResponse>

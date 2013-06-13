@@ -1,0 +1,209 @@
+<?xml version="1.0" ?>
+<ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01">
+  <OperationRequest>
+    <HTTPHeaders>
+      <Header Name="UserAgent" Value="HTTPClient/1.0 (2.3.3, ruby 1.9.3 (2013-02-06))"/>
+    </HTTPHeaders>
+    <RequestId>d472a64a-7f30-4e70-b825-ebdc1f5148df</RequestId>
+    <Arguments>
+      <Argument Name="Operation" Value="ItemLookup"/>
+      <Argument Name="Service" Value="AWSECommerceService"/>
+      <Argument Name="Signature" Value="dcm5otn+YUog1/fZg14AWioeI9OzHB8iTIOIblY9Wos="/>
+      <Argument Name="AssociateTag" Value="***REMOVED***"/>
+      <Argument Name="Version" Value="2011-08-01"/>
+      <Argument Name="ItemId" Value="B00CE1PKXA,B00D7YRXPG"/>
+      <Argument Name="AWSAccessKeyId" Value="***REMOVED***"/>
+      <Argument Name="Timestamp" Value="2013-06-13T11:19:31Z"/>
+      <Argument Name="ResponseGroup" Value="Medium"/>
+    </Arguments>
+    <RequestProcessingTime>0.1462520000000000</RequestProcessingTime>
+  </OperationRequest>
+  <Items>
+    <Request>
+      <IsValid>True</IsValid>
+      <ItemLookupRequest>
+        <IdType>ASIN</IdType>
+        <ItemId>B00CE1PKXA</ItemId>
+        <ItemId>B00D7YRXPG</ItemId>
+        <ResponseGroup>Medium</ResponseGroup>
+        <VariationPage>All</VariationPage>
+      </ItemLookupRequest>
+    </Request>
+    <Item>
+      <ASIN>B00CE1PKXA</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E6%82%9F%E7%A9%BA%E4%BC%A0/dp/B00CE1PKXA?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00CE1PKXA</DetailPageURL>
+      <SalesRank>3</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/510yp%2BtG2bL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">56</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/510yp%2BtG2bL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">119</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/510yp%2BtG2bL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">373</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/510yp%2BtG2bL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">22</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/510yp%2BtG2bL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">56</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/510yp%2BtG2bL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">56</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/510yp%2BtG2bL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">82</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/510yp%2BtG2bL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">119</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/510yp%2BtG2bL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">373</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>今何在</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>中南博集天卷文化传媒有限公司</Brand>
+        <Creator Role="作者">今何在</Creator>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <Label>湖南文艺出版社</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>湖南文艺出版社</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <NumberOfPages>222</NumberOfPages>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2011-06-01</PublicationDate>
+        <Publisher>湖南文艺出版社</Publisher>
+        <ReleaseDate>2013-04-27</ReleaseDate>
+        <Studio>湖南文艺出版社</Studio>
+        <Title>悟空传(完美纪念版)</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>理想和宿命、爱情与自由，是悟空传探讨的主题，也是十年来打动千万读者的核心。&lt;br /&gt;唐僧师徒四人面对早已注定的命运踏上西游道路。猪八戒和孙悟空虽然都神通广大，但在命运面前终究是软弱无力的小人物……&lt;br /&gt;作者探讨了等主题，读者和评论家一致给予极高评价。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《悟空传(完美纪念版)》&lt;br /&gt;著名作家今何在 时隔十年全新演绎《悟空传》！&lt;br /&gt;再度掀起畅销狂潮，为你讲述青春的美好回忆！&lt;br /&gt;一段早已注定的宿命，一段注定悲伤的爱情，一部掀开大陆文学创作高潮的经典作品&lt;br /&gt;《悟空传》时隔十年，全新震撼出击，冲击一百五十万畅销王座！&lt;br /&gt;面对无法改变的命运，所有人都想逃，所有人都在恨，你呢？&lt;br /&gt;理想与宿命、爱情与自由。一直是《悟空传》探讨的主题，也是十年来打动千万读者的核心。唐僧师徒四人面对早已注定的命运，终究踏上了西游的道路。孙悟空、猪八戒虽然神通广大，但在命运面前，不过是软弱无力的小人物...&lt;br /&gt;十年过去，这并不是一次简单的复制，只为，纪念那段不朽的绝美青春！&lt;p&gt;&lt;font color=red&gt;&lt;b&gt;点击链接进入玄幻传奇系列&lt;/b&gt;：&lt;br /&gt; 傲风之光芒大陆(套装共2册)(附精美书签1张)&lt;/b&gt;&lt;/font&gt;  &lt;br /&gt;傲风之光芒大陆2(套装上下册)(附书签1张)&lt;/b&gt;&lt;/font&gt;  &lt;br /&gt;山海经密码（一部带您重返中国一切神话、传说与文明源头的奇妙小说）&lt;/b&gt;&lt;/font&gt;  &lt;br /&gt;幻城&lt;/b&gt;&lt;/font&gt;  &lt;br /&gt;斗罗大陆(套装共14册)&lt;/b&gt;&lt;/font&gt;  &lt;br /&gt;斗破苍穹15:加玛风云&lt;/b&gt;&lt;/font&gt;  &lt;br /&gt;临界•爵迹1&lt;/b&gt;&lt;/font&gt;  &lt;br /&gt;临界•爵迹2&lt;/b&gt;&lt;/font&gt; &lt;br /&gt;&lt;br /&gt;&lt;img src='http://g-ecx.images-amazon.com/images/G/28/Y/B0053O64121._V178084763_.jpg'&gt;</Content>
+          <IsLinkSuppressed>1</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+    <Item>
+      <ASIN>B00D7YRXPG</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E7%AC%AC%E4%B8%83%E5%A4%A9/dp/B00D7YRXPG?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00D7YRXPG</DetailPageURL>
+      <SalesRank>6</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/51OYqB32CrL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">55</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/51OYqB32CrL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">118</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/51OYqB32CrL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">368</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/51OYqB32CrL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">22</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/51OYqB32CrL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">55</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/51OYqB32CrL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">55</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/51OYqB32CrL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">81</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/51OYqB32CrL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">118</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/51OYqB32CrL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">368</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>余华</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>新经典文化</Brand>
+        <Creator Role="作者">余华</Creator>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <Label>新星出版社</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>新星出版社</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2013-06-01</PublicationDate>
+        <Publisher>新星出版社</Publisher>
+        <ReleaseDate>2013-06-15</ReleaseDate>
+        <Studio>新星出版社</Studio>
+        <Title>第七天</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>沉潜7年，余华全新长篇，6月《第七天》震撼上市！Kindle版独家预售。 余华，杭州生，海盐长，行医5年，弃医从文。著有《活着》、《兄弟》、《许三观卖血记》、《在细雨中呼喊》等作，被翻译为20多种文字，在近30个国家出版。 余华的《第七天》，比《兄弟》更荒诞，比《活着》更绝望，这是一个残酷而温暖的故事。&lt;br /&gt;&lt;br /&gt;独家试读：&lt;br /&gt;&lt;br /&gt;浓雾弥漫之时，我走出了出租屋，在空虚混沌的城市里孑孓而行。我要去的地方名叫殡仪馆，这是它现在的名字，它过去的名字叫火葬场。我得到一个通知，让我早晨九点之前赶到殡仪馆，我的火化时间预约在九点半。&lt;br /&gt;昨夜响了一宵倒塌的声音，轰然声连接着轰然声，仿佛一幢一幢房屋疲惫不堪之后躺下了。我在持续的轰然声里似睡非睡，天亮后打开屋门时轰然声突然消失，我开门的动作似乎是关上轰然声的开关。随后看到门上贴着这张通知我去殡仪馆火化的纸条，上面的字在雾中湿润模糊，还有两张纸条是十多天前贴上去的，通知我去缴纳电费和水费。&lt;br /&gt;我出门时浓雾锁住了这个城市的容貌，这个城市失去了白昼和黑夜，失去了早晨和晚上。我走向公交车站，一些人影在我面前倏忽间出现，又倏忽间消失。我小心翼翼走了一段路程，一个像是站牌的东西挡住了我，仿佛是从地里突然生长出来。我想上面应该有一些数字，如果有203，就是我要坐的那一路公交车。我看不清楚上面的数字，举起右手去擦拭，仍然看不清楚。我揉擦起了自己的眼睛，好像看见上面的203，我知道这里就是公交车站。奇怪的感觉出现了，我的右眼还在原来的地方，左眼外移到颧骨的位置。接着我感到鼻子旁边好像挂着什么，下巴下面也好像挂着什么，我伸手去摸，发现鼻子旁边的就是鼻子，下巴下面的就是下巴，它们在我的脸上转移了。&lt;br /&gt;浓雾里影影幢幢，我听到活生生的声音此起彼伏，犹如波动之水。我虚无缥缈地站在这里，等待203 路公交车。听到很多汽车碰撞的声响接踵而来，浓雾湿透我的眼睛，我什么也没有看见，只听到连串车祸聚集起来的声响。一辆轿车从雾里冲出来，与我擦肩而去，冲向一堆活生生的声音，那些声音顷刻爆炸了，如同沸腾之水。&lt;br /&gt;我继续站立，继续等待。过了一会儿，我心想这里发生大面积的车祸， 203 路公交车不会来了，我应该走到下一个车站。我向前走去，湿漉漉的眼睛看到了雪花，在浓雾里纷纷扬扬出来时恍若光芒出来了，飘落在脸上，脸庞有些温暖了。我站住脚，低头打量它们如何飘落在身上，衣服在雪花里逐渐清晰起来。&lt;br /&gt;我意识到这是一个重要的日子：我死去的第一天。可是我没有净身，也没有穿上殓衣，只是穿着平常的衣服，还有外面这件陈旧臃肿的棉大衣，就走向殡仪馆。我为自己的冒失感到羞愧，于是转身往回走去。&lt;br /&gt;飘落的雪花让这个城市有了一些光芒，浓雾似乎慢慢卸妆了，我在行走里隐约看见街上来往的行人和车辆。我走回到刚才的公交车站，一片狼藉的景象出现在眼前，二十多辆汽车横七竖八堵住了街道，还有警车和救护车；一些人躺在地上，另一些人被从变形的车厢里拖出来；有些人在呻吟，有些人在哭泣，有些人无声无息。这是刚才车祸发生的地点，我停留一下，这次确切看清了站牌上的203。我穿越了过去。&lt;br /&gt;我回到出租屋，脱下身上不合时宜的衣服，光溜溜走到水槽旁边，拧开水龙头，用手掌接水给自己净身时看到身上有一些伤口。裂开的伤口涂满尘土，里面有碎石子和木头刺，我小心翼翼把它们剔除出去。&lt;br /&gt;这时候放在床上枕头旁边的手机响了，我感到奇怪，因为欠费已被停机两个月，现在它突然响了。我拿起手机，摁了一下接听键，小声说：“喂。”电话那头传来一个声音：“你是杨飞吗？”“是我。”“我是殡仪馆的，你到哪里了？”“我在家里。”“在家里干什么？”“我在净身。”“都快九点钟了，还在净身？”&lt;br /&gt;我不安地说：“我马上来。”“快点来，带上你的预约号。”“预约号在哪里？”“贴在你的门上。”&lt;br /&gt;对方挂断电话。我心里有些不快，这种事情还要催促？我放下电话，继续清洗身上的伤口。我找来一只碗，用碗接水后冲刷那些残留在伤口里的碎石子和木头刺，清洗速度加快了。&lt;br /&gt;净身之后，我湿漉漉走到衣柜那里，打开柜门寻找我的殓衣。里面没有殓衣，只有一身绸缎的白色睡衣像是殓衣，上面有着隐隐约约的印花图案，胸口用红线绣上的“李青”两字已经褪色，这是那段短暂婚姻留下的痕迹。我当时的妻子李青在商店里精心挑选了两套中式对襟睡衣，她在自己的睡衣胸口绣上我的名字，在我的睡衣胸口绣上她的名字。那段婚姻结束之后，我没再穿过它，现在我穿上了，感到这白色的绸缎睡衣有着雪花一样温暖的颜色。&lt;br /&gt;我打开屋门，仔细辨认贴在门上的殡仪馆通知，上面有一个“A3”，心想这就是预约号。我将通知摘下来，折叠后小心放入睡衣口袋。&lt;br /&gt;我准备走去时觉得缺少了什么，站在飘扬的雪花里思忖片刻，想起来了，是黑纱。我孤苦伶仃，没有人会来悼念我，只能自己悼念自己。&lt;br /&gt;我返回出租屋，在衣柜里寻找黑布。寻找了很久，没有黑布，只有一件黑色的衬衣，因为陈旧，黑色已经趋向灰黑色。我没有其他的选择，只能剪下它的一截袖管，套在左手的白色袖管上。&lt;br /&gt;虽然自我悼念的装束美中不足，我已经心满意足。&lt;br /&gt;我的手机又响了。“杨飞吗？”“是我。”“我是殡仪馆的，”声音问，“你想不想烧啊？”我迟疑了一下说：“想烧。”“都九点半了，你迟到啦。”“这种事情也有迟到？”我小心问。“想烧就快点来。”</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+  </Items>
+</ItemLookupResponse>

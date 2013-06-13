@@ -1,0 +1,956 @@
+<?xml version="1.0" ?>
+<ItemLookupResponse xmlns="http://webservices.amazon.com/AWSECommerceService/2011-08-01">
+  <OperationRequest>
+    <HTTPHeaders>
+      <Header Name="UserAgent" Value="HTTPClient/1.0 (2.3.3, ruby 1.9.3 (2013-02-06))"/>
+    </HTTPHeaders>
+    <RequestId>ec483b49-ce1b-42b1-b6e2-9dc8558749c1</RequestId>
+    <Arguments>
+      <Argument Name="Operation" Value="ItemLookup"/>
+      <Argument Name="Service" Value="AWSECommerceService"/>
+      <Argument Name="Signature" Value="98dRguvHEoQtpw0IVwOJrY9UfFT0SM3sRrl4dKdQSog="/>
+      <Argument Name="AssociateTag" Value="***REMOVED***"/>
+      <Argument Name="Version" Value="2011-08-01"/>
+      <Argument Name="ItemId" Value="B00BUK5Z7C,B00CFCYRXM,B00COGVZW0,B00CHX04FY,B00CE7OFAS,B009WNRLMG,B00CRX82NU,B00C3729EI,B0096XGAJM,B00C57S52G"/>
+      <Argument Name="AWSAccessKeyId" Value="***REMOVED***"/>
+      <Argument Name="Timestamp" Value="2013-06-13T13:39:33Z"/>
+      <Argument Name="ResponseGroup" Value="Medium"/>
+    </Arguments>
+    <RequestProcessingTime>0.1789240000000000</RequestProcessingTime>
+  </OperationRequest>
+  <Items>
+    <Request>
+      <IsValid>True</IsValid>
+      <ItemLookupRequest>
+        <IdType>ASIN</IdType>
+        <ItemId>B00BUK5Z7C</ItemId>
+        <ItemId>B00CFCYRXM</ItemId>
+        <ItemId>B00COGVZW0</ItemId>
+        <ItemId>B00CHX04FY</ItemId>
+        <ItemId>B00CE7OFAS</ItemId>
+        <ItemId>B009WNRLMG</ItemId>
+        <ItemId>B00CRX82NU</ItemId>
+        <ItemId>B00C3729EI</ItemId>
+        <ItemId>B0096XGAJM</ItemId>
+        <ItemId>B00C57S52G</ItemId>
+        <ResponseGroup>Medium</ResponseGroup>
+        <VariationPage>All</VariationPage>
+      </ItemLookupRequest>
+    </Request>
+    <Item>
+      <ASIN>B00BUK5Z7C</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E5%AE%B9%E6%98%93%E8%AF%AF%E8%AF%91%E7%9A%84%E8%8B%B1%E8%AF%AD/dp/B00BUK5Z7C?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00BUK5Z7C</DetailPageURL>
+      <SalesRank>44</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/51sOnEm7DjL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">53</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/51sOnEm7DjL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">113</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/51sOnEm7DjL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">353</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/51sOnEm7DjL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">21</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/51sOnEm7DjL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">53</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/51sOnEm7DjL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">53</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/51sOnEm7DjL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">78</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/51sOnEm7DjL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">113</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/51sOnEm7DjL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">353</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>何炳威</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>外语教学与研究出版社</Brand>
+        <Creator Role="作者">何炳威</Creator>
+        <Edition>第2版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <Label>外语教学与研究出版社</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>外语教学与研究出版社</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <NumberOfPages>299</NumberOfPages>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2009-03-01</PublicationDate>
+        <Publisher>外语教学与研究出版社</Publisher>
+        <ReleaseDate>2013-03-21</ReleaseDate>
+        <Studio>外语教学与研究出版社</Studio>
+        <Title>容易误译的英语（修订版）</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>《容易误译的英语》（修订版）所收词条既有单词，也有短语和句子；既有口语，也有书面语；既有习语，也有一般词语；既有普通词，也有科谱词(前者为主)；既有全称词，也有缩略语；既有英式英语，也有美式英语；既有词法问题，也有句法问题。收入的词条中有些词或释义在一般的英汉词典中不容易查到的。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《容易误译的英语》由何炳威编著，讲述了容易误译的语句。让你学习到更多的语法知识，想知道更多的意思，在这本书里可以让你恍然大悟的找到许多答案。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+    <Item>
+      <ASIN>B00CFCYRXM</ASIN>
+      <DetailPageURL>http://www.amazon.cn/30%E5%B2%81%E5%89%8D%E5%88%AB%E7%BB%93%E5%A9%9A/dp/B00CFCYRXM?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00CFCYRXM</DetailPageURL>
+      <SalesRank>49</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/51ujgrKXffL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">59</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/51ujgrKXffL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">125</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/51ujgrKXffL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">392</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/51ujgrKXffL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">24</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/51ujgrKXffL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">59</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/51ujgrKXffL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">59</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/51ujgrKXffL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">86</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/51ujgrKXffL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">125</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/51ujgrKXffL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">392</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>陈愉(Joy Chen)</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>浙版数媒</Brand>
+        <Creator Role="作者">陈愉(Joy Chen)</Creator>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <Label>浙江出版集团数字传媒有限公司</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>浙江出版集团数字传媒有限公司</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <NumberOfPages>182</NumberOfPages>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2012-05-01</PublicationDate>
+        <Publisher>浙江出版集团数字传媒有限公司</Publisher>
+        <ReleaseDate>2013-04-26</ReleaseDate>
+        <Studio>浙江出版集团数字传媒有限公司</Studio>
+        <Title>30岁前别结婚(一个精英猎头写给天下女性的高效规划)</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>《30岁前别结婚》是一本写给全球华人才俊的情书，这是一个精英猎头写给天下女性的幸福规划。新的世界，需要新的规则。&lt;br /&gt;作者陈愉，从一个在美国长大的、羞怯的中国小姑娘，成长为一名国际公民，一个敢于挑战规则、懂得说“不”的成熟女人；31岁时她当上了洛杉矶市的副市长，现在为全球化企业做猎头。&lt;br /&gt;《30岁前别结婚》这本书写的是爱，是独立，是最崭新的世界观、爱情观、婚姻观，是最有效的职场建议，她将与你分享，如何运用猎头的技巧将你梦寐以求的男人“收入囊中”。她将用最精彩的故事给你做个示范，告诉世界，什么才叫“不枉此生”。&lt;br /&gt;无论单身、已婚还是离异，作为女性，我们都可以凭借自己的力量让生命如繁花般怒放。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《30岁前别结婚》是一本写给全球华人才俊的情书，这是一个精英猎头写给天下女性的幸福规划。新的世界，需要新的规则。&lt;br /&gt;作者陈愉，从一个在美国长大的、羞怯的中国小姑娘，成长为一名国际公民，一个敢于挑战规则、懂得说“不”的成熟女人；31岁时她当上了洛杉矶市的副市长，现在为全球化企业做猎头。&lt;br /&gt;《30岁前别结婚》这本书写的是爱，是独立，是最崭新的世界观、爱情观、婚姻观，是最有效的职场建议，她将与你分享，如何运用猎头的技巧将你梦寐以求的男人“收入囊中”。她将用最精彩的故事给你做个示范，告诉世界，什么才叫“不枉此生”。&lt;br /&gt;无论单身、已婚还是离异，作为女性，我们都可以凭借自己的力量让生命如繁花般怒放。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+    <Item>
+      <ASIN>B00COGVZW0</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E5%8F%A4%E9%BE%99%E6%96%87%E9%9B%86%C2%B7%E5%B0%8F%E6%9D%8E%E9%A3%9E%E5%88%80-%E5%A4%9A%E6%83%85%E5%89%91%E5%AE%A2%E6%97%A0%E6%83%85%E5%89%91/dp/B00COGVZW0?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00COGVZW0</DetailPageURL>
+      <SalesRank>53</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/51nDZ8T0cjL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">57</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/51nDZ8T0cjL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">121</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/51nDZ8T0cjL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">378</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/51nDZ8T0cjL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">23</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/51nDZ8T0cjL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">57</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/51nDZ8T0cjL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">57</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/51nDZ8T0cjL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">83</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/51nDZ8T0cjL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">121</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/51nDZ8T0cjL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">378</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>古龙</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>上海读客图书有限公司</Brand>
+        <Creator Role="作者">古龙</Creator>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <Label>河南文艺出版社</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>河南文艺出版社</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <NumberOfPages>746</NumberOfPages>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2013-04-01</PublicationDate>
+        <Publisher>河南文艺出版社</Publisher>
+        <ReleaseDate>2013-05-07</ReleaseDate>
+        <Studio>河南文艺出版社</Studio>
+        <Title>古龙文集·小李飞刀：多情剑客无情剑 （上中下）</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>《小李飞刀：多情剑客无情剑》一直被公认为古龙武侠作品的巅峰之作和最高成就。它不仅是一部阐明武学真谛的作品，还是一部写尽人间世态炎凉的人情历史画，更是一部触动社会现实，探索人生哲理的警世名著。&lt;br /&gt;    本书问世至今，小李飞刀李寻欢作为华语世界最最著名的文学形象，感动着一代又一代的读者，被一遍又一遍翻拍成影视剧，总霸占收视率榜首。全书情节环环相扣，人物栩栩如生，读者虽然时刻处在刀光剑影之中，眼睛却始终被人性中最真挚的爱情、友情感动的热泪长流。&lt;br /&gt;    翻开本书，走进大师古龙精彩纷呈的文学世界，收获人生中永不可丢失的勇气、侠义、爱与宽容。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《小李飞刀:多情剑客无情剑》一直被公认为古龙武侠作品的巅峰之作和最高成就。它不仅是一部阐明武学真谛的作品，还是一部写尽人间世态炎凉的人情历史画，更是一部触动社会现实，探索人生哲理的警世名著。 &lt;br /&gt;本书问世至今，小李飞刀李寻欢作为华语世界最最著名的文学形象，感动着一代又一代的读者，被一遍又一遍翻拍成影视剧，总霸占收视率榜首。全书情节环环相扣，人物栩栩如生，读者虽然时刻处在刀光剑影之中，眼睛却始终被人性中最真挚的爱情、友情感动的热泪长流。 &lt;br /&gt;翻开本书，走进大师古龙精彩纷呈的文学世界，收获人生中永不可丢失的勇气、侠义、爱与宽容。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+    <Item>
+      <ASIN>B00CHX04FY</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E4%BA%91%E5%83%8F%E6%B2%A1%E6%9C%89%E7%8A%84%E8%A7%92%E5%92%8C%E5%B0%BE%E5%B7%B4%E7%98%B8%E4%BA%86%E8%85%BF%E7%9A%84%E9%95%BF%E9%A2%88%E9%B9%BF/dp/B00CHX04FY?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00CHX04FY</DetailPageURL>
+      <SalesRank>56</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/312SfqyZYHL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">50</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/312SfqyZYHL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">106</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/312SfqyZYHL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">331</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/312SfqyZYHL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">20</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/312SfqyZYHL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">50</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/312SfqyZYHL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">50</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/312SfqyZYHL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">73</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/312SfqyZYHL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">106</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/312SfqyZYHL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">331</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>于一爽</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>新星·悬疑·小资</Brand>
+        <Creator Role="作者">于一爽</Creator>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <Label>新星出版社</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>新星出版社</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <NumberOfPages>112</NumberOfPages>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2013-04-01</PublicationDate>
+        <Publisher>新星出版社</Publisher>
+        <ReleaseDate>2013-05-08</ReleaseDate>
+        <Studio>新星出版社</Studio>
+        <Title>云像没有犄角和尾巴瘸了腿的长颈鹿</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>被京城文化圈戏称为以酒成名的于一爽，文风干净利落，有如其酒风，属于愣、直给、二、迷乱、纵向纠结、横向拧巴，然后一烦了，说出一堆直刺人心的大实话。这本书单纯、直接、不掩饰、不做作地记录了她参与的许多酒局和饭局，也记录了这个时代的文化人们相聚、喝大和散场的姿势，拿得起、放得下，读起来很爽。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《云像没有犄角和尾巴瘸了腿的长颈鹿》内容简介：被京城文化圈戏称为以酒成名的于一爽，文风干净利落，有如其酒风，属于愣、直给、二、迷乱、纵向纠结、横向拧巴，然后一烦了，说出一堆直刺人心的大实话。《云像没有犄角和尾巴瘸了腿的长颈鹿》单纯、直接、不掩饰、不做作地记录了她参与的许多酒局和饭局，也记录了这个时代的文化人们相聚、喝大和散场的姿势，拿得起、放得下，读起来很爽。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+    <Item>
+      <ASIN>B00CE7OFAS</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E9%AC%BC%E4%B8%8D%E8%AF%AD%E4%B9%8B%E4%BB%99%E5%A2%A9%E9%AC%BC%E6%B3%A3/dp/B00CE7OFAS?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00CE7OFAS</DetailPageURL>
+      <SalesRank>61</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/51bow0LPSdL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">53</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/51bow0LPSdL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">113</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/51bow0LPSdL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">352</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/51bow0LPSdL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">21</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/51bow0LPSdL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">53</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/51bow0LPSdL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">53</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/51bow0LPSdL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">77</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/51bow0LPSdL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">113</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/51bow0LPSdL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">352</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>天下霸唱</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>北京新华先锋文化传媒有限公司</Brand>
+        <Creator Role="作者">天下霸唱</Creator>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <Label>湖南人民出版社</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>湖南人民出版社</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <NumberOfPages>228</NumberOfPages>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2013-03-01</PublicationDate>
+        <Publisher>湖南人民出版社</Publisher>
+        <ReleaseDate>2013-05-07</ReleaseDate>
+        <Studio>湖南人民出版社</Studio>
+        <Title>鬼不语之仙墩鬼泣</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>天下霸唱继《鬼吹灯》畅销千万后最火爆的冒险盗墓小说！&lt;br /&gt;《鬼不语之仙墩鬼泣（附赠盗墓解密卷宗）》是最新系列盗墓小说《鬼不语》中的第一本，以中国古代神秘的傩教文化为切口，引入一段曲折惊险的盗墓故事。主人公从先祖口耳相传下来的传说开始，闯东北，进中原，下西南，为了寻获传闻中的稀世奇珍和揭开神奇面具背后的秘密，经历了常人难以想象的艰险，古墓中会移动的壁画，黄河中如驳船的巨鱼，通天岭上神秘的血树，展现出一个光怪陆离的地下世界，颠覆关于盗墓的一切想象！</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《鬼不语之仙墩鬼泣》内容简介：天下霸唱继《鬼吹灯》畅销千万后最火爆的冒险盗墓小说！《鬼不语之仙墩鬼泣》是最新系列盗墓小说《鬼不语》中的第一本，以中国古代神秘的傩教文化为切口，引入一段曲折惊险的盗墓故事。主人公从先祖口耳相传下来的传说开始，闯东北，进中原，下西南，为了寻获传闻中的稀世奇珍和揭开神奇面具背后的秘密，经历了常人难以想象的艰险，古墓中会移动的壁画，黄河中如驳船的巨鱼，通天岭上神秘的血树，展现出一个光怪陆离的地下世界，颠覆关于盗墓的一切想象！&lt;br /&gt;&lt;br /&gt;海报：&lt;br /&gt;&lt;br /&gt;&lt;img src=http://g-ec4.images-amazon.com/images/G/28/huyananh/B00B46UCWA_03_amzn.jpg&gt;</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+    <Item>
+      <ASIN>B009WNRLMG</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E6%9C%80%E7%BE%8E%E7%9A%84%E6%97%B6%E5%85%89/dp/B009WNRLMG?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B009WNRLMG</DetailPageURL>
+      <SalesRank>63</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/51RH5PaK-uL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">49</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/51RH5PaK-uL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">104</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/51RH5PaK-uL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">326</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/51RH5PaK-uL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">20</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/51RH5PaK-uL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">49</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/51RH5PaK-uL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">49</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/51RH5PaK-uL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">72</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/51RH5PaK-uL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">104</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/51RH5PaK-uL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">326</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>桐华</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>中南博集天卷文化传媒有限公司</Brand>
+        <Creator Role="作者">桐华</Creator>
+        <EAN>9787540456801</EAN>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <ISBN>9787540456801</ISBN>
+        <Label>中南博集天卷</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>中南博集天卷</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <NumberOfPages>368</NumberOfPages>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2012-08-01</PublicationDate>
+        <Publisher>中南博集天卷</Publisher>
+        <ReleaseDate>2013-04-30</ReleaseDate>
+        <Studio>中南博集天卷</Studio>
+        <Title>最美的时光</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>《最美的时光》是桐华继《步步惊心》《大漠谣》之后，全新演绎最唯美浪漫、纠结虐心的都市爱情小说。无悔青春付出，写给每个人有爱的人。&lt;br /&gt;大概每个女孩，都曾在少女的年纪将目光停留在那样一个男生身上，他是学校里的王子，成绩优秀，性格开朗，有着阳光的笑容，打一手漂亮的篮球……女孩们总是默默地注视着他，却羞于上前打个招呼，止于单纯的欣赏。&lt;br /&gt;对当时17岁的苏蔓来说，宋翊就是这样的存在。&lt;br /&gt;只是她没想到，一切就在那个夏日的午后发生了变化。白桦林里，苏蔓捡起了滚到脚边的篮球，却失落了一颗少女的心。平凡的女孩苏蔓第一次觉得，自己也可以在青春的阳光下自信飞扬。&lt;br /&gt;我在清华等你——多年后这句话已被宋翊遗忘在时间的角落，不复记得。而那个捡篮球的女孩却一直牢记在心里，无数次在挫折后想起他说这句话的笑容，擦去眼泪，重新出发。她追随着他的脚步，出现在他出现的每一个地方，却始终没有勇气走到他的面前告诉他：“宋翊你好，我叫苏蔓，我喜欢你。”&lt;br /&gt;直到11年后，一次意外的重逢，苏蔓不再是当年那个平凡自卑的少女，而宋翊，也不再是笑容阳光的少年。飞扬的苏蔓大胆地追求着她的爱情，并不知另一个人正如她一般，怀着一份深沉的爱恋……&lt;br /&gt;在这个故事中，每个人都曾为了心中的那个人而忘了自己，不求有结果，不计付出，甚至不求那个人知道，然而那段曾不顾一切为一个人付出的岁月，对她们而言，已是人生最美的时光。&lt;br /&gt;&lt;br /&gt;海报：&lt;br /&gt;&lt;br /&gt;&lt;img src=http://g-ec4.images-amazon.com/images/G/28/BOOK-Catalog/annaww/B008OOZATU_02_AMZN.jpg&gt;</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《最美的时光》是桐华继《步步惊心》《大漠谣》之后，全新演绎最唯美浪漫、纠结虐心的都市爱情小说。无悔青春付出，写给每个人有爱的人。&lt;br /&gt;大概每个女孩，都曾在少女的年纪将目光停留在那样一个男生身上，他是学校里的王子，成绩优秀，性格开朗，有着阳光的笑容，打一手漂亮的篮球……女孩们总是默默地注视着他，却羞于上前打个招呼，止于单纯的欣赏。&lt;br /&gt;对当时17岁的苏蔓来说，宋翊就是这样的存在。&lt;br /&gt;只是她没想到，一切就在那个夏日的午后发生了变化。白桦林里，苏蔓捡起了滚到脚边的篮球，却失落了一颗少女的心。平凡的女孩苏蔓第一次觉得，自己也可以在青春的阳光下自信飞扬。&lt;br /&gt;我在清华等你——多年后这句话已被宋翊遗忘在时间的角落，不复记得。而那个捡篮球的女孩却一直牢记在心里，无数次在挫折后想起他说这句话的笑容，擦去眼泪，重新出发。她追随着他的脚步，出现在他出现的每一个地方，却始终没有勇气走到他的面前告诉他：“宋翊你好，我叫苏蔓，我喜欢你。”&lt;br /&gt;直到11年后，一次意外的重逢，苏蔓不再是当年那个平凡自卑的少女，而宋翊，也不再是笑容阳光的少年。飞扬的苏蔓大胆地追求着她的爱情，并不知另一个人正如她一般，怀着一份深沉的爱恋……&lt;br /&gt;在这个故事中，每个人都曾为了心中的那个人而忘了自己，不求有结果，不计付出，甚至不求那个人知道，然而那段曾不顾一切为一个人付出的岁月，对她们而言，已是人生最美的时光。&lt;br /&gt;&lt;br /&gt;海报：&lt;br /&gt;&lt;br /&gt;&lt;img src=http://g-ec4.images-amazon.com/images/G/28/BOOK-Catalog/annaww/B008OOZATU_02_AMZN.jpg&gt;</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+    <Item>
+      <ASIN>B00CRX82NU</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E6%98%93%E4%B8%AD%E5%A4%A9%E4%B8%AD%E5%8D%8E%E5%8F%B2-%E5%9B%BD%E5%AE%B6/dp/B00CRX82NU?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00CRX82NU</DetailPageURL>
+      <SalesRank>72</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/51wJPiCuWyL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">53</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/51wJPiCuWyL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">113</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/51wJPiCuWyL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">352</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/51wJPiCuWyL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">21</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/51wJPiCuWyL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">53</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/51wJPiCuWyL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">53</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/51wJPiCuWyL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">77</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/51wJPiCuWyL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">113</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/51wJPiCuWyL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">352</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>易中天</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>果麦文化</Brand>
+        <Creator Role="作者">易中天</Creator>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <Label>浙江文艺出版社</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>浙江文艺出版社</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2013-05-16</PublicationDate>
+        <Publisher>浙江文艺出版社</Publisher>
+        <ReleaseDate>2013-05-20</ReleaseDate>
+        <Studio>浙江文艺出版社</Studio>
+        <Title>易中天中华史:国家</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>为什么文明的标志是国家？为什么世界各国的体制五花八门？从部落到国家，是历史的岔路口。世界各民族开始分道扬镳，朝着认准的方向往前走。罗马共和、希腊城邦民主，西周受命于天。《易中天中华史：国家》回到历史现场，探寻国家的起源和机密。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《易中天中华史:国家》内容简介：为什么文明的标志是国家？为什么世界各国的体制五花八门？从部落到国家，是历史的岔路口。世界各民族开始分道扬镳，朝着认准的方向往前走。罗马共和、希腊城邦民主，西周受命于天。《易中天中华史:国家》回到历史现场，探寻国家的起源和机密。&lt;br /&gt;&lt;br /&gt;海报：&lt;br /&gt;&lt;br /&gt;&lt;img src=http://g-ec4.images-amazon.com/images/G/28/BOOK-Catalog/annaww3/B00CM3T9VE_01_AMZN.jpg&gt;</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+    <Item>
+      <ASIN>B00C3729EI</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E5%8E%9F%E6%9D%A5/dp/B00C3729EI?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00C3729EI</DetailPageURL>
+      <SalesRank>81</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/51NTz89OpHL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">54</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/51NTz89OpHL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">115</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/51NTz89OpHL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">359</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/51NTz89OpHL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">22</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/51NTz89OpHL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">54</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/51NTz89OpHL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">54</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/51NTz89OpHL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">79</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/51NTz89OpHL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">115</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/51NTz89OpHL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">359</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>辛夷坞</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>儒意欣欣图书</Brand>
+        <Creator Role="作者">辛夷坞</Creator>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <Label>朝华出版社</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>朝华出版社</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <NumberOfPages>250</NumberOfPages>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2011-11-01</PublicationDate>
+        <Publisher>朝华出版社</Publisher>
+        <ReleaseDate>2013-04-11</ReleaseDate>
+        <Studio>朝华出版社</Studio>
+        <Title>原来</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>你心中是否也有这样一个人？他离开后，生活还在继续，他留下的痕迹被平淡的日子逐渐抹去。你很少想起他，没有他也能过得很好。然而在那些个猝不及防的梦里，他又出现在你的身边，第一次说出分别后的悔意，你面带胜利者的笑容转身，醒来后却只想痛哭一场。&lt;br /&gt;苏韵锦忘不了程铮，正如程铮忘不了苏韵锦。遥远而明媚的青春年华里，莽撞少年向羞涩女孩第一次笨拙地表达他说不出口的爱意，一直以来，他们都在玩一场你追我逃的游戏，她希望他放开自己，然而当他真正松开手，她比谁都疼。&lt;br /&gt;谁说灰姑娘都在期待那只水晶鞋，就算找到王子，还是要走进童话里从未提及的平凡生活。你要捱得过几次天崩地裂的折磨，才能抵达天荒地老的幸福？&lt;br /&gt;我们在太年轻的时候遇见，除了爱，一无所知。&lt;br /&gt;所以弄丢了对方。&lt;br /&gt;所以更懂得爱。&lt;br /&gt;当时光流逝，兜兜转转，那个人是否还在原来的地方等你？</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《原来》内容简介：你心中是否也有这样一个人？他离开后，生活还在继续，他留下的痕迹被平淡的日子逐渐抹去。你很少想起他，没有他也能过得很好。然而在那些个猝不及防的梦里，他又出现在你的身边，第一次说出分别后的悔意，你面带胜利者的笑容转身，醒来后却只想痛哭一场。&lt;br /&gt;苏韵锦忘不了程铮，正如程铮忘不了苏韵锦。遥远而明媚的青春年华里，莽撞少年向羞涩女孩第一次笨拙地表达他说不出口的爱意，一直以来，他们都在玩一场你追我逃的游戏，她希望他放开自己，然而当他真正松开手，她比谁都疼。&lt;br /&gt;谁说灰姑娘都在期待那只水晶鞋，就算找到王子，还是要走进童话里从未提及的平凡生活。你要捱得过几次天崩地裂的折磨，才能抵达天荒地老的幸福？&lt;br /&gt;我们在太年轻的时候遇见，除了爱，一无所知。&lt;br /&gt;所以弄丢了对方。&lt;br /&gt;所以更懂得爱。&lt;br /&gt;当时光流逝，兜兜转转，那个人是否还在原来的地方等你？&lt;br /&gt;是谁规定了灰姑娘必须被王子拯救？没有人问过灰姑娘愿不愿意，也没有人问过她爱不爱王子，好像只要她的脚合适地穿上了水晶鞋，就理该感激涕零地跟王子同居，然后永远在幸福中诚惶诚恐。&lt;br /&gt;&lt;br /&gt;海报：&lt;br /&gt;&lt;br /&gt;&lt;img src=http://g-ec4.images-amazon.com/images/G/28/BOOK-Catalog/yihairong11/B0068A8BWA_01_amzn.jpg&gt;</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+    <Item>
+      <ASIN>B0096XGAJM</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E6%B0%91%E5%9B%BD%E4%BA%86/dp/B0096XGAJM?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B0096XGAJM</DetailPageURL>
+      <SalesRank>85</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/51VLfUR1feL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">50</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/51VLfUR1feL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">107</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/51VLfUR1feL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">334</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/51VLfUR1feL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">20</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/51VLfUR1feL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">50</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/51VLfUR1feL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">50</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/51VLfUR1feL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">73</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/51VLfUR1feL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">107</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/51VLfUR1feL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">334</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>杨早</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>新星出版社</Brand>
+        <Creator Role="作者">杨早</Creator>
+        <EAN>9787513307673</EAN>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <ISBN>9787513307673</ISBN>
+        <Label>新星出版社有限责任公司</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>新星出版社有限责任公司</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <NumberOfPages>304</NumberOfPages>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2012-08-01</PublicationDate>
+        <Publisher>新星出版社有限责任公司</Publisher>
+        <ReleaseDate>2013-03-28</ReleaseDate>
+        <Studio>新星出版社有限责任公司</Studio>
+        <Title>民国了</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>《民国了》从武昌举义写到民国成立。历史学者杨早角度新颖，仿佛回到当时历史之现场，发来富有画面感的“采访报道”；深入各省革命之细节，描写那些被主流历史遗忘的历史，提醒读者不只是从宏观角度去观望，更要学会从历史支流中凝视。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《民国了》从武昌举义写到民国成立。历史学者杨早角度新颖，仿佛回到当时历史之现场，发来富有画面感的“采访报道”；深入各省革命之细节，描写那些被主流历史遗忘的历史，提醒读者不只是从宏观角度去观望，更要学会从历史支流中凝视。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+    <Item>
+      <ASIN>B00C57S52G</ASIN>
+      <DetailPageURL>http://www.amazon.cn/%E6%89%93%E9%80%A0Facebook-%E4%BA%B2%E5%8E%86Facebook%E7%88%86%E5%8F%91%E7%9A%845%E5%B9%B4/dp/B00C57S52G?SubscriptionId=***REMOVED***&amp;tag=***REMOVED***&amp;linkCode=xm2&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00C57S52G</DetailPageURL>
+      <SalesRank>89</SalesRank>
+      <SmallImage>
+        <URL>http://ec4.images-amazon.com/images/I/51WsustNbaL._SL75_.jpg</URL>
+        <Height Units="pixels">75</Height>
+        <Width Units="pixels">54</Width>
+      </SmallImage>
+      <MediumImage>
+        <URL>http://ec4.images-amazon.com/images/I/51WsustNbaL._SL160_.jpg</URL>
+        <Height Units="pixels">160</Height>
+        <Width Units="pixels">114</Width>
+      </MediumImage>
+      <LargeImage>
+        <URL>http://ec4.images-amazon.com/images/I/51WsustNbaL.jpg</URL>
+        <Height Units="pixels">500</Height>
+        <Width Units="pixels">357</Width>
+      </LargeImage>
+      <ImageSets>
+        <ImageSet Category="primary">
+          <SwatchImage>
+            <URL>http://ec4.images-amazon.com/images/I/51WsustNbaL._SL30_.jpg</URL>
+            <Height Units="pixels">30</Height>
+            <Width Units="pixels">21</Width>
+          </SwatchImage>
+          <SmallImage>
+            <URL>http://ec4.images-amazon.com/images/I/51WsustNbaL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">54</Width>
+          </SmallImage>
+          <ThumbnailImage>
+            <URL>http://ec4.images-amazon.com/images/I/51WsustNbaL._SL75_.jpg</URL>
+            <Height Units="pixels">75</Height>
+            <Width Units="pixels">54</Width>
+          </ThumbnailImage>
+          <TinyImage>
+            <URL>http://ec4.images-amazon.com/images/I/51WsustNbaL._SL110_.jpg</URL>
+            <Height Units="pixels">110</Height>
+            <Width Units="pixels">79</Width>
+          </TinyImage>
+          <MediumImage>
+            <URL>http://ec4.images-amazon.com/images/I/51WsustNbaL._SL160_.jpg</URL>
+            <Height Units="pixels">160</Height>
+            <Width Units="pixels">114</Width>
+          </MediumImage>
+          <LargeImage>
+            <URL>http://ec4.images-amazon.com/images/I/51WsustNbaL.jpg</URL>
+            <Height Units="pixels">500</Height>
+            <Width Units="pixels">357</Width>
+          </LargeImage>
+        </ImageSet>
+      </ImageSets>
+      <ItemAttributes>
+        <Author>王淮</Author>
+        <Author>祝文让</Author>
+        <Binding>Kindle版</Binding>
+        <Brand>磨铁数盟</Brand>
+        <Creator Role="作者">王淮</Creator>
+        <Creator Role="作者">祝文让</Creator>
+        <Edition>第1版</Edition>
+        <Format>mobipocket_ebook</Format>
+        <Label>印刷工业出版社</Label>
+        <Languages>
+          <Language>
+            <Name>chinese</Name>
+            <Type>published</Type>
+          </Language>
+        </Languages>
+        <Manufacturer>印刷工业出版社</Manufacturer>
+        <NumberOfItems>1</NumberOfItems>
+        <NumberOfPages>134</NumberOfPages>
+        <ProductGroup>eBooks</ProductGroup>
+        <ProductTypeName>ABIS_EBOOKS</ProductTypeName>
+        <PublicationDate>2013-02-01</PublicationDate>
+        <Publisher>印刷工业出版社</Publisher>
+        <ReleaseDate>2013-05-03</ReleaseDate>
+        <Studio>印刷工业出版社</Studio>
+        <Title>打造Facebook:亲历Facebook爆发的5年</Title>
+      </ItemAttributes>
+      <EditorialReviews>
+        <EditorialReview>
+          <Source>编辑推荐</Source>
+          <Content>这本书的书名——《打造Facebook：亲历Facebook爆发的5年》很嚣张，谁有资格可以说这句话呢，当然，扎克伯格最有资格，但他不会亲自来告诉你，至少从目前的情况来看，近几年都不大可能。而且，这不是一个人的公司。里面的每一人，尤其是工程师，既是公司文化的承受者，同时也在不断的改造着公司的文化。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+        <EditorialReview>
+          <Source>内容简介</Source>
+          <Content>《打造Facebook:亲历Facebook爆发的5年》的书名——《打造Facebook》很嚣张，谁有资格可以说这句话呢，当然，扎克伯格最有资格，但他不会亲自来告诉你，至少从目前的情况来看，近几年都不大可能。而且，这不是一个人的公司。里面的每一人，尤其是工程师，既是公司文化的承受者，同时也在不断的改造着公司的文化。我想强调的是团队，是团队的力量打造了Facebook。而让团队凝聚在一起并充满战斗力的，即其文化。这种文化，包括一些做事的方式，为什么这么做的原因，和对这些做法和原因的认同。写《打造Facebook:亲历Facebook爆发的5年》，是想剖析Facebook文化的精髓，还有这里面的思考过程和前后的变化，详细解释当中最有价值和最值得学习的那几点。尤其作为早期员工，我们奠定了这些文化的基础。&lt;br /&gt;作者希望这是一本充满干货的书，能给所有对Facebook，对硅谷文化感兴趣的朋友一个机会，从内到外的来了解这种工程驱动，产品导向的方式究竟如何打造科技创新公司。</Content>
+          <IsLinkSuppressed>0</IsLinkSuppressed>
+        </EditorialReview>
+      </EditorialReviews>
+    </Item>
+  </Items>
+</ItemLookupResponse>
