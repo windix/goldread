@@ -8,6 +8,7 @@ require 'nokogiri'
 require './list'
 require './item'
 require './asin_config'
+require './db'
 
 module FreeKindleCN
 
