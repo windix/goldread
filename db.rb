@@ -13,7 +13,7 @@ module FreeKindleCN
       property :id, Serial
       property :asin, String, :length => 10, :key => true
       property :title, String, :length => 200
-      property :details_url, String, :length => 200
+      property :details_url, String, :length => 500
       property :review, Text
       property :image_url, String, :length => 200
       property :thumb_url, String, :length => 200
@@ -57,6 +57,7 @@ module FreeKindleCN
       property :id, Serial
       property :book_price, Integer
       property :kindle_price, Integer, :index => true
+      property :discount_rate, Float, :index => true
       property :retrieved_at, DateTime
 
       belongs_to :item
