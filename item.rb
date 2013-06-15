@@ -36,7 +36,7 @@ module FreeKindleCN
     end
 
     def num_of_pages
-      @raw.ItemAttributes!.NumberOfPages
+      @raw.ItemAttributes!.NumberOfPages.to_i
     end
 
     def publication_date
@@ -45,6 +45,32 @@ module FreeKindleCN
 
     def release_date
       @raw.ItemAttributes!.ReleaseDate
+    end
+
+    def save
+      db_item = DB::Item.first_or_create({:asin => asin},
+        {:created_at => Time.now})
+
+      db_item.update({
+        :title => title,
+        :details_url => details_url,
+        :review => review,
+        :image_url => image_url,
+        #:thumb_url
+        :author => author,
+        :publisher => publisher,
+        :num_of_pages => num_of_pages,
+        :publication_date => publication_date,
+        :release_date => release_date,
+        :updated_at => Time.now})
+
+      if (db_item.book_price != book_price || db_item.kindle_price != kindle_price)
+        db_item.prices.create({
+          :book_price => book_price,
+          :kindle_price => kindle_price,
+          :retrieved_at => Time.now})
+      end
+
     end
 
     private
@@ -64,6 +90,9 @@ module FreeKindleCN
 
         book_price = doc.css('span.listPrice').last.content.sub('￥', '').strip.to_f
         kindle_price = doc.at_css('span.kindlePrice').content.sub('￥', '').strip.to_f
+
+        book_price = (book_price * 100).to_i
+        kindle_price = (kindle_price * 100).to_i
 
         [ book_price, kindle_price ]
       end

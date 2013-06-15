@@ -23,15 +23,38 @@ module FreeKindleCN
       property :publication_date, Date
       property :release_date, Date
       property :created_at, DateTime
+      property :updated_at, DateTime
 
       has n, :prices
+
+      def book_price
+        load_price unless @book_price
+
+        @book_price
+      end
+
+      def kindle_price
+        load_price unless @kindle_price
+
+        @kindle_price
+      end
+
+      private
+
+      def load_price
+        latest_price = prices(:order => [:retrieved_at.desc]).first
+
+        if latest_price
+          @book_price = latest_price.book_price
+          @kindle_price = latest_price.kindle_price
+        end
+      end
     end
 
     class Price
       include DataMapper::Resource
 
       property :id, Serial
-      property :asin, String, :length => 10, :index => true
       property :book_price, Integer
       property :kindle_price, Integer, :index => true
       property :retrieved_at, DateTime

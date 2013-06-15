@@ -22,8 +22,8 @@ module FreeKindleCN
   puts items.first.kindle_price
 =end
 
-  #Item.fetch_info(list.daily_deal).each do |item|
-  Item.fetch_info(list.new_releases).each do |item|
+  Item.fetch_info(list.daily_deal).each do |item|
+  #Item.fetch_info(list.new_releases).each do |item|
     puts item.asin
     puts item.title
     puts item.author
@@ -37,6 +37,8 @@ module FreeKindleCN
     puts item.kindle_price
 
     puts "---------------------"
+
+    item.save
   end
 
 
