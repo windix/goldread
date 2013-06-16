@@ -4,3 +4,5 @@ gem 'httpclient'
 gem 'nokogiri'
 gem "data_mapper"
 gem "dm-sqlite-adapter"
+gem "sinatra"
+gem "sinatra-contrib"

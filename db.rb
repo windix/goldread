@@ -39,6 +39,20 @@ module FreeKindleCN
         @kindle_price
       end
 
+      def discount_rate
+        load_price unless @kindle_price
+
+        "%.2f%" % (@discount_rate.to_f * 100)
+      end
+
+      def formatted_book_price
+        "￥ %.2f" % (book_price.to_f / 100)
+      end
+
+      def formatted_kindle_price
+        "￥ %.2f" % (@kindle_price.to_f / 100)
+      end
+
       private
 
       def load_price
@@ -47,6 +61,7 @@ module FreeKindleCN
         if latest_price
           @book_price = latest_price.book_price
           @kindle_price = latest_price.kindle_price
+          @discount_rate = latest_price.discount_rate
         end
       end
     end

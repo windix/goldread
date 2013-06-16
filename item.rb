@@ -68,7 +68,7 @@ module FreeKindleCN
         db_item.prices.create({
           :book_price => book_price,
           :kindle_price => kindle_price,
-          :discount_rate => kindle_price.to_f / book_price.to_f,
+          :discount_rate => (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0,
           :retrieved_at => Time.now})
       end
 
