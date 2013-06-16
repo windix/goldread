@@ -15,5 +15,10 @@ module FreeKindleCN
       erb :index, :locals => { :items => DB::Item.all }
     end
 
+    get '/oauth/callback/weibo' do
+      params.inspect
+
+    end
+
   end
 end
