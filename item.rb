@@ -48,6 +48,8 @@ module FreeKindleCN
     end
 
     def save
+      puts "[#{asin}] #{author} - #{title}: #{kindle_price} / #{book_price}"
+
       db_item = DB::Item.first_or_create({:asin => asin},
         {:created_at => Time.now})
 
@@ -71,7 +73,9 @@ module FreeKindleCN
           :discount_rate => (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0,
           :retrieved_at => Time.now})
       end
-
+    rescue Exception
+      puts "Skip saving because of Exception: #{$!}"
+      # ignore
     end
 
     private
@@ -89,13 +93,19 @@ module FreeKindleCN
 
         doc = Nokogiri::HTML(content, nil, 'UTF-8')
 
-        book_price = doc.css('span.listPrice').last.content.sub('￥', '').strip.to_f
-        kindle_price = doc.at_css('span.kindlePrice').content.sub('￥', '').strip.to_f
+        begin
+          book_price = doc.css('span.listPrice').last.content.sub('￥', '').strip.to_f
+          kindle_price = doc.at_css('span.kindlePrice').content.sub('￥', '').strip.to_f
 
-        book_price = (book_price * 100).to_i
-        kindle_price = (kindle_price * 100).to_i
+          book_price = (book_price * 100).to_i
+          kindle_price = (kindle_price * 100).to_i
 
-        [ book_price, kindle_price ]
+          [ book_price, kindle_price ]
+        rescue Exception
+          puts content
+
+          raise
+        end
       end
 
       def fetch_info(asins)
@@ -105,14 +115,33 @@ module FreeKindleCN
 
         if asins.respond_to?(:each)
           asins.each_slice(10) do |slice|
-            all += client.lookup(slice)
+            all += lookup(client, slice)
           end
         else
-          all += client.lookup(asins)
+          all += lookup(client, asins)
         end
 
         all
       end
+
+      def lookup(client, asins)
+        retry_times = 0
+
+        begin
+          client.lookup(asins)
+        rescue Exception # => e
+          retry_times += 1
+
+          if retry_times > 3
+            raise
+          else
+            puts "[#{retry_times}] Exception: #{$!}"
+            sleep 5
+            retry
+          end
+        end
+      end
+
     end    
 
   end
