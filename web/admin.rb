@@ -13,13 +13,17 @@ module FreeKindleCN
 
       set :views, "#{File.expand_path(File.dirname(__FILE__))}/views/admin"
 
-      get '/' do
-        erb :index, :locals => { :items => DB::Item.all }
+      def self.new(*)
+        app = Rack::Auth::Digest::MD5.new(super) do |username|
+          {'***REMOVED***' => '***REMOVED***', '***REMOVED***' => '***REMOVED***'}[username]
+        end
+        app.realm = 'Protected Area'
+        app.opaque = 'secretkey'
+        app
       end
 
-      get '/oauth/callback/weibo' do
-        params.inspect
-
+      get '/' do
+        erb :index, :locals => { :items => DB::Item.all }
       end
 
     end
