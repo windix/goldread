@@ -1,3 +1,7 @@
-require './web'
+require './freekindlecn'
+require './web/admin'
 
-run FreeKindleCN::Web.new
+run Rack::URLMap.new({
+  '/admin' => FreeKindleCN::Web::Admin.new
+
+})
