@@ -1,0 +1,21 @@
+<h1><%= item.title %> - <%= item.author %></h1>
+
+<p>
+  <img src="<%= item.image_url %>" />
+</p>
+
+<h2>Sina Weibo</h2>
+
+<pre>
+#Kindle今日特价书# <%= item.title %> - <%= item.author %>
+纸书<%= item.formatted_book_price %> / Kindle版原价<%= item.formatted_previous_kindle_price %> / 今日特价<%= item.formatted_kindle_price %> (<%= item.formatted_discount_rate %>，省<%= item.save_amount %>)
+购买: http://goldread.net/dp/<%= item.asin %>
+</pre>
+
+<h2>Twitter</h2>
+
+<pre>
+#Kindle今日特价书 <%= item.title %> - <%= item.author %>
+纸书<%= item.formatted_book_price %> / Kindle版原价<%= item.formatted_previous_kindle_price %> / 今日特价<%= item.formatted_kindle_price %> (<%= item.formatted_discount_rate %>，省<%= item.save_amount %>)
+购买: http://goldread.net/dp/<%= item.asin %>
+</pre>

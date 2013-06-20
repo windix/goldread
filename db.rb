@@ -39,21 +39,47 @@ module FreeKindleCN
         @kindle_price
       end
 
+      def previous_kindle_price
+        prices(:order => [:retrieved_at.desc])
+
+        if prices.length == 1
+          prices[0].kindle_price
+        else
+          prices[1].kindle_price
+        end
+      end
+
       def discount_rate
         load_price unless @kindle_price
 
-        "%.2f%" % (@discount_rate.to_f * 100)
+        @discount_rate
       end
 
       def formatted_book_price
-        "￥ %.2f" % (book_price.to_f / 100)
+        format_price(book_price)
       end
 
       def formatted_kindle_price
-        "￥ %.2f" % (@kindle_price.to_f / 100)
+        format_price(kindle_price)
+      end
+
+      def formatted_discount_rate
+        "%.1f折" % (discount_rate.to_f * 10)
+      end
+
+      def formatted_previous_kindle_price
+        format_price(previous_kindle_price)
+      end
+
+      def save_amount
+        format_price(book_price.to_f - kindle_price.to_f)
       end
 
       private
+
+      def format_price(price)
+        "￥%.2f" % (price.to_f / 100)
+      end
 
       def load_price
         latest_price = prices(:order => [:retrieved_at.desc]).first
