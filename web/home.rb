@@ -6,15 +6,23 @@ require 'erb'
 
 module FreeKindleCN
   module Web
-    class Admin < Sinatra::Base
+    class Home < Sinatra::Base
       configure :development do
         register Sinatra::Reloader
       end
 
-      set :views, "#{File.expand_path(File.dirname(__FILE__))}/views/admin"
-
       get '/' do
-        erb :index, :locals => { :items => DB::Item.all }
+        "Watch this space!"
+      end
+
+      get '/dp/:asin' do
+        return 500 unless Item.is_valid_asin?(params[:asin])
+
+        if item = DB::Item.first(:asin => params[:asin])
+          redirect item.details_url
+        else
+          [404, "Not Found"]
+        end
       end
 
       get '/oauth/callback/weibo' do
