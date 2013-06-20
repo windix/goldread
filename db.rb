@@ -40,12 +40,12 @@ module FreeKindleCN
       end
 
       def previous_kindle_price
-        prices(:order => [:retrieved_at.desc])
+        price_changes = prices(:order => [:retrieved_at.desc])
 
-        if prices.length == 1
-          prices[0].kindle_price
+        if price_changes.length == 1
+          price_changes[0].kindle_price
         else
-          prices[1].kindle_price
+          price_changes[1].kindle_price
         end
       end
 
