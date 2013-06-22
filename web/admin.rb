@@ -15,6 +15,10 @@ module FreeKindleCN
       set :public_folder, "#{File.expand_path(File.dirname(__FILE__))}/public"
 
       helpers do
+        def min_file_suffix
+          (settings.environment == :development) ? "" : ".min"
+        end
+
         def price_color(item)
           # TODO: refactor with case?
           diff = item.previous_kindle_price.to_f - item.kindle_price.to_f

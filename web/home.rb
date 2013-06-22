@@ -18,7 +18,7 @@ module FreeKindleCN
       get '/dp/:asin' do
         if Item.is_valid_asin?(params[:asin]) &&
           item = DB::Item.first(:asin => params[:asin])
-          
+
           redirect item.details_url
         else
           [404, "Not Found"]
