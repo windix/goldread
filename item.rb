@@ -5,6 +5,10 @@ module FreeKindleCN
 
     # asin, title, details_url, review, image_url
 
+    def thumb_url
+      @raw.SmallImage!.URL
+    end
+
     def book_price
       load_price unless @book_price
 
