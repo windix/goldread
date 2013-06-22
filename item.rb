@@ -17,8 +17,23 @@ module FreeKindleCN
       @kindle_price
     end
 
+    # get author using the following orders:
+    # - use Author (or CSV when it is an array)
+    # - use Creator (or CSV when it is an array)
+    # - empty string
     def author
-      @raw.ItemAttributes!.Author
+      unless @author
+        @author = convert_content(@raw.ItemAttributes!.Author)
+
+        unless @author
+          @author = convert_content(@raw.ItemAttributes!.Creator)
+          unless @author
+            @author = ""
+          end
+        end
+      end
+
+      @author
     end
 
     def publisher
@@ -26,13 +41,7 @@ module FreeKindleCN
     end
 
     def review
-      reviews = @raw.EditorialReviews!.EditorialReview!
-
-      if reviews.is_a?(Array)
-        reviews.first.Content
-      else
-        reviews.Content
-      end
+      convert_content(@raw.EditorialReviews!.EditorialReview!, true).Content
     end
 
     def num_of_pages
@@ -84,6 +93,19 @@ module FreeKindleCN
       @book_price, @kindle_price = self.class.fetch_price(asin)
     end
 
+    # when content is an array, return first element or CSV string
+    def convert_content(content, array_get_first_element = false)
+      if content.is_a?(Array)
+        if array_get_first_element
+          content.first
+        else
+          content.join(",")
+        end
+      else
+        content
+      end
+    end
+
     class << self
       def is_valid_asin?(asin)
         asin =~ /^B[A-Z0-9]{9}$/
@@ -128,6 +150,8 @@ module FreeKindleCN
         all
       end
 
+      private
+
       def lookup(client, asins)
         retry_times = 0
 
@@ -146,7 +170,7 @@ module FreeKindleCN
         end
       end
 
-    end    
+    end
 
   end
 end
