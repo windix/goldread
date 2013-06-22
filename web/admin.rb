@@ -12,6 +12,7 @@ module FreeKindleCN
       end
 
       set :views, "#{File.expand_path(File.dirname(__FILE__))}/views/admin"
+      set :public_folder, "#{File.expand_path(File.dirname(__FILE__))}/public"
 
       helpers do
         def price_color(item)
