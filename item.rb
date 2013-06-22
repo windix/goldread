@@ -6,7 +6,7 @@ module FreeKindleCN
     # asin, title, details_url, review, image_url
 
     def thumb_url
-      @raw.SmallImage!.URL
+      @raw.MediumImage!.URL
     end
 
     def book_price
