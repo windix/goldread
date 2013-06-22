@@ -22,22 +22,14 @@ module FreeKindleCN
     # - use Creator (or CSV when it is an array)
     # - empty string
     def author
-      unless @author
-        @author = convert_content(@raw.ItemAttributes!.Author)
-
-        unless @author
-          @author = convert_content(@raw.ItemAttributes!.Creator)
-          unless @author
-            @author = ""
-          end
-        end
-      end
-
-      @author
+      @author ||=
+        convert_content(@raw.ItemAttributes!.Author) ||
+        convert_content(@raw.ItemAttributes!.Creator) ||
+        ""
     end
 
     def publisher
-      @raw.ItemAttributes!.Publisher
+      @raw.ItemAttributes!.Publisher.to_s
     end
 
     def review
@@ -49,11 +41,11 @@ module FreeKindleCN
     end
 
     def publication_date
-      @raw.ItemAttributes!.PublicationDate
+      @raw.ItemAttributes!.PublicationDate.to_s
     end
 
     def release_date
-      @raw.ItemAttributes!.ReleaseDate
+      @raw.ItemAttributes!.ReleaseDate.to_s
     end
 
     def save
