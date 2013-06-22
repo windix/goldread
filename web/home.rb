@@ -11,8 +11,10 @@ module FreeKindleCN
         register Sinatra::Reloader
       end
 
+      set :views, "#{File.expand_path(File.dirname(__FILE__))}/views/home"
+
       get '/' do
-        "Watch this space!"
+        erb :index
       end
 
       get '/dp/:asin' do
