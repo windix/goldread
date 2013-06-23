@@ -1,16 +1,12 @@
-PATH
-  remote: ~/git/asin
+GEM
+  remote: https://rubygems.org/
   specs:
+    addressable (2.3.4)
     asin (1.1.2)
       confiture (>= 0.1)
       crack (>= 0.3)
       hashie (>= 1.1)
       httpi (>= 0.9)
-
-GEM
-  remote: https://rubygems.org/
-  specs:
-    addressable (2.3.4)
     backports (2.3.0)
     bcrypt-ruby (3.0.1)
     confiture (0.1.4)
@@ -39,6 +35,9 @@ GEM
       dm-core (~> 1.2.0)
     dm-migrations (1.2.0)
       dm-core (~> 1.2.0)
+    dm-mysql-adapter (1.2.0)
+      dm-do-adapter (~> 1.2.0)
+      do_mysql (~> 0.10.6)
     dm-serializer (1.2.2)
       dm-core (~> 1.2.0)
       fastercsv (~> 1.5)
@@ -62,6 +61,8 @@ GEM
       uuidtools (~> 2.1)
     dm-validations (1.2.0)
       dm-core (~> 1.2.0)
+    do_mysql (0.10.13)
+      data_objects (= 0.10.13)
     do_sqlite3 (0.10.13)
       data_objects (= 0.10.13)
     eventmachine (1.0.0)
@@ -128,8 +129,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  asin!
+  asin
   data_mapper
+  dm-mysql-adapter
   dm-sqlite-adapter
   httpclient
   nokogiri
