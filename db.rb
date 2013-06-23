@@ -2,6 +2,7 @@
 
 require 'data_mapper'
 
+# DataMapper::Logger.new($stdout, :debug)
 DataMapper.setup(:default, "sqlite://#{File.expand_path(File.dirname(__FILE__))}/test.db")
 DataMapper::Model.raise_on_save_failure = true
 
