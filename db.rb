@@ -2,7 +2,8 @@
 
 require 'data_mapper'
 
-DataMapper.setup(:default, "sqlite://#{File.expand_path(File.dirname(__FILE__))}/test.db")
+#DataMapper.setup(:default, "sqlite://#{File.expand_path(File.dirname(__FILE__))}/test.db")
+DataMapper.setup(:default, "mysql://root:***REMOVED***@ca2/goldread")
 DataMapper::Model.raise_on_save_failure = true
 
 module FreeKindleCN
@@ -110,6 +111,9 @@ end
 
 DataMapper.finalize
 
-#DataMapper.auto_migrate!
-DataMapper.auto_upgrade!
+# Don't use this
+# DataMapper.auto_migrate!
+
+# Only use when DB is upgraded
+# DataMapper.auto_upgrade!
 
