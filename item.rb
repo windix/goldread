@@ -63,7 +63,7 @@ module FreeKindleCN
         :details_url => details_url,
         :review => review,
         :image_url => image_url,
-        #:thumb_url
+        :thumb_url => thumb_url,
         :author => author,
         :publisher => publisher,
         :num_of_pages => num_of_pages,

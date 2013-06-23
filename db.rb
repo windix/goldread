@@ -14,7 +14,7 @@ module FreeKindleCN
       property :id, Serial
       property :asin, String, :length => 10, :key => true
       property :title, String, :length => 200
-      property :details_url, String, :length => 500
+      property :details_url, String, :length => 1000
       property :review, Text
       property :image_url, String, :length => 200
       property :thumb_url, String, :length => 200
