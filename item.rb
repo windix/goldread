@@ -45,11 +45,11 @@ module FreeKindleCN
     end
 
     def publication_date
-      @raw.ItemAttributes!.PublicationDate.to_s
+      @raw.ItemAttributes!.PublicationDate
     end
 
     def release_date
-      @raw.ItemAttributes!.ReleaseDate.to_s
+      @raw.ItemAttributes!.ReleaseDate
     end
 
     def save
