@@ -1,13 +1,13 @@
 # encoding: UTF-8
 
 require 'sinatra/base'
-require 'sinatra/reloader'
 require 'erb'
 
 module FreeKindleCN
   module Web
     class Home < Sinatra::Base
       configure :development do
+        require 'sinatra/reloader'
         register Sinatra::Reloader
       end
 

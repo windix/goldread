@@ -3,8 +3,13 @@
 require 'data_mapper'
 
 # DataMapper::Logger.new($stdout, :debug)
-#DataMapper.setup(:default, "sqlite://#{File.expand_path(File.dirname(__FILE__))}/test.db")
-DataMapper.setup(:default, "mysql://root:***REMOVED***@ca2/goldread")
+
+if ENV['RACK_ENV'] == :production
+  DataMapper.setup(:default, "mysql://root:***REMOVED***@ca2/goldread")
+else
+  DataMapper.setup(:default, "sqlite://#{File.expand_path(File.dirname(__FILE__))}/test.db")
+end
+
 DataMapper::Model.raise_on_save_failure = true
 
 module FreeKindleCN
