@@ -116,11 +116,15 @@ module FreeKindleCN
         doc = Nokogiri::HTML(content, nil, 'UTF-8')
 
         begin
-          book_price = doc.css('span.listPrice').last.content.sub('￥', '').strip.to_f
-          kindle_price = doc.at_css('span.kindlePrice').content.sub('￥', '').strip.to_f
+          if doc.css('p.infoText').text == '该商品目前无法进行购买'
+            book_price = kindle_price = -1
+          else
+            book_price = doc.css('span.listPrice').last.content.sub('￥', '').strip.to_f
+            kindle_price = doc.at_css('span.kindlePrice').content.sub('￥', '').strip.to_f
 
-          book_price = (book_price * 100).to_i
-          kindle_price = (kindle_price * 100).to_i
+            book_price = (book_price * 100).to_i
+            kindle_price = (kindle_price * 100).to_i
+          end
 
           [ book_price, kindle_price ]
         rescue Exception
