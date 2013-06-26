@@ -53,8 +53,6 @@ module FreeKindleCN
     end
 
     def save
-      puts "[#{asin}] #{author} - #{title}: #{kindle_price} / #{book_price}"
-
       db_item = DB::Item.first_or_create({:asin => asin},
         {:created_at => Time.now})
 
@@ -71,18 +69,10 @@ module FreeKindleCN
         :release_date => release_date,
         :updated_at => Time.now})
 
-      if (db_item.book_price != book_price || db_item.kindle_price != kindle_price)
-        db_item.prices.create({
-          :book_price => book_price,
-          :kindle_price => kindle_price,
-          :discount_rate => (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0,
-          :retrieved_at => Time.now})
-      end
+      db_item
     rescue Exception
       puts "Skip saving because of Exception: #{$!}"
-      # ignore
-
-      raise
+      nil
     end
 
     private

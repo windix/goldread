@@ -85,7 +85,9 @@ module FreeKindleCN
       private
 
       def format_price(price)
-        if price < 0
+        if price.nil?
+          "!"
+        elsif price < 0
           "-"
         else
           "￥%.2f" % (price.to_f / 100)

@@ -33,19 +33,58 @@ module FreeKindleCN
       end
 
       def fetch_info(asins)
-        client = ASIN::Client.instance
+        # if passed one single ASIN convert it to array
+        asins = [asins] unless asins.respond_to?(:each)
 
-        all = []
+        db_items = []
+        unloaded_asins = []
 
-        if asins.respond_to?(:each)
-          asins.each_slice(10) do |slice|
-            all += lookup(client, slice)
+        asins.each do |asin|
+          db_item = DB::Item.first(:asin => asin)
+
+          if db_item
+            db_items << db_item
+          else
+            unloaded_asins << asin
           end
-        else
-          all += lookup(client, asins)
         end
 
-        all
+        if unloaded_asins.length > 0
+          client = ASIN::Client.instance
+
+          unloaded_asins.each_slice(10) do |slice|
+            lookup(client, slice).each do |item|
+              db_item = item.save
+              db_items << db_item if db_item
+            end
+          end
+        end
+
+        db_items.each do |db_item|
+          begin
+            # TODO: also check timestamp
+            book_price, kindle_price = self.fetch_price(db_item.asin)
+
+            if (db_item.book_price.nil? ||
+              db_item.kindle_price.nil? ||
+              db_item.book_price != book_price ||
+              db_item.kindle_price != kindle_price)
+
+              db_item.prices.create({
+                :book_price => book_price,
+                :kindle_price => kindle_price,
+                :discount_rate => (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0,
+                :retrieved_at => Time.now})
+
+              puts "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
+            end
+          rescue Exception
+            puts "Skip #{db_item.asin} because of Exception: #{$!}"
+            next
+          end
+        end # db_items.each
+
+        db_items
       end
 
       private
