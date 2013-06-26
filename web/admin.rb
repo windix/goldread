@@ -32,7 +32,12 @@ module FreeKindleCN
             else
               # price dropped: red / price incresed: blue
               color = (diff > 0) ? "red" : "blue";
-              "<span style='color:#{color}'>#{item.formatted_previous_kindle_price}->#{item.formatted_kindle_price}</span>"
+
+              result =<<-END
+                <span style='color:#{color}'>
+                  #{item.formatted_previous_kindle_price}->#{item.formatted_kindle_price}
+                </span>
+              END
             end
           end
         end

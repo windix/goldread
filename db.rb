@@ -93,13 +93,21 @@ module FreeKindleCN
       end
 
       def load_price
-        latest_price = prices(:order => [:retrieved_at.desc]).first
+        price_changes = prices(:order => [:retrieved_at.desc])
 
-        if latest_price
-          @book_price = latest_price.book_price
-          @kindle_price = latest_price.kindle_price
-          @discount_rate = latest_price.discount_rate
+        case price_changes.length
+        when 0
+          return
+        when 1
+          @previous_price = @current_price = price_changes[0]
+        else
+          @current_price = price_changes[0]
+          @previous_price = price_changes[1]
         end
+
+        @book_price = @current_price.book_price
+        @kindle_price = @current_price.kindle_price
+        @discount_rate = @current_price.discount_rate
       end
     end
 
