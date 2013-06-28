@@ -9,3 +9,4 @@ gem "sinatra"
 gem "sinatra-contrib", :group => :development
 gem "twitter"
 gem "weibo_2"
+gem "thor"
