@@ -47,36 +47,12 @@ module FreeKindleCN
         end
       end
 
-      def formatted_book_price
-        format_price(book_price)
-      end
-
-      def formatted_kindle_price
-        format_price(kindle_price)
-      end
-
       def formatted_discount_rate
         "%.1f折" % (discount_rate.to_f * 10)
       end
 
-      def formatted_previous_kindle_price
-        format_price(previous_kindle_price)
-      end
-
       def save_amount
-        format_price(book_price.to_f - kindle_price.to_f)
-      end
-
-      private
-
-      def format_price(price)
-        if price.nil?
-          "!"
-        elsif price < 0
-          "-"
-        else
-          "￥%.2f" % (price.to_f / 100)
-        end
+        (book_price - kindle_price).format_price
       end
     end
 

@@ -9,7 +9,14 @@ require 'nokogiri'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
+require 'monkey_patch'
 require 'list'
 require 'item'
 require 'asin_config'
 require 'db'
+
+# Constants
+module FreeKindleCN
+  DATE_FORMAT = '%Y-%m-%d'
+  DATETIME_FORMAT = '%Y-%m-%d %H:%M'
+end

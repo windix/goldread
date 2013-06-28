@@ -20,7 +20,6 @@ module FreeKindleCN
         end
 
         def price_color(item)
-          # TODO: refactor with case?
           if item.kindle_price < 0
             "-"
           elsif item.previous_kindle_price
@@ -29,11 +28,11 @@ module FreeKindleCN
 
             result =<<-END
               <span style='color:#{color}'>
-                #{item.formatted_previous_kindle_price}->#{item.formatted_kindle_price}
+                #{item.previous_kindle_price.format_price}->#{item.kindle_price.format_price}
               </span>
             END
           else
-            item.formatted_kindle_price
+            item.kindle_price.format_price
           end
         end
       end

@@ -1,15 +1,5 @@
 # encoding: UTF-8
 
-class Array
-  def odd_values
-    self.values_at(* self.each_index.select(&:even?))
-  end
-
-  def even_values
-    self.values_at(* self.each_index.select(&:odd?))
-  end
-end
-
 module FreeKindleCN
   class AsinList
     def initialize
@@ -40,7 +30,7 @@ module FreeKindleCN
 
       # TODO weekly deals
 
-      # doc.at_css('span.price').content 
+      # doc.at_css('span.price').content
       doc.at_css('img[alt="立即购买"]').parent['href'][%r{/gp/product/([A-Z0-9]+)/}, 1]
     end
 

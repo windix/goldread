@@ -1,21 +1,61 @@
-<h1><%= item.title %> - <%= item.author %></h1>
+<h1><%= item.title %></h1>
 
-<p>
-  <img src="<%= item.image_url %>" />
-</p>
+<div class="row">
+  <div class="span4">
+    <img class="img-polaroid" src="<%= item.image_url %>" />
+  </div>
 
-<h2>Sina Weibo</h2>
+  <div class="span8">
+    <dl class="dl-horizontal">
+      <dt>ASIN</dt>
+      <dd><%= item.asin %></dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt>author</dt>
+      <dd><%= item.author %></dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt>publisher</dt>
+      <dd><%= item.publisher %></dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt>book price / pages</dt>
+      <dd><%= item.book_price.format_price %> / <%= item.num_of_pages %></dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt>review</dt>
+      <dd><%= item.review %></dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt>纸书 / 电子书出版日期</dt>
+      <dd><%= item.publication_date.strftime(FreeKindleCN::DATE_FORMAT) %> / <%= item.release_date.strftime(FreeKindleCN::DATE_FORMAT) %></dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt>created at</dt>
+      <dd><%= item.created_at.strftime(FreeKindleCN::DATETIME_FORMAT) %></dd>
+    </dl>
+    <dl class="dl-horizontal">
+      <dt>updated at</dt>
+      <dd><%= item.updated_at.strftime(FreeKindleCN::DATETIME_FORMAT) %></dd>
+    </dl>
 
-<pre>
-#Kindle今日特价书# <%= item.title %> - <%= item.author %>
-纸书<%= item.formatted_book_price %> / Kindle版原价<%= item.formatted_previous_kindle_price %> / 今日特价<%= item.formatted_kindle_price %> (<%= item.formatted_discount_rate %>，省<%= item.save_amount %>)
-购买: http://goldread.net/dp/<%= item.asin %>
-</pre>
+    <h2>Price History</h2>
 
-<h2>Twitter</h2>
+    <table class="table table-condensed table-bordered" style='width:200px'>
+    <% item.prices.each do |price| %>
+      <tr>
+        <td><%= price.retrieved_at.strftime(FreeKindleCN::DATETIME_FORMAT) %></td>
+        <td><%= price.kindle_price.format_price %></td>
+      </tr>
+    <% end %>
+    </table>
 
-<pre>
-#Kindle今日特价书 <%= item.title %> - <%= item.author %>
-纸书<%= item.formatted_book_price %> / Kindle版原价<%= item.formatted_previous_kindle_price %> / 今日特价<%= item.formatted_kindle_price %> (<%= item.formatted_discount_rate %>，省<%= item.save_amount %>)
-购买: http://goldread.net/dp/<%= item.asin %>
-</pre>
+    <h2>Twitter</h2>
+
+    <pre>
+    #Kindle今日特价书 <%= item.title %> - <%= item.author %>
+    纸书<%= item.book_price.format_price %> / Kindle版原价<%= item.previous_kindle_price.format_price %> / 今日特价<%= item.kindle_price.format_price %> (<%= item.formatted_discount_rate %>，省<%= item.save_amount %>)
+    购买: http://goldread.net/dp/<%= item.asin %>
+    </pre>
+  </div>
+</div>
