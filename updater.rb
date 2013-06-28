@@ -39,7 +39,7 @@ module FreeKindleCN
         [ book_price, kindle_price ]
       end
 
-      def fetch_info(asins)
+      def fetch_info(asins, to_fetch_price = true)
         # if passed one single ASIN convert it to array
         asins = [asins] unless asins.respond_to?(:each)
 
@@ -67,37 +67,39 @@ module FreeKindleCN
           end
         end
 
-        db_items.each_slice(10) do |slice|
+        if to_fetch_price
+          db_items.each_slice(15) do |slice|
 
-          threads = []
-          slice.each do |db_item|
-            threads << Thread.new do
-              begin
-                # TODO: also check timestamp
-                book_price, kindle_price = self.fetch_price(db_item.asin)
+            threads = []
+            slice.each do |db_item|
+              threads << Thread.new do
+                begin
+                  # TODO: also check timestamp
+                  book_price, kindle_price = fetch_price(db_item.asin)
 
-                if (db_item.book_price.nil? ||
-                  db_item.kindle_price.nil? ||
-                  db_item.book_price != book_price ||
-                  db_item.kindle_price != kindle_price)
+                  if (db_item.book_price.nil? ||
+                    db_item.kindle_price.nil? ||
+                    db_item.book_price != book_price ||
+                    db_item.kindle_price != kindle_price)
 
-                  db_item.prices.create({
-                    :book_price => book_price,
-                    :kindle_price => kindle_price,
-                    :discount_rate => (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0,
-                    :retrieved_at => Time.now})
+                    db_item.prices.create({
+                      :book_price => book_price,
+                      :kindle_price => kindle_price,
+                      :discount_rate => (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0,
+                      :retrieved_at => Time.now})
 
-                  puts "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
+                    puts "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
+                  end
+                rescue Exception
+                  puts "Skip #{db_item.asin} because of Exception: #{$!}"
                 end
-              rescue Exception
-                puts "Skip #{db_item.asin} because of Exception: #{$!}"
               end
-            end
-          end # slice.each
+            end # slice.each
 
-          threads.each { |thread| thread.join }
+            threads.each { |thread| thread.join }
 
-        end # db_items.each_slice
+          end # db_items.each_slice
+        end
 
         db_items
       end
