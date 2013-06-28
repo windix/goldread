@@ -29,37 +29,22 @@ module FreeKindleCN
       property :num_of_pages, Integer, :allow_nil => true
       property :publication_date, Date
       property :release_date, Date
+      property :book_price, Integer
+      property :kindle_price, Integer, :index => true
+      property :discount_rate, Float, :index => true
       property :created_at, DateTime
       property :updated_at, DateTime
 
       has n, :prices
 
-      def book_price
-        load_price unless @book_price
-
-        @book_price
-      end
-
-      def kindle_price
-        load_price unless @kindle_price
-
-        @kindle_price
-      end
-
       def previous_kindle_price
         price_changes = prices(:order => [:retrieved_at.desc])
 
-        if price_changes.length == 1
-          price_changes[0].kindle_price
-        else
+        if price_changes.length >= 2
           price_changes[1].kindle_price
+        else
+          nil
         end
-      end
-
-      def discount_rate
-        load_price unless @kindle_price
-
-        @discount_rate
       end
 
       def formatted_book_price
@@ -92,24 +77,6 @@ module FreeKindleCN
         else
           "￥%.2f" % (price.to_f / 100)
         end
-      end
-
-      def load_price
-        price_changes = prices(:order => [:retrieved_at.desc])
-
-        case price_changes.length
-        when 0
-          return
-        when 1
-          @previous_price = @current_price = price_changes[0]
-        else
-          @current_price = price_changes[0]
-          @previous_price = price_changes[1]
-        end
-
-        @book_price = @current_price.book_price
-        @kindle_price = @current_price.kindle_price
-        @discount_rate = @current_price.discount_rate
       end
     end
 

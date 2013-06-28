@@ -21,24 +21,19 @@ module FreeKindleCN
 
         def price_color(item)
           # TODO: refactor with case?
-
-          if item.kindle_price.to_f < 0
+          if item.kindle_price < 0
             "-"
+          elsif item.previous_kindle_price
+            # price dropped: red / price incresed: blue
+            color = (item.previous_kindle_price - item.kindle_price > 0) ? "red" : "blue"
+
+            result =<<-END
+              <span style='color:#{color}'>
+                #{item.formatted_previous_kindle_price}->#{item.formatted_kindle_price}
+              </span>
+            END
           else
-            diff = item.previous_kindle_price.to_f - item.kindle_price.to_f
-
-            if diff == 0
-              item.formatted_kindle_price
-            else
-              # price dropped: red / price incresed: blue
-              color = (diff > 0) ? "red" : "blue";
-
-              result =<<-END
-                <span style='color:#{color}'>
-                  #{item.formatted_previous_kindle_price}->#{item.formatted_kindle_price}
-                </span>
-              END
-            end
+            item.formatted_kindle_price
           end
         end
       end

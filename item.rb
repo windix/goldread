@@ -54,9 +54,13 @@ module FreeKindleCN
 
     def save
       db_item = DB::Item.first_or_create({:asin => asin},
-        {:created_at => Time.now})
+        {:book_price => -1,
+          :kindle_price => -1,
+          :discount_rate => 1,
+          :created_at => Time.now})
 
-      db_item.update({
+      # we don't update price information when calling from fetch_info
+      db_item.update(
         :title => title,
         :details_url => details_url,
         :review => review,
@@ -67,7 +71,8 @@ module FreeKindleCN
         :num_of_pages => num_of_pages,
         :publication_date => publication_date,
         :release_date => release_date,
-        :updated_at => Time.now})
+        :updated_at => Time.now
+      )
 
       db_item
     rescue Exception
@@ -98,9 +103,6 @@ module FreeKindleCN
       def is_valid_asin?(asin)
         asin =~ /^B[A-Z0-9]{9}$/
       end
-
-
-
     end
 
   end

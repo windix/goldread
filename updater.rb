@@ -77,16 +77,23 @@ module FreeKindleCN
                   # TODO: also check timestamp
                   book_price, kindle_price = fetch_price(db_item.asin)
 
-                  if (db_item.book_price.nil? ||
-                    db_item.kindle_price.nil? ||
-                    db_item.book_price != book_price ||
-                    db_item.kindle_price != kindle_price)
+                  if (db_item.book_price != book_price || db_item.kindle_price != kindle_price)
+                    discount_rate = (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0
+                    now = Time.now
 
-                    db_item.prices.create({
+                    db_item.update(
                       :book_price => book_price,
                       :kindle_price => kindle_price,
-                      :discount_rate => (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0,
-                      :retrieved_at => Time.now})
+                      :discount_rate => discount_rate,
+                      :updated_at => now
+                    )
+
+                    db_item.prices.create(
+                      :book_price => book_price,
+                      :kindle_price => kindle_price,
+                      :discount_rate => discount_rate,
+                      :retrieved_at => now
+                    )
 
                     puts "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
                   end
