@@ -16,14 +16,20 @@
       <dt>publisher</dt>
       <dd><%= item.publisher %></dd>
 
-      <dt>book price / pages</dt>
-      <dd><%= item.book_price.format_price %> / <%= item.num_of_pages %></dd>
+      <dt>book price</dt>
+      <dd><%= item.book_price.format_price %></dd>
+
+      <dt>pages</dt>
+      <dd><%= item.num_of_pages %></dd>
 
       <dt>review</dt>
       <dd><%= item.review %></dd>
 
-      <dt>纸书 / 电子书出版日期</dt>
-      <dd><%= item.publication_date.strftime(FreeKindleCN::DATE_FORMAT) %> / <%= item.release_date.strftime(FreeKindleCN::DATE_FORMAT) %></dd>
+      <dt>纸书出版日期</dt>
+      <dd><%= (item.publication_date || "").strftime(FreeKindleCN::DATE_FORMAT) %></dd>
+
+      <dt>电子书出版日期</dt>
+      <dd><%= (item.release_date || "").strftime(FreeKindleCN::DATE_FORMAT) %></dd>
 
       <dt>created at</dt>
       <dd><%= item.created_at.strftime(FreeKindleCN::DATETIME_FORMAT) %></dd>
