@@ -9,6 +9,7 @@ GEM
       httpi (>= 0.9)
     backports (2.3.0)
     bcrypt-ruby (3.0.1)
+    chartkick (1.1.3)
     confiture (0.1.4)
     crack (0.4.0)
       safe_yaml (~> 0.9.0)
@@ -131,6 +132,7 @@ PLATFORMS
 
 DEPENDENCIES
   asin
+  chartkick
   data_mapper
   dm-mysql-adapter
   dm-sqlite-adapter

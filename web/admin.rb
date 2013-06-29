@@ -2,6 +2,7 @@
 
 require 'sinatra/base'
 require 'erb'
+require 'chartkick'
 
 module FreeKindleCN
   module Web
