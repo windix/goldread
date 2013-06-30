@@ -67,7 +67,7 @@ module FreeKindleCN
 
         begin
           if params[:tweet_upload_picture]
-            Twitter.update_with_media(params[:tweet_text], open(params[:tweet_image_url]))
+            Twitter.update_with_media(params[:tweet_text], open(params[:tweet_image_url]).read)
           else
             Twitter.update(params[:tweet_text])
           end
