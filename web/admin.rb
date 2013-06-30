@@ -3,6 +3,7 @@
 require 'sinatra/base'
 require 'erb'
 require 'chartkick'
+require 'open-uri'
 
 module FreeKindleCN
   module Web
@@ -58,6 +59,22 @@ module FreeKindleCN
           erb :dp, :locals => { :item => item }
         else
           [404, "Not Found"]
+        end
+      end
+
+      post '/tweet' do
+        require 'twitter_config'
+
+        begin
+          if params[:tweet_upload_picture]
+            Twitter.update_with_media(params[:tweet_text], open(params[:tweet_image_url]))
+          else
+            Twitter.update(params[:tweet_text])
+          end
+
+          "Twitter updated!"
+        rescue => e
+          "Failed to update twitter - #{e.message}"
         end
       end
 

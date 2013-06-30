@@ -65,10 +65,57 @@
 
     <h2>Twitter</h2>
 
-    <pre>
-#Kindle今日特价书 <%= item.title %> - <%= item.author %>
-纸书<%= item.book_price.format_price %> / Kindle版原价<%= item.previous_kindle_price.format_price %> / 今日特价<%= item.kindle_price.format_price %> (<%= item.formatted_discount_rate %>，省<%= item.save_amount %>)
-购买: http://goldread.net/dp/<%= item.asin %>
-    </pre>
+    <script type="text/javascript">
+      var tweet_text_body = "<%= item.title %> - <%= item.author %> 纸书<%= item.book_price.format_price %> / Kindle版原价<%= item.previous_kindle_price.format_price %> / 今日特价<%= item.kindle_price.format_price %> (<%= item.formatted_discount_rate %>，省<%= item.save_amount %>) 购买: http://goldread.net/dp/<%= item.asin %>";
+
+      function set_tweet_text() {
+        $('#tweet_text').text($('input:radio[name=tweet_hashtag]:checked').val() + " " + tweet_text_body);
+      }
+
+      function tweet_text_remaining() {
+        var media_url_length = 23; // characters_reserved_per_media
+        var length = 140 - ($('#tweet_upload_picture').is(':checked') ? media_url_length : 0);
+        var remaining = length - twttr.txt.getTweetLength($('#tweet_text').val());
+        $('#tweet_text_remaining').text(remaining);
+      }
+
+      $(function() {
+        set_tweet_text();
+        tweet_text_remaining();
+
+        $('input:radio[name=tweet_hashtag]').change(function() {
+          set_tweet_text();
+          tweet_text_remaining();
+        });
+
+        // TODO: difference between on and change ?
+        $('#tweet_text').on("propertychange input textInput", tweet_text_remaining);
+
+        $('#tweet_upload_picture').change(tweet_text_remaining);
+      });
+    </script>
+
+    <form action="<%= url("/tweet") %>" method="POST">
+      <input type="hidden" name="tweet_image_url" value="<%= item.image_url %>">
+
+      <label class="radio">
+        <input type="radio" name="tweet_hashtag" value="#Kindle今日特价书">#Kindle今日特价书
+      </label>
+      <label class="radio">
+        <input type="radio" name="tweet_hashtag" value="#Kindle好书推荐" checked>#Kindle好书推荐
+      </label>
+
+      <textarea id="tweet_text" name="tweet_text" class="input-xxlarge" rows="3"></textarea>
+
+      <label class="checkbox">
+        <input type="checkbox" name="tweet_upload_picture" id="tweet_upload_picture" checked>包含图片
+      </label>
+
+      <label>
+        Remaining: <span id="tweet_text_remaining">...</span>
+      </label>
+
+      <input type="submit" name="submit" value="Tweet!">
+    </form>
   </div>
 </div>

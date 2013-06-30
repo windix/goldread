@@ -21,7 +21,9 @@
       <script src="../assets/js/html5shiv.js"></script>
     <![endif]-->
 
+    <script src="<%= url("/js/jquery-1.10.1#{min_file_suffix}.js") %>"></script>
     <script src="//www.***REMOVED***.com/jsapi"></script>
+    <!-- https://raw.github.com/ankane/chartkick/master/app/assets/javascripts/chartkick.js -->
     <script src="<%= url("/js/chartkick.js") %>"></script>
   </head>
 
@@ -33,8 +35,8 @@
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<%= url("/js/jquery-1.10.1#{min_file_suffix}.js") %>"></script>
     <script src="<%= url("/js/bootstrap#{min_file_suffix}.js") %>"></script>
-
+    <!-- https://raw.github.com/twitter/twitter-text-js/master/twitter-text.js -->
+    <script src="<%= url("/js/twitter-text.js") %>"></script>
   </body>
 </html>
