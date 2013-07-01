@@ -15,6 +15,8 @@ class CLI < Thor
 
   desc "list", "download by lists"
   def list
+    puts "#{Time.now}: Updating lists..."
+
     list = AsinList.new
 
     puts "Daily Deals"
@@ -39,6 +41,8 @@ class CLI < Thor
 
   desc "all", "refetch price for all books"
   def all
+    puts "#{Time.now}: Updating all..."
+    
     Updater.fetch_info(DB::Item.all(:fields => [:asin]).collect { |item| item.asin })
   end
 

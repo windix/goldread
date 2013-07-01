@@ -45,6 +45,7 @@ module FreeKindleCN
             raise
           else
             puts "[#{retry_times}] Exception: #{$!}"
+            puts content
             sleep 5
             retry
           end
