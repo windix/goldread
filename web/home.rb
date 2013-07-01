@@ -27,9 +27,18 @@ module FreeKindleCN
         end
       end
 
-      get '/oauth/callback/weibo' do
-        params.inspect
+      get '/oauth/weibo' do
+        require 'weibo_config'
+        client = WeiboOAuth2::Client.new
+        redirect client.authorize_url
+      end
 
+      get '/oauth/callback/weibo' do
+        require 'weibo_config'
+        client = WeiboOAuth2::Client.new
+        access_token = client.auth_code.get_token(params[:code])
+
+        erb :weibo_callback, :locals => { :access_token => access_token }
       end
 
     end
