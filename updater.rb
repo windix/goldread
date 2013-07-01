@@ -29,6 +29,10 @@ module FreeKindleCN
             book_price = (book_price * 100).to_i
             kindle_price = (kindle_price * 100).to_i
 
+          elsif content.include? "<h2>意外错误</h2>"
+            # temporary error, retry
+            raise "temporary error, retry"
+
           else
             # book is permanently unavailable -- the ASIN becomes invalid
             puts content
