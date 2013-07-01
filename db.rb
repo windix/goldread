@@ -34,6 +34,7 @@ module FreeKindleCN
       property :discount_rate, Float, :index => true
       property :created_at, DateTime
       property :updated_at, DateTime
+      property :deleted, Boolean, :default => false
 
       has n, :prices
 

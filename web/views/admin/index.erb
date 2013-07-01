@@ -12,7 +12,7 @@
   </thead>
   <tbody>
   <% items.each do |item| %>
-    <tr>
+    <tr <%= "class='error'" if item.deleted %>>
       <td><%= item.id %></td>
       <td><a href="<%= url("dp/#{item.asin}") %>"><%= item.asin %></a></td>
       <td><a href="<%= item.details_url %>"><%= (item.title || "")[0..20] %></a></td>
