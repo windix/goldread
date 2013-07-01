@@ -37,6 +37,12 @@ module FreeKindleCN
             item.kindle_price.format_price
           end
         end
+
+        def prices_data_for_chart(item)
+          data = item.prices.collect { |p| [p.retrieved_at, p.kindle_price.to_f / 100] }
+          # push current datetime as the endpoint
+          data << [Time.now, data.last[1]]
+        end
       end
 
       def self.new(*)

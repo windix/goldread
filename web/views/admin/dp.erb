@@ -4,7 +4,7 @@
   <div class="span4">
     <p><img class="img-polaroid" src="<%= item.image_url %>" /></p>
 
-    <p><%= line_chart item.prices.collect { |p| [p.retrieved_at, p.kindle_price.to_f / 100] } %></p>
+    <p><%= line_chart prices_data_for_chart(item) %></p>
   </div>
 
   <div class="span8">
