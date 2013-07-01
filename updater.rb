@@ -31,6 +31,7 @@ module FreeKindleCN
 
           else
             # book is permanently unavailable -- the ASIN becomes invalid
+            puts content
             return nil
           end
         rescue Exception # => e
@@ -58,10 +59,10 @@ module FreeKindleCN
         asins.each do |asin|
           db_item = DB::Item.first(:asin => asin)
 
-          # skip updating deleted item
-          next if db_item.deleted
-
           if db_item
+            # skip updating deleted item
+            next if db_item.deleted
+
             db_items << db_item
           else
             unloaded_asins << asin
