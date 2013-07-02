@@ -4,7 +4,7 @@ require 'data_mapper'
 
 # DataMapper::Logger.new($stdout, :debug)
 
-if ENV['RACK_ENV'] == 'production'
+if FreeKindleCN::CONTEXT == :production
   DataMapper.setup(:default, "mysql://root:***REMOVED***@ca2/goldread")
 else
   DataMapper.setup(:default, "sqlite://#{File.expand_path(File.dirname(__FILE__))}/test.db")

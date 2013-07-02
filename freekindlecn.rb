@@ -1,7 +1,16 @@
 # encoding: UTF-8
 
 require 'bundler'
-Bundler.setup(:default, (ENV['RACK_ENV'] || 'development').to_sym)
+
+# Constants
+module FreeKindleCN
+  CONTEXT = ENV['RACK_ENV'] ? ENV['RACK_ENV'].to_sym : :development
+
+  DATE_FORMAT = '%Y-%m-%d'
+  DATETIME_FORMAT = '%Y-%m-%d %H:%M'
+end
+
+Bundler.setup(:default, FreeKindleCN::CONTEXT)
 
 require 'asin'
 require 'httpclient'
@@ -14,9 +23,4 @@ require 'list'
 require 'item'
 require 'asin_config'
 require 'db'
-
-# Constants
-module FreeKindleCN
-  DATE_FORMAT = '%Y-%m-%d'
-  DATETIME_FORMAT = '%Y-%m-%d %H:%M'
-end
+require 'tweet'

@@ -4,6 +4,8 @@
   <div class="span4">
     <p><img class="img-polaroid" src="<%= item.image_url %>" /></p>
 
+    <p class="text-center"><a href="<%= item.details_url %>">购买</a></p>
+
     <p><%= line_chart prices_data_for_chart(item) %></p>
   </div>
 
