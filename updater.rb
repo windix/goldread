@@ -13,6 +13,11 @@ module FreeKindleCN
         begin
           content = client.get("http://www.amazon.cn/gp/aw/d/#{asin}").content
 
+          if content.include? "<h2>意外错误</h2>"
+            # temporary error, retry
+            raise "temporary error, retry"
+          end
+
           doc = Nokogiri::HTML(content, nil, 'UTF-8')
 
           if doc.css('p.infoText').text == '该商品目前无法进行购买'
@@ -28,10 +33,6 @@ module FreeKindleCN
 
             book_price = (book_price * 100).to_i
             kindle_price = (kindle_price * 100).to_i
-
-          elsif content.include? "<h2>意外错误</h2>"
-            # temporary error, retry
-            raise "temporary error, retry"
 
           else
             # book is permanently unavailable -- the ASIN becomes invalid
