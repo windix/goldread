@@ -9,7 +9,7 @@ if FreeKindleCN::CONTEXT == :production
 
   WEIBO_CONFIG = {
     :access_token => '***REMOVED***',
-    :expires => 1530415035
+    :expires => 1530450662
   }
 else
   # development: freekindlecn
