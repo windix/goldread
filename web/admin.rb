@@ -71,7 +71,7 @@ module FreeKindleCN
       post '/tweet' do
         result = {}
         image_file = open(params[:tweet_image_url]) if params[:tweet_upload_picture]
-        
+
         # twitter
         require 'twitter_config'
 
@@ -91,6 +91,9 @@ module FreeKindleCN
         require 'weibo_config'
         weibo_client = WeiboOAuth2::Client.new
         weibo_client.get_token_from_hash(WEIBO_CONFIG)
+
+        # weibo's hash tag is #xxx#
+        params[:tweet_text].sub!(params[:tweet_hashtag], params[:tweet_hashtag] + '#')
 
         begin
           if params[:tweet_upload_picture]
