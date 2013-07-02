@@ -100,6 +100,14 @@
     <form action="<%= url("/tweet") %>" method="POST">
       <input type="hidden" name="tweet_image_url" value="<%= item.image_url %>">
 
+      <label class="checkbox">
+        <input type="checkbox" name="tweet_to[twitter]" checked>Twitter
+      </label>
+
+      <label class="checkbox">
+        <input type="checkbox" name="tweet_to[weibo]" checked>Weibo
+      </label>
+
       <label class="radio">
         <input type="radio" name="tweet_hashtag" value="#Kindle今日特价书">#Kindle今日特价书
       </label>

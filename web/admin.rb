@@ -73,10 +73,9 @@ module FreeKindleCN
           params[:tweet_hashtag],
           params[:tweet_upload_picture] ? params[:tweet_image_url] : nil
 
-        result = {
-          'twitter' => tweet.send_to_twitter ? 'successful' : tweet.get_error,
-          'weibo' => tweet.send_to_weibo ? 'successful' : tweet.get_error,
-        }
+        result = params[:tweet_to].collect do |t|
+          tweet.send("send_to_#{t[0]}") ? 'successful' : tweet.get_error
+        end
 
         result.inspect
       end
