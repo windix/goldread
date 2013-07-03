@@ -70,7 +70,7 @@ module FreeKindleCN
     class Price
       include DataMapper::Resource
 
-      storage_names[:default] = "prices_new"
+      storage_names[:default] = "prices"
 
       property :id, Serial
       property :kindle_price, Integer, :index => true
