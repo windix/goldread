@@ -115,7 +115,7 @@ module FreeKindleCN
                       db_item.prices.create(
                         :kindle_price => kindle_price,
                         :retrieved_at => now
-                      ) if (kindle_price != -1)
+                      ) if (kindle_price != -1 && db_item.kindle_price != kindle_price)
 
                       puts "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
                     end
