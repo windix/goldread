@@ -22,26 +22,45 @@ module FreeKindleCN
         end
 
         def price_color(item)
-          if item.kindle_price < 0
-            "-"
-          elsif item.previous_kindle_price
-            # price dropped: red / price incresed: blue
-            color = (item.previous_kindle_price - item.kindle_price > 0) ? "red" : "blue"
+          if item.price_fluc
+            if item.price_fluc.empty?
+              item.kindle_price.format_price
+            else
+              # price dropped: red / price incresed: blue
+              color = (item.price_fluc.last.kindle_price - item.price_fluc.first.kindle_price > 0) ? "blue" : "red"
 
-            result =<<-END
-              <span style='color:#{color}'>
-                #{item.previous_kindle_price.format_price}->#{item.kindle_price.format_price}
-              </span>
-            END
+              result =<<-END
+                <span style='color:#{color}'>
+                  #{item.price_fluc.first.kindle_price.format_price}->#{item.price_fluc.last.kindle_price.format_price}
+                </span>
+              END
+            end
           else
-            item.kindle_price.format_price
+            "-"
           end
         end
 
         def prices_data_for_chart(item)
           data = item.prices.collect { |p| [p.retrieved_at, p.kindle_price.to_f / 100] }
+
           # push current datetime as the endpoint
-          data << [Time.now, data.last[1]]
+          data << [Time.now, data.last[1]] unless data.empty?
+        end
+
+        def tweet_template(item)
+          title_and_author = "#{item.title} - #{item.author}"
+          paper_book_price = "纸书#{item.book_price.format_price}"
+
+          if item.price_fluc.nil? or item.price_fluc.empty?
+            kindle_book_price = "Kindle版#{item.kindle_price.format_price}"
+          else
+            kindle_book_price = "Kindle版原价#{item.price_fluc.first.kindle_price.format_price} / 今日特价#{item.price_fluc.last.kindle_price.format_price}"
+          end
+
+          discount = "(#{item.formatted_discount_rate}，省#{item.save_amount})"
+          url = "购买: http://goldread.net/dp/#{item.asin}"
+
+          "#{title_and_author} #{paper_book_price} / #{kindle_book_price} #{discount} #{url}"
         end
       end
 

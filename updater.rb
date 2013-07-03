@@ -40,16 +40,17 @@ module FreeKindleCN
             return nil
           end
         rescue Exception # => e
-          retry_times += 1
+          raise
+          # retry_times += 1
 
-          if retry_times > 3
-            raise
-          else
-            puts "[#{retry_times}] Exception: #{$!}"
-            puts content
-            sleep 5
-            retry
-          end
+          # if retry_times > 3
+          #   raise
+          # else
+          #   puts "[#{retry_times}] Exception: #{$!}"
+          #   puts content
+          #   sleep 5
+          #   retry
+          # end
         end
 
         [ book_price, kindle_price ]
@@ -98,7 +99,7 @@ module FreeKindleCN
 
                   unless kindle_price
                     db_item.update(:deleted => true)
-                    puts "[#{db_item.asin}] removed"
+                    puts "[#{db_item.asin}] **** REMOVED ****"
                   else
                     if (db_item.book_price != book_price || db_item.kindle_price != kindle_price)
                       discount_rate = (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0
@@ -112,11 +113,9 @@ module FreeKindleCN
                       )
 
                       db_item.prices.create(
-                        :book_price => book_price,
                         :kindle_price => kindle_price,
-                        :discount_rate => discount_rate,
                         :retrieved_at => now
-                      )
+                      ) if (kindle_price != -1)
 
                       puts "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
                     end

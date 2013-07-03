@@ -13,7 +13,11 @@ ruby 003_refactor_prices.rb | mysql -uroot -p***REMOVED*** goldread
 
 ALTER TABLE prices_new
   DROP book_price,
-  DROP discount_rate;
+  DROP discount_rate,
+  DROP item_asin;
+
+RENAME TABLE prices TO prices_old;
+RENAME TABLE prices_new TO prices;
 
 =end
 

@@ -43,13 +43,11 @@
     </dl>
 
     <h2>Price History</h2>
-
-    <table class="table table-condensed table-bordered" style='width:400px'>
+    <table class="table table-condensed table-bordered" style='width:300px'>
       <thead>
         <tr>
           <th>#</th>
           <th>retrieved at</th>
-          <th>book price</th>
           <th>kindle price</th>
         </tr>
       </thead>
@@ -58,7 +56,6 @@
         <tr>
           <td><%= price.id %>
           <td><%= price.retrieved_at.strftime(FreeKindleCN::DATETIME_FORMAT) %></td>
-          <td><%= price.book_price.format_price %></td>
           <td><%= price.kindle_price.format_price %></td>
         </tr>
       <% end %>
@@ -68,7 +65,7 @@
     <h2>Twitter</h2>
 
     <script type="text/javascript">
-      var tweet_text_body = "<%= item.title %> - <%= item.author %> 纸书<%= item.book_price.format_price %> / Kindle版原价<%= item.previous_kindle_price.format_price %> / 今日特价<%= item.kindle_price.format_price %> (<%= item.formatted_discount_rate %>，省<%= item.save_amount %>) 购买: http://goldread.net/dp/<%= item.asin %>";
+      var tweet_text_body = "<%= tweet_template(item) %>";
 
       function set_tweet_text() {
         $('#tweet_text').text($('input:radio[name=tweet_hashtag]:checked').val() + " " + tweet_text_body);

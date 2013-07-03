@@ -53,6 +53,8 @@ module FreeKindleCN
     end
 
     def save
+      now = Time.now
+
       DB::Item.first_or_create({:asin => asin},
         {:title => title,
         :details_url => details_url,
@@ -67,8 +69,8 @@ module FreeKindleCN
         :book_price => -1,
         :kindle_price => -1,
         :discount_rate => 1.0,
-        :created_at => Time.now,
-        :updated_at => Time.now}
+        :created_at => now,
+        :updated_at => now}
       )
     rescue Exception
       puts "Skip saving because of Exception: #{$!}"

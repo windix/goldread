@@ -3,8 +3,7 @@ gem 'asin' #, :path => '~/git/asin'
 gem 'httpclient'
 gem 'nokogiri'
 gem "data_mapper"
-gem "dm-sqlite-adapter", :group => :development
-gem "dm-mysql-adapter", :group => :production
+gem "dm-mysql-adapter"
 gem "sinatra"
 gem "sinatra-contrib", :group => :development
 gem "twitter"

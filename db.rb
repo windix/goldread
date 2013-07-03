@@ -21,7 +21,7 @@ module FreeKindleCN
       storage_names[:default] = "items"
 
       property :id, Serial
-      property :asin, String, :length => 10, :key => true
+      property :asin, String, :length => 10, :unique => true
       property :title, String, :length => 200
       property :details_url, String, :length => 1000
       property :review, Text
@@ -41,13 +41,20 @@ module FreeKindleCN
 
       has n, :prices
 
-      def previous_kindle_price
+      # return price fluctuation of previous two prces
+      def price_fluc
+        # return nil when current price is unavailable
+        return nil if kindle_price == -1
+
         price_changes = prices(:order => [:retrieved_at.desc])
 
-        if price_changes.length >= 2
-          price_changes[1].kindle_price
+        # defensive code, this case is incorrect
+        return nil if price_changes.empty?
+
+        if price_changes.length == 1 # only 1 price, no fluc
+          []
         else
-          nil
+          [price_changes[1], price_changes[0]]
         end
       end
 
@@ -63,12 +70,10 @@ module FreeKindleCN
     class Price
       include DataMapper::Resource
 
-      storage_names[:default] = "prices"
+      storage_names[:default] = "prices_new"
 
       property :id, Serial
-      property :book_price, Integer
       property :kindle_price, Integer, :index => true
-      property :discount_rate, Float, :index => true
       property :retrieved_at, DateTime
 
       belongs_to :item
