@@ -7,7 +7,8 @@ require 'data_mapper'
 if FreeKindleCN::CONTEXT == :production
   DataMapper.setup(:default, "mysql://root:***REMOVED***@ca2/goldread")
 else
-  DataMapper.setup(:default, "sqlite://#{File.expand_path(File.dirname(__FILE__))}/test.db")
+  #DataMapper.setup(:default, "sqlite://#{File.expand_path(File.dirname(__FILE__))}/test.db")
+  DataMapper.setup(:default, "mysql://root:***REMOVED***@localhost/goldread")
 end
 
 DataMapper::Model.raise_on_save_failure = true
@@ -16,6 +17,8 @@ module FreeKindleCN
   module DB
     class Item
       include DataMapper::Resource
+
+      storage_names[:default] = "items"
 
       property :id, Serial
       property :asin, String, :length => 10, :key => true
@@ -60,6 +63,8 @@ module FreeKindleCN
     class Price
       include DataMapper::Resource
 
+      storage_names[:default] = "prices"
+
       property :id, Serial
       property :book_price, Integer
       property :kindle_price, Integer, :index => true
@@ -68,8 +73,6 @@ module FreeKindleCN
 
       belongs_to :item
     end
-
-
   end
 end
 

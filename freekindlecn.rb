@@ -8,6 +8,7 @@ module FreeKindleCN
 
   DATE_FORMAT = '%Y-%m-%d'
   DATETIME_FORMAT = '%Y-%m-%d %H:%M'
+  MYSQL_FORMAT = '%Y-%m-%d %H:%M:%S'
 end
 
 Bundler.setup(:default, FreeKindleCN::CONTEXT)
