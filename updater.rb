@@ -41,16 +41,16 @@ module FreeKindleCN
           end
         rescue Exception # => e
           raise
-          # retry_times += 1
+          retry_times += 1
 
-          # if retry_times > 3
-          #   raise
-          # else
-          #   puts "[#{retry_times}] Exception: #{$!}"
-          #   puts content
-          #   sleep 5
-          #   retry
-          # end
+          if retry_times > 3
+            raise
+          else
+            puts "[#{retry_times}] Exception: #{$!}"
+            puts content
+            sleep 5
+            retry
+          end
         end
 
         [ book_price, kindle_price ]
@@ -101,9 +101,20 @@ module FreeKindleCN
                     db_item.update(:deleted => true)
                     puts "[#{db_item.asin}] **** REMOVED ****"
                   else
-                    if (db_item.book_price != book_price || db_item.kindle_price != kindle_price)
+                    if db_item.book_price != book_price ||
+                      db_item.kindle_price != kindle_price ||
+                      db_item.prices.empty?
+
                       discount_rate = (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0
                       now = Time.now
+
+                      if kindle_price != -1 &&
+                        (db_item.kindle_price != kindle_price || db_item.prices.empty?)
+                        db_item.prices.create(
+                          :kindle_price => kindle_price,
+                          :retrieved_at => now
+                        )
+                      end
 
                       db_item.update(
                         :book_price => book_price,
@@ -111,11 +122,6 @@ module FreeKindleCN
                         :discount_rate => discount_rate,
                         :updated_at => now
                       )
-
-                      db_item.prices.create(
-                        :kindle_price => kindle_price,
-                        :retrieved_at => now
-                      ) if (kindle_price != -1 && db_item.kindle_price != kindle_price)
 
                       puts "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
                     end
