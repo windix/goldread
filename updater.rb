@@ -13,6 +13,8 @@ module FreeKindleCN
         begin
           content = client.get("http://www.amazon.cn/gp/aw/d/#{asin}").content
 
+          content.encode!("UTF-8", :invalid => :replace) unless content.valid_encoding?
+
           if content.include? "<h2>意外错误</h2>"
             # temporary error, retry
             raise "temporary error, retry"
