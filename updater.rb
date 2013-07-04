@@ -40,7 +40,6 @@ module FreeKindleCN
             return nil
           end
         rescue Exception # => e
-          raise
           retry_times += 1
 
           if retry_times > 3
