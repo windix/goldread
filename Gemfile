@@ -6,6 +6,7 @@ gem "data_mapper"
 gem "dm-mysql-adapter"
 gem "sinatra"
 gem "sinatra-contrib", :group => :development
+gem "sinatra-index"
 gem "twitter"
 gem "weibo_2"
 gem "thor"

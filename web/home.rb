@@ -1,6 +1,7 @@
 # encoding: UTF-8
 
 require 'sinatra/base'
+require 'sinatra-index'
 require 'erb'
 
 module FreeKindleCN
@@ -11,11 +12,14 @@ module FreeKindleCN
         register Sinatra::Reloader
       end
 
+      register Sinatra::Index
+      use_static_index 'index.html'
+
       set :views, "#{File.expand_path(File.dirname(__FILE__))}/views/home"
 
-      get '/' do
-        erb :index
-      end
+#      get '/' do
+#        erb :index
+#      end
 
       get '/dp/:asin' do
         if Item.is_valid_asin?(params[:asin]) &&
