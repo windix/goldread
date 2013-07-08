@@ -4,6 +4,7 @@ require 'sinatra/base'
 require 'erb'
 require 'chartkick'
 require 'open-uri'
+require 'json'
 
 module FreeKindleCN
   module Web

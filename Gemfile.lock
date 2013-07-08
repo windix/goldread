@@ -133,6 +133,7 @@ DEPENDENCIES
   data_mapper
   dm-mysql-adapter
   httpclient
+  json
   nokogiri
   sinatra
   sinatra-contrib

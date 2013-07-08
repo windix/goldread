@@ -65,7 +65,7 @@
     <h2>Twitter</h2>
 
     <script type="text/javascript">
-      var tweet_text_body = "<%= tweet_template(item) %>";
+      var tweet_text_body = <%= tweet_template(item).to_json %>;
 
       function set_tweet_text() {
         $('#tweet_text').text($('input:radio[name=tweet_hashtag]:checked').val() + " " + tweet_text_body);
