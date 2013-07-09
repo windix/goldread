@@ -13,7 +13,7 @@ module FreeKindleCN
         begin
           content = client.get("http://www.amazon.cn/gp/aw/d/#{asin}").content
 
-          content.encode!("UTF-8", :invalid => :replace) unless content.valid_encoding?
+          content.encode!("UTF-8", :invalid => :replace, :undef => :replace, :replace => '') # unless content.valid_encoding?
 
           if content.include? "<h2>意外错误</h2>"
             # temporary error, retry
@@ -41,7 +41,9 @@ module FreeKindleCN
             puts content
             return nil
           end
-        rescue Exception # => e
+        rescue Exception => e
+          puts e.backtrace
+
           retry_times += 1
 
           if retry_times > 3
