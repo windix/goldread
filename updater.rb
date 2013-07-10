@@ -11,7 +11,7 @@ module FreeKindleCN
 
         retry_times = 0
         begin
-          content = client.get("http://www.amazon.cn/gp/aw/d/#{asin}").content
+          content = client.get_content("http://www.amazon.cn/gp/aw/d/#{asin}")
 
           if content.encoding.to_s != "UTF-8"
             # log
@@ -44,8 +44,8 @@ module FreeKindleCN
 
           else
             # book is permanently unavailable -- the ASIN becomes invalid
-            puts content
-            return nil
+            # but we need to verify it: the web dp page will be 404 if it is PERMANENTLY unavailable
+            return nil if HTTPClient.get("http://www.amazon.cn/dp/#{asin}").status_code == 404
           end
         rescue Exception => e
           puts e.backtrace
