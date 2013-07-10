@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'asin' #, :path => '~/git/asin'
+gem 'asin', :git => 'https://github.com/***REMOVED***/asin.git'
 gem 'httpclient'
 gem 'nokogiri'
 gem "data_mapper"
@@ -12,3 +12,4 @@ gem "weibo_2"
 gem "thor"
 gem "chartkick"
 gem "json"
+gem "douban_api"

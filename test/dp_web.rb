@@ -4,7 +4,7 @@ require 'bundler/setup'
 require 'nokogiri'
 require 'open-uri'
 
-asin = 'B006RPCZ6Y'
+asin = 'B009P4OVLQ'
 
 doc = Nokogiri::HTML(open("http://www.amazon.cn/dp/#{asin}"))
 
@@ -26,13 +26,7 @@ versions.each do |version|
 	puts
 end
 
-#puts "评价：" + doc.at_css('table#productDetailsTable span.crAvgStars span.swSprite').content
-#puts "评价：" + doc.css('span.crAvgStars span.swSprite').length.to_s
-puts "评价：" + doc.at_css("span.asinReviewsSummary[name=#{asin}] span.swSprite").content
-
-
-exit
-
+puts "评价：" + doc.at_css('table#productDetailsTable span.crAvgStars span.swSprite').content
 puts doc.at_css('table#productDetailsTable span.crAvgStars > a').content
 
 puts "排名：" + doc.at_css('li#SalesRank').content[/Kindle商店商品里排第([\d,]+)名/, 1]

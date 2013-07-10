@@ -45,6 +45,14 @@ module FreeKindleCN
         erb :weibo_callback, :locals => { :access_token => access_token }
       end
 
+      get '/oauth/callback/douban' do
+        params.inspect
+
+        3640a1e2a8130cd5
+
+      end
+
+
     end
   end
 end

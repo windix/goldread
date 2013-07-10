@@ -100,6 +100,14 @@ module FreeKindleCN
         result.inspect
       end
 
+      get '/amazon/asin/:asin' do
+        client = ASIN::Client.instance
+        client.lookup(params[:asin])
+        
+        content_type :xml
+        client.resp
+      end
+
     end
   end
 end
