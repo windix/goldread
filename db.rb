@@ -58,6 +58,10 @@ module FreeKindleCN
         end
       end
 
+      def last_price
+        prices(:order => [:retrieved_at.desc]).first
+      end
+
       def formatted_discount_rate
         "%.1f折" % (discount_rate.to_f * 10)
       end
