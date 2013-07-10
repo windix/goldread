@@ -13,7 +13,13 @@ module FreeKindleCN
         begin
           content = client.get("http://www.amazon.cn/gp/aw/d/#{asin}").content
 
-          content.encode!("UTF-8", :invalid => :replace, :undef => :replace, :replace => '') # unless content.valid_encoding?
+          if content.encoding.to_s != "UTF-8"
+            # log
+            File.open("encoding_error_#{asin}.txt", "w") { |f| f.write(content) }
+            content = content.force_encoding("UTF-8")
+
+            # content.encode!("UTF-8", :invalid => :replace, :undef => :replace, :replace => '') # unless content.valid_encoding?
+          end
 
           if content.include? "<h2>意外错误</h2>"
             # temporary error, retry
