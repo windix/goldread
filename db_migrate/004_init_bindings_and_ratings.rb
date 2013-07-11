@@ -15,7 +15,7 @@ CREATE TABLE IF NOT EXISTS `bindings` (
   KEY `index_bindings_item` (`item_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
-CREATE TABLE IF NOT EXISTS `rankings` (
+CREATE TABLE IF NOT EXISTS `ratings` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `source` varchar(10) DEFAULT NULL,
   `average` int(11) DEFAULT NULL,
