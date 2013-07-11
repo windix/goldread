@@ -45,13 +45,20 @@ module FreeKindleCN
         erb :weibo_callback, :locals => { :access_token => access_token }
       end
 
-      get '/oauth/callback/douban' do
-        params.inspect
+      get '/oauth/douban' do
+        require 'douban_config'
 
-        3640a1e2a8130cd5
-
+        scope = "douban_basic_common,book_basic_r"
+        redirect Douban.authorize_url(:redirect_uri => DOUBAN_CALLBACK, :scope => scope)
       end
 
+      get '/oauth/callback/douban' do
+        require 'douban_config'
+
+        response = Douban.get_access_token(params[:code], :redirect_uri => DOUBAN_CALLBACK)
+
+        erb :douban_callback, :locals => { :response => response }
+      end
 
     end
   end
