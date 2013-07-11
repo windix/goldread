@@ -52,6 +52,23 @@ module FreeKindleCN
       @raw.ItemAttributes!.ReleaseDate
     end
 
+    def binding
+      case @raw.ItemAttributes!.binding
+      when "平装"
+        "paperback"
+      when "Kindle版"
+        "kindle"
+      when "精装"
+        "hardcover"
+      else
+        nil
+      end
+    end
+
+    def isbn13
+      @raw.ItemAttributes!.EAN
+    end
+
     def save
       now = Time.now
 

@@ -40,6 +40,8 @@ module FreeKindleCN
       property :deleted, Boolean, :default => false
 
       has n, :prices
+      has n, :bindings
+      has n, :ratings
 
       # return price fluctuation of previous two prces
       def price_fluc
@@ -69,6 +71,19 @@ module FreeKindleCN
       def save_amount
         (book_price - kindle_price).format_price
       end
+
+      def preferred_binding
+        @preferred_binding ||= bindings(:preferred => true).first
+      end
+
+      def alternate_kindle_versions
+        @alternate_kindle_versions ||= bindings(:type => 'kindle')
+      end
+
+      def rating_by_source(source = 'amazon')
+        ratings(:source => source).first
+      end
+
     end
 
     class Price
@@ -82,6 +97,53 @@ module FreeKindleCN
 
       belongs_to :item
     end
+
+    class Binding
+      include DataMapper::Resource
+
+      storage_names[:default] = "bindings"
+
+      property :id, Serial
+      property :type, String, :length => 10 # paperback, hardcover
+      property :asin, String, :length => 10
+      property :isbn, String, :length => 13 # ISBN13 / EAN
+      property :douban_id, Integer
+      property :preferred, Boolean, :default => false
+      property :created_at, DateTime
+
+      def douban_api_url
+        "http://api.douban.com/v2/book/#{douban_id}"
+      end
+
+      def douban_page_url
+        "http://book.douban.com/subject/#{douban_id}/"
+      end
+
+      def amazon_url
+        "http://www.amazon.cn/dp/#{asin}"
+      end
+
+      belongs_to :item
+    end
+
+    class Rating
+      include DataMapper::Resource
+
+      storage_names[:default] = "ratings"
+
+      property :id, Serial
+      property :source, String, :length => 10 # amazon, douban
+      property :average, Integer
+      property :num_of_votes, Integer
+      property :updated_at, DateTime
+
+      def display
+        "#{average.to_f / 10} (#{num_of_votes})"
+      end
+
+      belongs_to :item
+    end
+
   end
 end
 
