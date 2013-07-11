@@ -74,7 +74,7 @@ DB::Item.all(:deleted => false).each do |db_item|
     if book_url
       book_asin = book_url['href'][/dp\/([A-Z0-9]+)$/, 1]
     else
-      puts "Cannot parse ASIN, skip..."
+      puts "Cannot parse ASIN, skip..." if binding_type != "kindle"
       next
     end
 
