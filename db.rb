@@ -61,7 +61,7 @@ module FreeKindleCN
       end
 
       def last_price
-        prices(:order => [:retrieved_at.desc]).first
+        prices(:order => [:retrieved_at.desc]).first.kindle_price rescue nil
       end
 
       def formatted_discount_rate
