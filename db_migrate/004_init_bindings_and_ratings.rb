@@ -52,6 +52,11 @@ DB::Item.all(:deleted => false).each do |db_item|
 
   bindings = doc.css('table.twisterMediaMatrix table tbody').collect { |t| t['id'] }.compact
 
+  if bindings.empty?
+    puts "[#{asin}] No other bindings, skip..."
+    next
+  end
+
   is_preferred = true
   bindings.each do |binding|
     tbody = doc.at_css("tbody##{binding}")
@@ -101,6 +106,12 @@ DB::Item.all(:deleted => false).each do |db_item|
 
 
     ### DOUBAN API
+
+    # invalid isbn13
+    unless item.isbn13
+      puts "ISBN for [#{book_asin}] is empty, skip..."
+      next
+    end
 
     begin
       book_info = douban_client.isbn(item.isbn13)
