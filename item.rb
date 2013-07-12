@@ -61,12 +61,15 @@ module FreeKindleCN
       when "精装"
         "hardcover"
       else
+        # other known bindings: "CD"
         nil
       end
     end
 
     def isbn13
-      @raw.ItemAttributes!.EAN
+      # only keep first 13 digits
+      # e.g. for B008H0H9FO, the EAN is 9787510407550 01
+      @raw.ItemAttributes!.EAN[0..12] rescue nil
     end
 
     def save

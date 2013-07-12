@@ -64,6 +64,9 @@ DB::Item.all(:deleted => false).each do |db_item|
         "hardcover"
       when "kindle_meta_binding_winner", "kindle_meta_binding_body"
         "kindle"
+      when "audiobooks_meta_binding_winner", "other_meta_binding_winner"
+        # audiobook, skip
+        next
       else
         puts "Unknown binding '#{binding}', skip...."
         next
