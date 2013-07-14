@@ -52,6 +52,11 @@ DB::Item.all(:deleted => false).each do |db_item|
 
   bindings = doc.css('table.twisterMediaMatrix table tbody').collect { |t| t['id'] }.compact
 
+  if bindings.empty?
+    puts "[#{asin}] No other bindings, skip..."
+    next
+  end
+
   is_preferred = true
   bindings.each do |binding|
     tbody = doc.at_css("tbody##{binding}")
@@ -64,6 +69,9 @@ DB::Item.all(:deleted => false).each do |db_item|
         "hardcover"
       when "kindle_meta_binding_winner", "kindle_meta_binding_body"
         "kindle"
+      when "audiobooks_meta_binding_winner", "other_meta_binding_winner"
+        # audiobook, skip
+        next
       else
         puts "Unknown binding '#{binding}', skip...."
         next
@@ -98,6 +106,12 @@ DB::Item.all(:deleted => false).each do |db_item|
 
 
     ### DOUBAN API
+
+    # invalid isbn13
+    unless item.isbn13
+      puts "ISBN for [#{book_asin}] is empty, skip..."
+      next
+    end
 
     begin
       book_info = douban_client.isbn(item.isbn13)

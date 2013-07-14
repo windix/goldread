@@ -1,12 +1,18 @@
 GIT
   remote: https://github.com/***REMOVED***/asin.git
-  revision: 88dbbfaf2befa5c11163521d69f46b3efcab99f3
+  revision: 3a7cd3492bc6c66e067a3e4d74f232086cbf088d
   specs:
     asin (1.1.2)
       confiture (>= 0.1)
       crack (>= 0.3)
       hashie (>= 1.1)
       httpi (>= 0.9)
+
+GIT
+  remote: https://github.com/***REMOVED***/log_buddy.git
+  revision: 4518a3c4262e7580dac6e78183c29ed2e5596a5d
+  specs:
+    log_buddy (0.7.0)
 
 GEM
   remote: https://rubygems.org/
@@ -147,6 +153,7 @@ DEPENDENCIES
   douban_api
   httpclient
   json
+  log_buddy!
   nokogiri
   sinatra
   sinatra-contrib
