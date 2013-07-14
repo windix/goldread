@@ -14,9 +14,11 @@ end
 Bundler.setup(:default, FreeKindleCN::CONTEXT)
 
 require 'log_buddy'
-LogBuddy.init
 
-d "Current Environment: #{FreeKindleCN::CONTEXT}"
+LogBuddy.init
+LogBuddy.logger.level = Logger::INFO
+
+logger.info "Current Environment: #{FreeKindleCN::CONTEXT}"
 
 require 'asin'
 require 'httpclient'

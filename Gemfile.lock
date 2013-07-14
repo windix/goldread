@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/***REMOVED***/asin.git
-  revision: 88dbbfaf2befa5c11163521d69f46b3efcab99f3
+  revision: 3a7cd3492bc6c66e067a3e4d74f232086cbf088d
   specs:
     asin (1.1.2)
       confiture (>= 0.1)

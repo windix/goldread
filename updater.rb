@@ -15,10 +15,10 @@ module FreeKindleCN
         db_item = DB::Item.first(:asin => asin)
 
         unless db_item.bindings.empty?
-          d "[#{asin}] #{db_item.bindings.length} bindings exist, skip..."
+          logger.debug "[#{asin}] #{db_item.bindings.length} bindings exist, skip..."
           return
         else
-          d "[#{asin}] #{db_item.title}"
+          logger.debug "[#{asin}] #{db_item.title}"
         end
 
         ### PARSE WEB PAGE
@@ -29,7 +29,7 @@ module FreeKindleCN
         bindings = doc.css('table.twisterMediaMatrix table tbody').collect { |t| t['id'] }.compact
 
         if bindings.empty?
-          d "[#{asin}] No other bindings, skip..."
+          logger.debug "[#{asin}] No other bindings, skip..."
           return
         end
 
@@ -49,7 +49,7 @@ module FreeKindleCN
               # audiobook, skip
               next
             else
-              d "Unknown binding '#{binding}', skip...."
+              logger.debug "Unknown binding '#{binding}', skip...."
               next
             end
 
@@ -58,7 +58,7 @@ module FreeKindleCN
           if book_url
             book_asin = book_url['href'][/dp\/([A-Z0-9]+)$/, 1]
           else
-            d "Cannot parse ASIN, skip..." if binding_type != "kindle"
+            logger.debug "Cannot parse ASIN, skip..." if binding_type != "kindle"
             next
           end
 
@@ -74,7 +74,7 @@ module FreeKindleCN
           items = asin_client.lookup(book_asin)
 
           if items.empty?
-            d "Cannot find Book ASIN: #{book_asin}, skip..." unless binding_type == "kindle"
+            logger.debug "Cannot find Book ASIN: #{book_asin}, skip..." unless binding_type == "kindle"
             next
           else
             item = items.first
@@ -84,7 +84,7 @@ module FreeKindleCN
 
           # invalid isbn13
           unless item.isbn13
-            d "ISBN for [#{book_asin}] is empty, skip..."
+            logger.debug "ISBN for [#{book_asin}] is empty, skip..."
             next
           end
 
@@ -94,7 +94,7 @@ module FreeKindleCN
             # exceed Douban's request limits
             raise
           rescue => e
-            d "Failed to find ISBN '#{item.isbn13}' from douban: #{e.message}, skip..."
+            logger.debug "Failed to find ISBN '#{item.isbn13}' from douban: #{e.message}, skip..."
             next
           end
 
@@ -181,7 +181,7 @@ module FreeKindleCN
             return nil if HTTPClient.get("http://www.amazon.cn/dp/#{asin}").status_code == 404
           end
         rescue Exception => e
-          d e.backtrace
+          logger.debug e.backtrace
 
           retry_times += 1
 
@@ -189,7 +189,7 @@ module FreeKindleCN
             raise
           else
             logger.error "[#{retry_times}] Exception: #{$!}"
-            d content
+            logger.debug content
             sleep 5
             retry
           end
@@ -296,7 +296,7 @@ module FreeKindleCN
         #         begin
         #           fetch_bindings_and_ratings(db_item.asin)
         #         rescue => e
-        #           d "(fetch bindings and ratings) Skip #{db_item.asin} because of Exception: #{e.message}"
+        #           logger.error "(fetch bindings and ratings) Skip #{db_item.asin} because of Exception: #{e.message}"
         #         end
         #       end # Thread.new
         #     end # slice.each
