@@ -92,8 +92,8 @@ module FreeKindleCN
         :created_at => now,
         :updated_at => now}
       )
-    rescue Exception
-      puts "Skip saving because of Exception: #{$!}"
+    rescue => e
+      d "Skip saving because of Exception: #{e.message}"
       nil
     end
 

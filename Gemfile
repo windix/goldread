@@ -13,3 +13,4 @@ gem "thor"
 gem "chartkick"
 gem "json"
 gem "douban_api"
+gem "log_buddy", :git => 'https://github.com/***REMOVED***/log_buddy.git'

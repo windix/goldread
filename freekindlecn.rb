@@ -13,6 +13,11 @@ end
 
 Bundler.setup(:default, FreeKindleCN::CONTEXT)
 
+require 'log_buddy'
+LogBuddy.init
+
+d "Current Environment: #{FreeKindleCN::CONTEXT}"
+
 require 'asin'
 require 'httpclient'
 require 'nokogiri'

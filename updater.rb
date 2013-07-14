@@ -15,10 +15,10 @@ module FreeKindleCN
         db_item = DB::Item.first(:asin => asin)
 
         unless db_item.bindings.empty?
-          puts "[#{asin}] #{db_item.bindings.length} bindings exist, skip..."
+          d "[#{asin}] #{db_item.bindings.length} bindings exist, skip..."
           return
         else
-          puts "[#{asin}] #{db_item.title}"
+          d "[#{asin}] #{db_item.title}"
         end
 
         ### PARSE WEB PAGE
@@ -29,7 +29,7 @@ module FreeKindleCN
         bindings = doc.css('table.twisterMediaMatrix table tbody').collect { |t| t['id'] }.compact
 
         if bindings.empty?
-          puts "[#{asin}] No other bindings, skip..."
+          d "[#{asin}] No other bindings, skip..."
           return
         end
 
@@ -49,7 +49,7 @@ module FreeKindleCN
               # audiobook, skip
               next
             else
-              puts "Unknown binding '#{binding}', skip...."
+              d "Unknown binding '#{binding}', skip...."
               next
             end
 
@@ -58,7 +58,7 @@ module FreeKindleCN
           if book_url
             book_asin = book_url['href'][/dp\/([A-Z0-9]+)$/, 1]
           else
-            puts "Cannot parse ASIN, skip..." if binding_type != "kindle"
+            d "Cannot parse ASIN, skip..." if binding_type != "kindle"
             next
           end
 
@@ -74,7 +74,7 @@ module FreeKindleCN
           items = asin_client.lookup(book_asin)
 
           if items.empty?
-            puts "Cannot find Book ASIN: #{book_asin}, skip..." unless binding_type == "kindle"
+            d "Cannot find Book ASIN: #{book_asin}, skip..." unless binding_type == "kindle"
             next
           else
             item = items.first
@@ -84,7 +84,7 @@ module FreeKindleCN
 
           # invalid isbn13
           unless item.isbn13
-            puts "ISBN for [#{book_asin}] is empty, skip..."
+            d "ISBN for [#{book_asin}] is empty, skip..."
             next
           end
 
@@ -94,13 +94,13 @@ module FreeKindleCN
             # exceed Douban's request limits
             raise
           rescue => e
-            puts "Failed to find ISBN '#{item.isbn13}' from douban: #{e.message}, skip..."
+            d "Failed to find ISBN '#{item.isbn13}' from douban: #{e.message}, skip..."
             next
           end
 
           ### SAVE TO DB
 
-          puts "[#{asin}] #{binding_type}#{is_preferred ? "*" : ""}: "\
+          logger.info "[#{asin}] #{binding_type}#{is_preferred ? "*" : ""}: "\
             "#{book_asin}, #{item.isbn13}, "\
             "a: #{average_reviews} of #{num_of_votes}, "\
             "d: #{book_info[:rating][:average]} of #{book_info[:rating][:numRaters]}"
@@ -181,15 +181,15 @@ module FreeKindleCN
             return nil if HTTPClient.get("http://www.amazon.cn/dp/#{asin}").status_code == 404
           end
         rescue Exception => e
-          puts e.backtrace
+          d e.backtrace
 
           retry_times += 1
 
           if retry_times > 3
             raise
           else
-            puts "[#{retry_times}] Exception: #{$!}"
-            puts content
+            logger.error "[#{retry_times}] Exception: #{$!}"
+            d content
             sleep 5
             retry
           end
@@ -241,7 +241,7 @@ module FreeKindleCN
 
                   unless kindle_price
                     db_item.update(:deleted => true)
-                    puts "[#{db_item.asin}] **** REMOVED ****"
+                    logger.info "[#{db_item.asin}] **** REMOVED ****"
                   else
                     if db_item.book_price != book_price ||
                       db_item.kindle_price != kindle_price ||
@@ -264,20 +264,20 @@ module FreeKindleCN
                         :updated_at => now
                       )
 
-                      puts "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
+                      logger.info "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
                     end
 
                     if to_fetch_bindings_and_ratings
                       begin
                         fetch_bindings_and_ratings(db_item.asin)
                       rescue => e
-                        puts "(fetch bindings and ratings) Skip #{db_item.asin} because of Exception: #{e.message}"
+                        logger.error "(fetch bindings and ratings) Skip #{db_item.asin} because of Exception: #{e.message}"
                       end
                     end
 
                   end
                 rescue => e
-                  puts "(fetch price) Skip #{db_item.asin} because of Exception: #{e.message}"
+                  logger.error "(fetch price) Skip #{db_item.asin} because of Exception: #{e.message}"
                 end
               end # Thread.new
             end # slice.each
@@ -296,7 +296,7 @@ module FreeKindleCN
         #         begin
         #           fetch_bindings_and_ratings(db_item.asin)
         #         rescue => e
-        #           puts "(fetch bindings and ratings) Skip #{db_item.asin} because of Exception: #{e.message}"
+        #           d "(fetch bindings and ratings) Skip #{db_item.asin} because of Exception: #{e.message}"
         #         end
         #       end # Thread.new
         #     end # slice.each
@@ -322,7 +322,7 @@ module FreeKindleCN
           if retry_times > 3
             raise
           else
-            puts "[#{retry_times}] Exception: #{$!}"
+            logger.error "[#{retry_times}] Exception: #{$!}"
             sleep 5
             retry
           end
