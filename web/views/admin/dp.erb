@@ -42,6 +42,13 @@
       <dd><%= item.updated_at.strftime(FreeKindleCN::DATETIME_FORMAT) %></dd>
     </dl>
 
+    <h2>Ratings</h2>
+    <ul>
+      <li>Amazon: <%= item.rating_by_source('amazon') || "-" %></li>
+      <li><a href="<%= item.preferred_binding.douban_page_url rescue "#" %>">Douban</a>: <%= item.rating_by_source('douban') || "-" %></li>
+    </ul>
+
+
     <h2>Price History</h2>
     <table class="table table-condensed table-bordered" style='width:300px'>
       <thead>

@@ -137,7 +137,7 @@ module FreeKindleCN
       property :num_of_votes, Integer
       property :updated_at, DateTime
 
-      def display
+      def to_s
         "#{average.to_f / 10} (#{num_of_votes})"
       end
 
