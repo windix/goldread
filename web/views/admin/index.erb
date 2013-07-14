@@ -23,8 +23,8 @@
       <td><a href="<%= item.preferred_binding.amazon_url rescue "#" %>"><%= item.book_price.format_price %></a></td>
       <td><%= price_color(item) %></td>
       <td><%= item.formatted_discount_rate %></td>
-      <td><%= item.rating_by_source('amazon').display %></td>
-      <td><a href="<%= item.preferred_binding.douban_page_url rescue "#" %>"><%= item.rating_by_source('douban').display %></a></td>
+      <td><%= item.rating_by_source('amazon') %></td>
+      <td><a href="<%= item.preferred_binding.douban_page_url rescue "#" %>"><%= item.rating_by_source('douban') %></a></td>
       <td><%= item.alternate_kindle_versions.empty? ? "-" : "K" %></td>
     </tr>
   <% end %>
