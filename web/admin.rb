@@ -63,6 +63,16 @@ module FreeKindleCN
 
           "#{title_and_author} #{paper_book_price} / #{kindle_book_price} #{discount} #{url}"
         end
+
+        def tr_color(item)
+          if item.deleted
+            'error'
+          elsif Time.now.to_i - item.updated_at.to_time.to_i < 86400 # 1 day
+            'warning'
+          else
+            nil
+          end
+        end
       end
 
       def self.new(*)
@@ -103,7 +113,7 @@ module FreeKindleCN
       get '/amazon/asin/:asin' do
         client = ASIN::Client.instance
         client.lookup(params[:asin])
-        
+
         content_type :xml
         client.resp
       end

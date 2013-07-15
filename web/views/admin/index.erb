@@ -15,7 +15,8 @@
   </thead>
   <tbody>
   <% items.each do |item| %>
-    <tr <%= "class='error'" if item.deleted %>>
+    <% item_tr_css_class = tr_color(item) %>
+    <tr <%= "class='#{item_tr_css_class}'" if item_tr_css_class %>>
       <td><%= item.id %></td>
       <td><a href="<%= url("dp/#{item.asin}") %>"><%= item.asin %></a></td>
       <td><a href="<%= item.details_url %>"><%= (item.title || "")[0..20] %></a></td>
