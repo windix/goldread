@@ -26,7 +26,7 @@
       <td><%= item.formatted_discount_rate %></td>
       <td><%= item.rating_by_source('amazon') %></td>
       <td><a href="<%= item.preferred_binding.douban_page_url rescue "#" %>"><%= item.rating_by_source('douban') %></a></td>
-      <td><%= item.alternate_kindle_versions.empty? ? "-" : "K" %></td>
+      <td><%= note(item) %></td>
     </tr>
   <% end %>
   </tbody>

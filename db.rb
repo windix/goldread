@@ -42,6 +42,7 @@ module FreeKindleCN
       has n, :prices
       has n, :bindings
       has n, :ratings
+      has n, :tweet_archives
 
       # return price fluctuation of previous two prces
       def price_fluc
@@ -111,6 +112,8 @@ module FreeKindleCN
       property :preferred, Boolean, :default => false
       property :created_at, DateTime
 
+      belongs_to :item
+
       def douban_api_url
         "http://api.douban.com/v2/book/#{douban_id}"
       end
@@ -122,8 +125,6 @@ module FreeKindleCN
       def amazon_url
         "http://www.amazon.cn/dp/#{asin}"
       end
-
-      belongs_to :item
     end
 
     class Rating
@@ -144,6 +145,20 @@ module FreeKindleCN
       belongs_to :item
     end
 
+    class TweetArchive
+      include DataMapper::Resource
+
+      storage_names[:default] = "tweet_archives"
+
+      property :id, Serial
+      property :tweet_id, Integer
+      property :published_at, DateTime
+      property :content, String, :length => 300
+      property :hashtag, String, :length => 20
+      property :is_main, Boolean, :default => false
+
+      belongs_to :item
+    end
   end
 end
 

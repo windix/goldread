@@ -73,6 +73,18 @@ module FreeKindleCN
             nil
           end
         end
+
+        def note(item)
+          note = ""
+
+          note += "K" unless item.alternate_kindle_versions.empty?
+          note += "T" unless item.tweet_archives.empty?
+
+          # last
+          note += "-" if note.empty?
+
+          note
+        end
       end
 
       def self.new(*)
@@ -116,6 +128,10 @@ module FreeKindleCN
 
         content_type :xml
         client.resp
+      end
+
+      get '/tweets' do
+        erb :tweets, :locals => { :tweets => DB::TweetArchive.all }
       end
 
     end
