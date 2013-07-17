@@ -1,0 +1,16 @@
+<% tweets.each do |t| %>
+	<div class="media">
+		<img src="<%= t.item.thumb_url %>" class="pull-left media-object img-polaroid" />
+
+		<div class="media-body">
+			<% if t.is_main %>
+				<h6 class="meia-heading"><%= t.published_at.strftime(FreeKindleCN::DATETIME_FORMAT) %></h6>
+				<p><%= t.content %></p>
+			<% end %>
+			<div class="well well-small">
+				<p><%= t.item.title %> - <%= t.item.author %></p>
+				<p>Kindle版价格：<%= t.item.kindle_price.format_price %></p>
+			</div>
+		</div>
+	</div>
+<% end %>
