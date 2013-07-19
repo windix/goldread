@@ -131,7 +131,7 @@ module FreeKindleCN
       end
 
       get '/tweets' do
-        erb :tweets, :locals => { :tweets => DB::TweetArchive.all }
+        erb :tweets, :locals => { :tweets => DB::TweetArchive.all(:order => [:published_at.desc]) }
       end
 
     end
