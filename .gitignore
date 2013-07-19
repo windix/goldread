@@ -1,1 +1,7 @@
 *.db
+web/public/feed
+web/public/images
+web/public/static
+web/public/stylesheets
+web/public/index.html
+web/public/sitemap.xml
