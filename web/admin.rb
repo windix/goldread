@@ -5,6 +5,7 @@ require 'erb'
 require 'chartkick'
 require 'open-uri'
 require 'json'
+require 'twitter-text'
 
 module FreeKindleCN
   module Web
@@ -18,6 +19,8 @@ module FreeKindleCN
       # set :public_folder, "#{File.expand_path(File.dirname(__FILE__))}/public"
 
       helpers do
+        include Twitter::Autolink
+
         def min_file_suffix
           (settings.environment == :development) ? "" : ".min"
         end

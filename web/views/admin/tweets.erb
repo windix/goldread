@@ -5,7 +5,7 @@
 		<div class="media-body">
 			<% if t.is_main %>
 				<h6 class="meia-heading"><%= t.published_at.strftime(FreeKindleCN::DATETIME_FORMAT) %></h6>
-				<p><%= t.content %></p>
+				<p><%= auto_link t.content %></p>
 			<% end %>
 			<div class="well well-small">
 				<p><%= t.item.title %> - <%= t.item.author %></p>

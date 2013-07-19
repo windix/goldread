@@ -136,6 +136,11 @@ GEM
       faraday (~> 0.8, < 0.10)
       multi_json (~> 1.0)
       simple_oauth (~> 0.2)
+    twitter-text (1.6.1)
+      unf (~> 0.0.5)
+    unf (0.0.5)
+      unf_ext
+    unf_ext (0.0.6)
     uuidtools (2.1.4)
     weibo_2 (0.1.4)
       hashie (~> 2.0.4)
@@ -162,4 +167,5 @@ DEPENDENCIES
   sinatra-index
   thor
   twitter
+  twitter-text
   weibo_2
