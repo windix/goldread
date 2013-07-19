@@ -309,6 +309,57 @@ module FreeKindleCN
         db_items
       end
 
+      def fetch_tweets
+        require 'twitter_config'
+
+        tweets = Twitter.user_timeline('goldreadchina',
+          :count => 100,
+          :exclude_replies => true,
+          :trim_user => true,
+          :contributor_details => false,
+          :include_rts => false,
+          :since_id => DB::TweetArchive.first(:order => [:published_at.desc]).tweet_id
+        )
+
+        tweets.reverse.each do |t|
+          hashtag = t.hashtags.first
+
+          if hashtag && (hashtag.text == "Kindle好书推荐" || hashtag.text == "Kindle今日特价书")
+            content = CGI.unescape(t.text)
+
+            next if t.urls.empty?
+
+            # store full URLs
+            t.urls.each { |url| content.sub!(url.url, url.expanded_url) }
+
+            # remove image URL
+            t.media.each { |media| content.sub!(media.url, '') }
+
+            is_main = true
+            t.urls.each do |url|
+              asin = url.expanded_url[/dp\/([A-Z0-9]+)/, 1]
+
+              item = DB::Item.first(:asin => asin)
+
+              d "#{t.id}, #{hashtag.text}, #{t.created_at} [#{asin}]"
+              d content
+
+              DB::TweetArchive.create(
+                :tweet_id => t.id,
+                :published_at => t.created_at,
+                :content => content[0...300],
+                :hashtag => hashtag.text,
+                :is_main => is_main,
+                :item_id => item.id
+              )
+
+              is_main = false
+            end
+          end
+        end
+
+      end
+
       private
 
       def lookup(client, asins)

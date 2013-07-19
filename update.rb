@@ -46,6 +46,13 @@ class CLI < Thor
     Updater.fetch_info(DB::Item.all(:fields => [:asin]).collect { |item| item.asin })
   end
 
+  desc "tweets", "sync tweets"
+  def tweets
+    logger.info "#{Time.now}: Get tweets..."
+
+    Updater.fetch_tweets
+  end
+
 end
 
 CLI.start(ARGV)
