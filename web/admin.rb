@@ -6,6 +6,9 @@ require 'chartkick'
 require 'open-uri'
 require 'json'
 require 'twitter-text'
+require 'will_paginate'
+require 'will_paginate/data_mapper'
+require 'will_paginate-bootstrap'
 
 module FreeKindleCN
   module Web
@@ -17,6 +20,8 @@ module FreeKindleCN
 
       set :views, "#{File.expand_path(File.dirname(__FILE__))}/views/admin"
       # set :public_folder, "#{File.expand_path(File.dirname(__FILE__))}/public"
+
+      helpers WillPaginate::Sinatra::Helpers
 
       helpers do
         include Twitter::Autolink
@@ -100,7 +105,7 @@ module FreeKindleCN
       end
 
       get '/' do
-        erb :index, :locals => { :items => DB::Item.all }
+        erb :index, :locals => { :items => DB::Item.all.paginate(:page => params[:page], :per_page => ADMIN_ITEMS_PER_PAGE) }
       end
 
       get '/dp/:asin' do
