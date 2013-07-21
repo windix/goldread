@@ -1,0 +1,2 @@
+#rsync -avz --dry-run ~/git/freekindlecn-static/public/ ca2.***REMOVED***.org:/var/www/goldread/freekindlecn/web/public/
+rsync -avz ~/git/freekindlecn-static/public/ ca2.***REMOVED***.org:/var/www/goldread/freekindlecn/web/public/
