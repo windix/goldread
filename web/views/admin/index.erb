@@ -50,4 +50,4 @@
   </tbody>
 </table>
 
-<%= will_paginate items, renderer: BootstrapPagination::Sinatra %>
+<%= will_paginate items, renderer: BootstrapPagination::Sinatra unless current_filter == :all %>

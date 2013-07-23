@@ -101,7 +101,8 @@ module FreeKindleCN
             [:price_change, "Price Change"],
             [:discount_rate, "Discount Rate"],
             [:douban_rating, "Douban Rating"],
-            [:amazon_rating, "Amazon Rating"]
+            [:amazon_rating, "Amazon Rating"],
+            [:all, "All"]
           ]
 
           result = ""
@@ -176,11 +177,13 @@ module FreeKindleCN
 
       private
 
-      def render_filter(filter)
-        view = DB::ItemView.new
-        view.set_order(filter.to_sym, :desc)
+      def render_filter(current_filter)
+        current_filter = current_filter.to_sym
 
-        erb :index, :locals => { :items => view.fetch(params[:page]), :current_filter => filter }
+        view = DB::ItemView.new
+        view.set_order(current_filter, :desc)
+
+        erb :index, :locals => { :items => view.fetch(params[:page]), :current_filter => current_filter }
       end
 
     end

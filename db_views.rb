@@ -7,6 +7,8 @@ module FreeKindleCN
     class ItemView
 
       def set_order(method, order = :desc)
+        @use_pagination = true
+
         case method
         when :added
           @order_sql = "ORDER BY created_at %ORDER%, id %ORDER%"
@@ -21,13 +23,20 @@ module FreeKindleCN
           @order_sql = "ORDER BY douban_average %ORDER%, douban_votes %ORDER%, id %ORDER%"
         when :amazon_rating
           @order_sql = "ORDER BY amazon_average %ORDER%, amazon_votes %ORDER%, id %ORDER%"
+        when :all
+          @order_sql = "ORDER BY id %ORDER%"
+          @use_pagination = false
         end
 
         @order_sql.gsub! "%ORDER%", (order == :asc) ? " ASC" : " DESC"
       end
 
       def fetch(page = 1)
-        repository(:default).adapter.select(build_query).paginate :page => page, :per_page => ADMIN_ITEMS_PER_PAGE
+        if @use_pagination
+          repository(:default).adapter.select(build_query).paginate :page => page, :per_page => ADMIN_ITEMS_PER_PAGE
+        else
+          repository(:default).adapter.select(build_query)
+        end
       end
 
       def build_query
