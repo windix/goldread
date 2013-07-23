@@ -19,6 +19,7 @@ module FreeKindleCN
           @filter_sql = "HAVING price_change IS NOT NULL"
         when :discount_rate
           @order_sql = "ORDER BY discount_rate %ORDER%, id %ORDER%"
+          @filter_sql = "HAVING kindle_price != 0"
         when :douban_rating
           @order_sql = "ORDER BY douban_average %ORDER%, douban_votes %ORDER%, id %ORDER%"
         when :amazon_rating
