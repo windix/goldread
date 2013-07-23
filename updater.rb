@@ -254,10 +254,10 @@ module FreeKindleCN
                         # insert new price
 
                         # first clear orders for existing prices
-                        db_item.prices.update(:order => 0)
+                        db_item.prices.update(:orders => 0)
 
                         # set correct orders
-                        prices = db_item.prices(:order => [:id.desc])
+                        prices = db_item.prices(:orders => [:id.desc])
 
                         # only need to mark the second last -- since the new entry will be the last one
                         if last = prices[-1]
