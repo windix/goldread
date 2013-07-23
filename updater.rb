@@ -245,7 +245,8 @@ module FreeKindleCN
                   else
                     if db_item.book_price != book_price ||
                       db_item.kindle_price != kindle_price ||
-                      db_item.prices.empty?
+                      db_item.prices.empty? ||
+                      db_item.last_price != kindle_price
 
                       discount_rate = (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0
                       now = Time.now
@@ -257,7 +258,7 @@ module FreeKindleCN
                         db_item.prices.update(:orders => 0)
 
                         # set correct orders
-                        prices = db_item.prices(:orders => [:id.desc])
+                        prices = db_item.prices(:order => [:id.asc])
 
                         # only need to mark the second last -- since the new entry will be the last one
                         if last = prices[-1]
