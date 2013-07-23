@@ -39,11 +39,11 @@
       <td><a href="<%= url("dp/#{item.asin}") %>"><%= item.asin %></a></td>
       <td><a href="<%= item.details_url %>"><%= (item.title || "")[0..20] %></a></td>
       <td><%= (item.author || "")[0..10] %></td>
-      <td><a href="<%= FreeKindleCN::Item.amazon_url(item.book_asin) rescue "#" %>"><%= item.book_price.format_price %></a></td>
+      <td><a href="<%= FreeKindleCN::Item.amazon_url(item.book_asin) %>"><%= item.book_price.format_price %></a></td>
       <td><%= price_color(item) %></td>
       <td><%= FreeKindleCN::Item.formatted_discount_rate(item.discount_rate) %></td>
       <td><%= FreeKindleCN::Item.formatted_rating(item.amazon_average, item.amazon_votes) %></td>
-      <td><a href="<%= FreeKindleCN::Item.douban_page_url(douban_id) rescue "#" %>"><%= FreeKindleCN::Item.formatted_rating(item.douban_average, item.douban_votes) %></a></td>
+      <td><a href="<%= FreeKindleCN::Item.douban_page_url(item.douban_id) %>"><%= FreeKindleCN::Item.formatted_rating(item.douban_average, item.douban_votes) %></a></td>
       <td><%= note(item) %></td>
     </tr>
   <% end %>

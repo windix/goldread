@@ -123,15 +123,15 @@ module FreeKindleCN
       end
 
       def douban_api_url(douban_id)
-        "http://api.douban.com/v2/book/#{douban_id}"
+        douban_id ? "http://api.douban.com/v2/book/#{douban_id}" : "#"
       end
 
       def douban_page_url(douban_id)
-        "http://book.douban.com/subject/#{douban_id}/"
+        douban_id ? "http://book.douban.com/subject/#{douban_id}/" : "#"
       end
 
       def amazon_url(asin)
-        "http://www.amazon.cn/dp/#{asin}"
+        asin ? "http://www.amazon.cn/dp/#{asin}" : "#"
       end
 
       def formatted_discount_rate(discount_rate)
@@ -139,7 +139,7 @@ module FreeKindleCN
       end
 
       def formatted_rating(average, num_of_votes)
-        "#{average.to_f / 10} (#{num_of_votes})"
+        "#{average.to_f / 10} (#{num_of_votes})" if (average && num_of_votes)
       end
 
     end
