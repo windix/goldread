@@ -95,31 +95,66 @@ module FreeKindleCN
         def item_filter_menu(current_filter)
           current_filter = current_filter.to_sym
 
-          methods = [
-            [:added, "Recently Added"],
-            [:updated, "Recently Updated"],
-            [:price_change, "Price Change"],
-            [:discount_rate, "Discount Rate"],
-            [:douban_rating, "Douban Rating"],
-            [:amazon_rating, "Amazon Rating"],
-            [:all, "All"]
-          ]
+          methods = {
+            :default => [
+              [:added, "Recently Added"],
+              [:updated, "Recently Updated"],
+              [:price_change, "Price Change"],
+              [:discount_rate, "Discount Rate"],
+              [:douban_rating, "Douban Rating"],
+              [:amazon_rating, "Amazon Rating"],
+              [:all, "All"]
+            ],
 
-          result = ""
-          methods.each do |method|
+            :more => [
+              [:book_price, "Book Price"],
+              [:kindle_price, "Kindle Price"],
+              [:free, "Free Books"],
+            ]
+          }
+
+          filter_menu_template = <<-END
+            <ul class="nav nav-pills">
+              %DEFAULT_FILTER%
+              <li class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">More <b class="caret"></b></a>
+                <ul class="dropdown-menu">
+                  %MORE_FILTER%
+                </ul>
+              </li>
+            </ul>
+          END
+
+          default_filter = ""
+          methods[:default].each do |method|
             filter, filter_text = *method
 
             li_css_class = "class=\"active\"" if filter == current_filter
             filter_url = url("/filter/#{filter}")
 
-            result += <<-END
+            default_filter += <<-END
               <li #{li_css_class}>
                 <a href="#{filter_url}">#{filter_text}</a>
               </li>
             END
           end
 
-          result
+          more_filter = ""
+          methods[:more].each do |method|
+            filter, filter_text = *method
+            filter_url = url("/filter/#{filter}")
+
+            more_filter += <<-END
+              <li>
+                <a href="#{filter_url}">#{filter_text}</a>
+              </li>
+            END
+          end
+
+          filter_menu_template.sub!('%DEFAULT_FILTER%', default_filter)
+          filter_menu_template.sub!('%MORE_FILTER%', more_filter)
+
+          filter_menu_template
         end
 
       end

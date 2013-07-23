@@ -26,6 +26,13 @@ module FreeKindleCN
         when :all
           @order_sql = "ORDER BY id %ORDER%"
           @use_pagination = false
+        when :book_price
+          @order_sql = "ORDER BY book_price %ORDER%"
+        when :kindle_price
+          @order_sql = "ORDER BY kindle_price %ORDER%"
+        when :free
+          @order_sql = "ORDER BY id %ORDER%"
+          @filter_sql = "HAVING kindle_price = 0"
         end
 
         @order_sql.gsub! "%ORDER%", (order == :asc) ? " ASC" : " DESC"
