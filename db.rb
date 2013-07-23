@@ -66,7 +66,7 @@ module FreeKindleCN
       end
 
       def formatted_discount_rate
-        "%.1f折" % (discount_rate.to_f * 10)
+        FreeKindleCN::Item.formatted_discount_rate(discount_rate)
       end
 
       def save_amount
@@ -116,15 +116,15 @@ module FreeKindleCN
       belongs_to :item
 
       def douban_api_url
-        "http://api.douban.com/v2/book/#{douban_id}"
+        FreeKindleCN::Item.douban_api_url(douban_id)
       end
 
       def douban_page_url
-        "http://book.douban.com/subject/#{douban_id}/"
+        FreeKindleCN::Item.douban_page_url(douban_id)
       end
 
       def amazon_url
-        "http://www.amazon.cn/dp/#{asin}"
+        FreeKindleCN::Item.amazon_url(asin)
       end
     end
 
@@ -140,7 +140,7 @@ module FreeKindleCN
       property :updated_at, DateTime
 
       def to_s
-        "#{average.to_f / 10} (#{num_of_votes})"
+        FreeKindleCN::Item.formatted_rating(average, num_of_votes)
       end
 
       belongs_to :item

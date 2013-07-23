@@ -117,9 +117,31 @@ module FreeKindleCN
     end
 
     class << self
+      # this is probably wrong in some case for paper book (some even uses ISBN directly)
       def is_valid_asin?(asin)
         asin =~ /^B[A-Z0-9]{9}$/
       end
+
+      def douban_api_url(douban_id)
+        "http://api.douban.com/v2/book/#{douban_id}"
+      end
+
+      def douban_page_url(douban_id)
+        "http://book.douban.com/subject/#{douban_id}/"
+      end
+
+      def amazon_url(asin)
+        "http://www.amazon.cn/dp/#{asin}"
+      end
+
+      def formatted_discount_rate(discount_rate)
+        "%.1f折" % (discount_rate.to_f * 10)
+      end
+
+      def formatted_rating(average, num_of_votes)
+        "#{average.to_f / 10} (#{num_of_votes})"
+      end
+
     end
 
   end

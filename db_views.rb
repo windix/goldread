@@ -9,25 +9,26 @@ module FreeKindleCN
       def set_order(method, order = :desc)
         case method
         when :added
-          @order_sql = "ORDER BY created_at"
+          @order_sql = "ORDER BY created_at %ORDER%, id %ORDER%"
         when :updated
-          @order_sql = "ORDER BY updated_at"
+          @order_sql = "ORDER BY updated_at %ORDER%, id %ORDER%"
         when :price_change
-          @order_sql = "ORDER BY price_change"
+          @order_sql = "ORDER BY price_change %ORDER%, id %ORDER%"
+          @filter_sql = "HAVING price_change IS NOT NULL"
         when :discount_rate
-          @order_sql = "ORDER BY discount_rate"
+          @order_sql = "ORDER BY discount_rate %ORDER%, id %ORDER%"
         when :douban_rating
-          @order_sql = "ORDER BY douban_average"
+          @order_sql = "ORDER BY douban_average %ORDER%, douban_votes %ORDER%, id %ORDER%"
+        when :amazon_rating
+          @order_sql = "ORDER BY amazon_average %ORDER%, amazon_votes %ORDER%, id %ORDER%"
         end
 
-        @order_sql += (order == :asc) ? " ASC" : " DESC";
+        @order_sql.gsub! "%ORDER%", (order == :asc) ? " ASC" : " DESC"
       end
 
       def fetch(page = 1)
         repository(:default).adapter.select(build_query).paginate :page => page, :per_page => ADMIN_ITEMS_PER_PAGE
       end
-
-      private
 
       def build_query
         "SELECT items.id,
@@ -46,6 +47,7 @@ module FreeKindleCN
             items.deleted,
             bindings.asin AS book_asin,
             bindings.douban_id,
+            alternate_kindle_bindings.count AS alternate_kindle_bindings_count,
             amazon.average AS amazon_average,
             amazon.num_of_votes AS amazon_votes,
             douban.average AS douban_average,
@@ -55,10 +57,15 @@ module FreeKindleCN
         LEFT JOIN prices AS last_price ON (last_price.item_id = items.id AND last_price.orders = -1)
         LEFT JOIN prices AS second_last_price ON (second_last_price.item_id = items.id AND second_last_price.orders = -2)
         LEFT JOIN bindings ON (bindings.item_id = items.id AND bindings.preferred = 1)
+        LEFT JOIN (SELECT COUNT(*) AS count, item_id
+                  FROM bindings
+                  WHERE type = 'kindle'
+                  GROUP BY item_id) AS alternate_kindle_bindings ON (alternate_kindle_bindings.item_id = items.id)
         LEFT JOIN ratings AS amazon ON (amazon.item_id = items.id AND amazon.source = 'amazon')
         LEFT JOIN ratings AS douban ON (douban.item_id = items.id AND douban.source = 'douban')
         LEFT JOIN tweet_archives ON (tweet_archives.item_id = items.id)
         GROUP BY items.id
+        #{@filter_sql}
         #{@order_sql}
         "
       end

@@ -6,8 +6,6 @@ require 'chartkick'
 require 'open-uri'
 require 'json'
 require 'twitter-text'
-require 'will_paginate'
-require 'will_paginate/data_mapper'
 require 'will_paginate-bootstrap'
 
 module FreeKindleCN
@@ -31,18 +29,18 @@ module FreeKindleCN
         end
 
         def price_color(item)
-          if item.price_fluc
-            if item.price_fluc.empty?
-              item.kindle_price.format_price
-            else
+          if item.kindle_price != -1
+            if item.price_change
               # price dropped: red / price incresed: blue
-              color = (item.price_fluc.last.kindle_price - item.price_fluc.first.kindle_price > 0) ? "blue" : "red"
+              color = item.price_change > 0 ? "blue" : "red"
 
-              result =<<-END
+              result = <<-END
                 <span style='color:#{color}'>
-                  #{item.price_fluc.first.kindle_price.format_price}->#{item.price_fluc.last.kindle_price.format_price}
+                  #{item.p2.format_price}->#{item.p1.format_price}
                 </span>
               END
+            else
+              item.kindle_price.format_price
             end
           else
             "-"
@@ -85,8 +83,8 @@ module FreeKindleCN
         def note(item)
           note = ""
 
-          note += "K" unless item.alternate_kindle_versions.empty?
-          note += "T" unless item.tweet_archives.empty?
+          note += "K" if item.alternate_kindle_bindings_count.to_i > 0
+          note += "T" if item.tweeted_at
 
           # last
           note += "-" if note.empty?
@@ -105,7 +103,10 @@ module FreeKindleCN
       end
 
       get '/' do
-        erb :index, :locals => { :items => DB::Item.all.paginate(:page => params[:page], :per_page => ADMIN_ITEMS_PER_PAGE) }
+        view = DB::ItemView.new
+        view.set_order(:added, :desc)
+
+        erb :index, :locals => { :items => view.fetch(params[:page]) }
       end
 
       get '/dp/:asin' do
