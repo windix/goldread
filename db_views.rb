@@ -17,6 +17,8 @@ module FreeKindleCN
         when :price_change
           @order_sql = "ORDER BY price_change %ORDER%, id %ORDER%"
           @filter_sql = "HAVING price_change IS NOT NULL"
+        when :price_change_count
+          @order_sql = "ORDER BY price_change_count %ORDER%"
         when :discount_rate
           @order_sql = "ORDER BY discount_rate %ORDER%, id %ORDER%"
           @filter_sql = "HAVING kindle_price != 0"
@@ -36,7 +38,7 @@ module FreeKindleCN
           @filter_sql = "HAVING kindle_price = 0"
         end
 
-        @order_sql.gsub! "%ORDER%", (order == :asc) ? " ASC" : " DESC"
+        @order_sql.gsub! "%ORDER%", (order == :asc) ? "ASC" : "DESC"
       end
 
       def fetch(page = 1)
@@ -58,6 +60,7 @@ module FreeKindleCN
             last_price.kindle_price AS p1,
             second_last_price.kindle_price AS p2,
             (last_price.kindle_price - second_last_price.kindle_price) AS price_change,
+            prices_count.count AS price_change_count,
             items.discount_rate,
             items.created_at,
             items.updated_at,
@@ -73,6 +76,9 @@ module FreeKindleCN
         FROM items
         LEFT JOIN prices AS last_price ON (last_price.item_id = items.id AND last_price.orders = -1)
         LEFT JOIN prices AS second_last_price ON (second_last_price.item_id = items.id AND second_last_price.orders = -2)
+        LEFT JOIN (SELECT COUNT(*) AS count, item_id
+                  FROM prices
+                  GROUP BY item_id) AS prices_count ON (prices_count.item_id = items.id)
         LEFT JOIN bindings ON (bindings.item_id = items.id AND bindings.preferred = 1)
         LEFT JOIN (SELECT COUNT(*) AS count, item_id
                   FROM bindings

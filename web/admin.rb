@@ -110,6 +110,7 @@ module FreeKindleCN
               [:book_price, "Book Price"],
               [:kindle_price, "Kindle Price"],
               [:free, "Free Books"],
+              [:price_change_count, "Number of Price Changes"]
             ]
           }
 
