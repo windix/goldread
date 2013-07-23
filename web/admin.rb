@@ -187,13 +187,23 @@ module FreeKindleCN
       end
 
       post '/tweet' do
+        require 'updater'
+
         tweet = Tweet.new params[:tweet_text],
           params[:tweet_hashtag],
           params[:tweet_upload_picture] ? params[:tweet_image_url] : nil
 
+        any_successful = false
         result = params[:tweet_to].collect do |t|
-          tweet.send("send_to_#{t[0]}") ? 'successful' : tweet.get_error
+          send_result = tweet.send("send_to_#{t[0]}")
+
+          any_successful = true if send_result
+
+          send_result ? 'successful' : tweet.get_error
         end
+
+        # update new tweet
+        Updater.fetch_tweets if any_successful
 
         result.inspect
       end
