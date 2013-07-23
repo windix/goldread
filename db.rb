@@ -44,7 +44,7 @@ module FreeKindleCN
       has n, :ratings
       has n, :tweet_archives
 
-      # return price fluctuation of previous two prces
+      # return price fluctuation of previous two prices
       def price_fluc
         # return nil when current price is unavailable
         return nil if kindle_price == -1
@@ -95,6 +95,7 @@ module FreeKindleCN
       property :id, Serial
       property :kindle_price, Integer, :index => true
       property :retrieved_at, DateTime
+      property :orders, Integer # -1 for last, -2 for second last, 0 for others
 
       belongs_to :item
     end

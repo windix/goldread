@@ -56,6 +56,7 @@
           <th>#</th>
           <th>retrieved at</th>
           <th>kindle price</th>
+          <th>orders</th>
         </tr>
       </thead>
       <tbody>
@@ -64,6 +65,7 @@
           <td><%= price.id %>
           <td><%= price.retrieved_at.strftime(FreeKindleCN::DATETIME_FORMAT) %></td>
           <td><%= price.kindle_price.format_price %></td>
+          <td><%= price.orders %></td>
         </tr>
       <% end %>
       </tbody>

@@ -251,9 +251,23 @@ module FreeKindleCN
                       now = Time.now
 
                       if kindle_price != -1 && db_item.last_price != kindle_price
+                        # insert new price
+
+                        # first clear orders for existing prices
+                        db_item.prices.update(:order => 0)
+
+                        # set correct orders
+                        prices = db_item.prices(:order => [:id.desc])
+
+                        # only need to mark the second last -- since the new entry will be the last one
+                        if last = prices[-1]
+                          last.update(:orders => -2)
+                        end
+
                         db_item.prices.create(
                           :kindle_price => kindle_price,
-                          :retrieved_at => now
+                          :retrieved_at => now,
+                          :orders => -1
                         )
                       end
 
