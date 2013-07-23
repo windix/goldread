@@ -91,6 +91,36 @@ module FreeKindleCN
 
           note
         end
+
+        def item_filter_menu(current_filter)
+          current_filter = current_filter.to_sym
+
+          methods = [
+            [:added, "Recently Added"],
+            [:updated, "Recently Updated"],
+            [:price_change, "Price Change"],
+            [:discount_rate, "Discount Rate"],
+            [:douban_rating, "Douban Rating"],
+            [:amazon_rating, "Amazon Rating"]
+          ]
+
+          result = ""
+          methods.each do |method|
+            filter, filter_text = *method
+
+            li_css_class = "class=\"active\"" if filter == current_filter
+            filter_url = url("/filter/#{filter}")
+
+            result += <<-END
+              <li #{li_css_class}>
+                <a href="#{filter_url}">#{filter_text}</a>
+              </li>
+            END
+          end
+
+          result
+        end
+
       end
 
       def self.new(*)
@@ -103,10 +133,11 @@ module FreeKindleCN
       end
 
       get '/' do
-        view = DB::ItemView.new
-        view.set_order(:added, :desc)
+        render_filter(:added) # default filter is :added
+      end
 
-        erb :index, :locals => { :items => view.fetch(params[:page]) }
+      get '/filter/:filter' do
+        render_filter(params[:filter])
       end
 
       get '/dp/:asin' do
@@ -141,6 +172,15 @@ module FreeKindleCN
 
       get '/tweets' do
         erb :tweets, :locals => { :tweets => DB::TweetArchive.all(:order => [:published_at.desc]) }
+      end
+
+      private
+
+      def render_filter(filter)
+        view = DB::ItemView.new
+        view.set_order(filter.to_sym, :desc)
+
+        erb :index, :locals => { :items => view.fetch(params[:page]), :current_filter => filter }
       end
 
     end
