@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 gem 'asin', :git => 'https://github.com/***REMOVED***/asin.git'
 gem 'httpclient'
 gem 'nokogiri'
-gem "data_mapper"
+gem "data_mapper", "~>1.2"
 gem "dm-mysql-adapter"
 gem "sinatra"
 gem "sinatra-contrib", :group => :development
@@ -18,3 +18,4 @@ gem "awesome_print"
 gem "twitter-text"
 gem "will_paginate"
 gem 'will_paginate-bootstrap'
+#gem 'gollum', :git => 'https://github.com/gollum/gollum.git'
