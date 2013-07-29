@@ -1,7 +1,7 @@
 # encoding: UTF-8
 require 'douban_api'
 
-if false # FreeKindleCN::CONTEXT == :production
+if FreeKindleCN::CONTEXT == :production
   # production: 金玉良读
 
   Douban.configure do |config|
