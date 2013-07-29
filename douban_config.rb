@@ -12,7 +12,7 @@ if FreeKindleCN::CONTEXT == :production
   DOUBAN_CALLBACK = "http://goldread.net/oauth/callback/douban"
 
   DOUBAN_CONFIG = {
-    :access_token => '148d1edf7d8338d63da75c9e7889aa82',
+    :access_token => '3dbe15e168b70fa7b93a41a43a252ef5',
     :user_id => ***REMOVED***
   }
 else
