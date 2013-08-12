@@ -18,7 +18,7 @@ Bundler.setup(:default, FreeKindleCN::CONTEXT)
 require 'log_buddy'
 
 LogBuddy.init
-LogBuddy.logger.level = Logger::INFO
+LogBuddy.logger.level = (FreeKindleCN::CONTEXT == :development) ? Logger::DEBUG : Logger::INFO
 
 logger.info "Current Environment: #{FreeKindleCN::CONTEXT}"
 

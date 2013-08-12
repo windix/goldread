@@ -90,12 +90,10 @@ module FreeKindleCN
 
           begin
             book_info = douban_client.isbn(item.isbn13)
-          rescue Douban::BadRequest
-            # exceed Douban's request limits
+
+          rescue Douban::Error
+            logger.info douban_client.get_rate_limit_info
             raise
-          rescue => e
-            logger.debug "Failed to find ISBN '#{item.isbn13}' from douban: #{e.message}, skip..."
-            next
           end
 
           ### SAVE TO DB

@@ -9,6 +9,16 @@ GIT
       httpi (>= 0.9)
 
 GIT
+  remote: https://github.com/***REMOVED***/douban_api
+  revision: 0a0800a922fd6867c3203f94b0b6f08aa7397169
+  specs:
+    douban_api (0.1.5)
+      faraday (>= 0.7, < 0.9)
+      faraday_middleware (~> 0.8)
+      hashie (>= 0.4.0)
+      multi_json (~> 1.0, >= 1.0.3)
+
+GIT
   remote: https://github.com/***REMOVED***/log_buddy.git
   revision: 4518a3c4262e7580dac6e78183c29ed2e5596a5d
   specs:
@@ -73,11 +83,6 @@ GEM
       dm-core (~> 1.2.0)
     do_mysql (0.10.13)
       data_objects (= 0.10.13)
-    douban_api (0.1.5)
-      faraday (>= 0.7, < 0.9)
-      faraday_middleware (~> 0.8)
-      hashie (>= 0.4.0)
-      multi_json (~> 1.0, >= 1.0.3)
     eventmachine (1.0.3)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
@@ -162,7 +167,7 @@ DEPENDENCIES
   chartkick
   data_mapper (~> 1.2)
   dm-mysql-adapter
-  douban_api
+  douban_api!
   httpclient
   json
   log_buddy!
