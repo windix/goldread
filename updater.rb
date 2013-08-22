@@ -10,7 +10,7 @@ module FreeKindleCN
 
       def fetch_bindings_and_ratings(asin)
         asin_client = ASIN::Client.instance
-        douban_client = Douban.client(DOUBAN_CONFIG)
+        douban_client = DoubanHelper.client
 
         db_item = DB::Item.first(:asin => asin)
 
@@ -91,7 +91,12 @@ module FreeKindleCN
           begin
             book_info = douban_client.isbn(item.isbn13)
 
-          rescue Douban::Error
+          rescue Douban::Error => e
+            if e.code == 106
+              DoubanHelper.refresh_client
+              logger.info "Douban token has been refreshed"
+            end
+
             logger.info douban_client.get_rate_limit_info
             raise
           end

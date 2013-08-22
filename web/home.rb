@@ -47,17 +47,14 @@ module FreeKindleCN
 
       get '/oauth/douban' do
         require 'douban_config'
-
-        scope = "douban_basic_common,book_basic_r"
-        redirect Douban.authorize_url(:redirect_uri => DOUBAN_CALLBACK, :scope => scope)
+        redirect DoubanHelper.auth_url
       end
 
       get '/oauth/callback/douban' do
         require 'douban_config'
+        DoubanHelper.handle_callback(params[:code])
 
-        response = Douban.get_access_token(params[:code], :redirect_uri => DOUBAN_CALLBACK)
-
-        erb :douban_callback, :locals => { :response => response }
+        "Done!"
       end
 
     end
