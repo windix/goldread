@@ -23,12 +23,11 @@ LogBuddy.logger.level = (FreeKindleCN::CONTEXT == :development) ? Logger::DEBUG 
 logger.info "Current Environment: #{FreeKindleCN::CONTEXT}"
 
 require 'asin'
-require 'httpclient'
-require 'nokogiri'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
 require 'monkey_patch'
+require 'parser'
 require 'list'
 require 'item'
 require 'asin_config'

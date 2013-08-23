@@ -22,59 +22,17 @@ module FreeKindleCN
         end
 
         ### PARSE WEB PAGE
-
-        content = HTTPClient.get_content("http://www.amazon.cn/dp/#{asin}")
-        doc = Nokogiri::HTML(content, nil, 'UTF-8')
-
-        bindings = doc.css('table.twisterMediaMatrix table tbody').collect { |t| t['id'] }.compact
-
-        if bindings.empty?
-          logger.debug "[#{asin}] No other bindings, skip..."
-          return
-        end
+        parser = Parser::WebDetail.new(asin)
+        parser.parse
 
         is_preferred = true
-        bindings.each do |binding|
-          tbody = doc.at_css("tbody##{binding}")
-          next if tbody.content.strip.empty?
-
-          binding_type = case binding
-            when "paperback_meta_binding_winner"
-              "paperback"
-            when "hardcover_meta_binding_winner"
-              "hardcover"
-            when "kindle_meta_binding_winner", "kindle_meta_binding_body"
-              "kindle"
-            when "audiobooks_meta_binding_winner", "other_meta_binding_winner"
-              # audiobook, skip
-              next
-            else
-              logger.debug "Unknown binding '#{binding}', skip...."
-              next
-            end
-
-          book_url = tbody.at_css('td.tmm_bookTitle a')
-
-          if book_url
-            book_asin = book_url['href'][/dp\/([A-Z0-9]+)$/, 1]
-          else
-            logger.debug "Cannot parse ASIN, skip..." if binding_type != "kindle"
-            next
-          end
-
-          # "平均4.5 星"" -> 4.5
-          average_reviews = doc.at_css('table#productDetailsTable span.crAvgStars span.swSprite').content[/[\d\.]+/].to_f
-
-          # "56 条商品评论" => 56
-          num_of_votes = doc.at_css('table#productDetailsTable span.crAvgStars > a').content[/[\d,]+/].sub(',', '').to_i
-
-
+        parser.bindings.each do |binding_type, book_asin|
           ### AMAZON API
 
           items = asin_client.lookup(book_asin)
 
           if items.empty?
-            logger.debug "Cannot find Book ASIN: #{book_asin}, skip..." unless binding_type == "kindle"
+            logger.debug "Cannot find Book ASIN: #{book_asin}, skip..." unless binding_type == :kindle
             next
           else
             item = items.first
@@ -105,25 +63,25 @@ module FreeKindleCN
 
           logger.info "[#{asin}] #{binding_type}#{is_preferred ? "*" : ""}: "\
             "#{book_asin}, #{item.isbn13}, "\
-            "a: #{average_reviews} of #{num_of_votes}, "\
+            "a: #{parser.average_reviews} of #{parser.num_of_votes}, "\
             "d: #{book_info[:rating][:average]} of #{book_info[:rating][:numRaters]}"
 
           # BINDING
           db_item.bindings.create(
-            :type => binding_type,
+            :type => binding_type.to_s,
             :asin => book_asin,
             :isbn => item.isbn13,
             :douban_id => book_info[:id],
-            :preferred => binding_type == "kindle" ? false : is_preferred,
+            :preferred => binding_type == :kindle ? false : is_preferred,
             :created_at => Time.now
           )
 
-          if binding_type != "kindle" && is_preferred
+          if binding_type != :kindle && is_preferred
             # AMAZON RATING
             db_item.ratings.create(
               :source => 'amazon',
-              :average => average_reviews * 10,
-              :num_of_votes => num_of_votes,
+              :average => parser.average_reviews * 10,
+              :num_of_votes => parser.num_of_votes,
               :updated_at => Time.now
             )
 
@@ -137,68 +95,15 @@ module FreeKindleCN
 
             is_preferred = false
           end
-
         end # of bindings
       end
 
       def fetch_price(asin)
         # mobile chrome, 这个是可购买的手机版本页面
-        client = HTTPClient.new :agent_name => "Mozilla/5.0 (iPhone; U; CPU iPhone OS 5_1_1 like Mac OS X; en-gb) AppleWebKit/534.46.0 (KHTML, like Gecko) CriOS/19.0.1084.60 Mobile/9B206 Safari/7534.48.3"
+        parser = Parser::MobileDetail.new(asin)
+        parser.parse
 
-        retry_times = 0
-        begin
-          content = client.get_content("http://www.amazon.cn/gp/aw/d/#{asin}")
-
-          if content.encoding.to_s != "UTF-8"
-            # log
-            File.open("encoding_error_#{asin}.txt", "w") { |f| f.write(content) }
-            content = content.force_encoding("UTF-8")
-
-            # content.encode!("UTF-8", :invalid => :replace, :undef => :replace, :replace => '') # unless content.valid_encoding?
-          end
-
-          if content.include? "<h2>意外错误</h2>"
-            # temporary error, retry
-            raise "temporary error, retry"
-          end
-
-          doc = Nokogiri::HTML(content, nil, 'UTF-8')
-
-          if doc.css('p.infoText').text == '该商品目前无法进行购买'
-            # book is temporary unavailable
-            book_price = kindle_price = -1
-
-          elsif doc.css('input[name="ASIN.0"]').length == 1
-            # book is available
-
-            # listPrice有两个通常：电子书定价 / 纸书定价，一些情况下只有电子书定价
-            book_price = doc.css('span.listPrice').last.content.sub('￥', '').strip.to_f
-            kindle_price = doc.at_css('span.kindlePrice').content.sub('￥', '').strip.to_f
-
-            book_price = (book_price * 100).to_i
-            kindle_price = (kindle_price * 100).to_i
-
-          else
-            # book is permanently unavailable -- the ASIN becomes invalid
-            # but we need to verify it: the web dp page will be 404 if it is PERMANENTLY unavailable
-            return nil if HTTPClient.get("http://www.amazon.cn/dp/#{asin}").status_code == 404
-          end
-        rescue Exception => e
-          logger.debug e.backtrace
-
-          retry_times += 1
-
-          if retry_times > 3
-            raise
-          else
-            logger.error "[#{retry_times}] Exception: #{$!}"
-            logger.debug content
-            sleep 5
-            retry
-          end
-        end
-
-        [ book_price, kindle_price ]
+        [ parser.book_price, parser.kindle_price ]
       end
 
       def fetch_info(asins, to_fetch_price = true, to_fetch_bindings_and_ratings = true)
