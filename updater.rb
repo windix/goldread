@@ -194,7 +194,7 @@ module FreeKindleCN
                       begin
                         fetch_bindings_and_ratings(db_item.asin)
                       rescue => e
-                        logger.debug e.backtrace
+                        logger.error e.backtrace
                         logger.error "(fetch bindings and ratings) Skip #{db_item.asin} because of Exception: #{e.message}"
                       end
                     end

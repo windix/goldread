@@ -40,8 +40,6 @@ module FreeKindleCN
             book_url = tbody.at_css('td.tmm_bookTitle a')
 
             if book_url
-              puts book_url['href']
-
               @bindings[binding_type] = book_url['href'][%r{/dp/([A-Z0-9]+)/}, 1]
             else
               logger.debug "Cannot parse ASIN, skip..." if binding_type != :kindle

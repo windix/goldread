@@ -48,7 +48,7 @@ module FreeKindleCN
 
           yield doc
         rescue => e
-          logger.debug e.backtrace
+          logger.error e.backtrace
 
           retry_times += 1
 
