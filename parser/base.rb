@@ -32,34 +32,34 @@ module FreeKindleCN
 
       def parse_with_retry(url, mobile = false)
         retry_times = 0
+        begin
+          resp = client(mobile).get(url)
 
-        resp = client(mobile).get(url)
+          case(resp.status_code)
+          when 200
+            @content = resp.content
+          when 404
+            return false
+          else
+            raise "HTTP code: #{resp.status_code}"
+          end
 
-        case(resp.status_code)
-        when 200
-          @content = resp.content
-        when 404
-          return false
-        else
-          raise "HTTP code: #{resp.status_code}"
-        end
+          doc = Nokogiri::HTML(@content, nil, 'UTF-8')
 
-        doc = Nokogiri::HTML(@content, nil, 'UTF-8')
+          yield doc
+        rescue => e
+          logger.debug e.backtrace
 
-        yield doc
+          retry_times += 1
 
-      rescue => e
-        logger.debug e.backtrace
-
-        retry_times += 1
-
-        if retry_times > 3
-          false
-        else
-          logger.error "[#{retry_times}] Exception: #{e.message}"
-          logger.debug @content
-          sleep 5
-          retry
+          if retry_times > 3
+            false
+          else
+            logger.error "[#{retry_times}] Exception: #{e.message}"
+            logger.debug @content
+            sleep 5
+            retry
+          end
         end
       end
 
