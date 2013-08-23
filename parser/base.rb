@@ -33,7 +33,17 @@ module FreeKindleCN
       def parse_with_retry(url, mobile = false)
         retry_times = 0
 
-        @content = client(mobile).get_content(url)
+        resp = client(mobile).get(url)
+
+        case(resp.status_code)
+        when 200
+          @content = resp.content
+        when 404
+          return false
+        else
+          raise "HTTP code: #{resp.status_code}"
+        end
+
         doc = Nokogiri::HTML(@content, nil, 'UTF-8')
 
         yield doc
