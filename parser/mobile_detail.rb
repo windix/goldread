@@ -16,9 +16,9 @@ module FreeKindleCN
 
           elsif doc.css('input[name="ASIN.0"]').length == 1
             # book is available
-            if (doc.css('span.listPrice').last && doc.at_css('span.kindlePrice'))
-              # listPrice有两个通常：电子书定价 / 纸书定价，一些情况下只有电子书定价
-              @book_price = parse_price(doc.css('span.listPrice').last.content)
+            if (doc.at_css('span.kindlePrice'))
+              # listPrice有两个通常：电子书定价 / 纸书定价，一些情况下只有电子书定价，也有时候没有
+              @book_price = parse_price(doc.css('span.listPrice').last.content) rescue 0
               @kindle_price = parse_price(doc.at_css('span.kindlePrice').content)
               return true
             else
