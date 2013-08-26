@@ -16,13 +16,17 @@ module FreeKindleCN
 
           elsif doc.css('input[name="ASIN.0"]').length == 1
             # book is available
-
-            # listPrice有两个通常：电子书定价 / 纸书定价，一些情况下只有电子书定价
-            @book_price = parse_price(doc.css('span.listPrice').last.content)
-            @kindle_price = parse_price(doc.at_css('span.kindlePrice').content)
-
-            return true
-
+            if (doc.css('span.listPrice').last && doc.at_css('span.kindlePrice'))
+              # listPrice有两个通常：电子书定价 / 纸书定价，一些情况下只有电子书定价
+              @book_price = parse_price(doc.css('span.listPrice').last.content)
+              @kindle_price = parse_price(doc.at_css('span.kindlePrice').content)
+              return true
+            else
+              logger.info "*************************************************"
+              logger.info @content
+              logger.info "*************************************************"
+              return false
+            end
           else
             # book is permanently unavailable -- the ASIN becomes invalid
             # but we need to verify it: the web dp page will be 404 if it is PERMANENTLY unavailable
