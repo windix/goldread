@@ -15,6 +15,8 @@ end
 
 Bundler.setup(:default, FreeKindleCN::CONTEXT)
 
+require 'newrelic_rpm' if FreeKindleCN::CONTEXT == :production
+
 require 'log_buddy'
 
 LogBuddy.init
@@ -35,3 +37,4 @@ require 'db'
 require 'db_views'
 require 'tweet'
 require 'douban_config'
+
