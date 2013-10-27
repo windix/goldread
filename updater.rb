@@ -262,6 +262,7 @@ module FreeKindleCN
             is_main = true
             t.urls.each do |url|
               asin = url.expanded_url[/dp\/([A-Z0-9]+)/, 1]
+              next unless asin
 
               item = DB::Item.first(:asin => asin)
 
