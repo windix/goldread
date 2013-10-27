@@ -64,10 +64,10 @@ module FreeKindleCN
             kindle_book_price = "Kindle版原价#{item.price_fluc.first.kindle_price.format_price} / 今日特价#{item.price_fluc.last.kindle_price.format_price}"
           end
 
-          discount = "(#{item.formatted_discount_rate}，省#{item.save_amount})"
+          #discount = "(#{item.formatted_discount_rate}，省#{item.save_amount})"
           url = "购买: http://goldread.net/dp/#{item.asin}"
 
-          "#{title_and_author} #{paper_book_price} / #{kindle_book_price} #{discount} #{url}"
+          "#{title_and_author} #{paper_book_price} / #{kindle_book_price} #{url}"
         end
 
         def tr_color(item)
