@@ -48,10 +48,10 @@ module FreeKindleCN
           end #binding_ids
 
           # "平均4.5 星"" -> 4.5
-          @average_reviews = doc.at_css('table#productDetailsTable span.crAvgStars span.swSprite').content[/[\d\.]+/].to_f
+          @average_reviews = doc.at_css('table#productDetailsTable span.crAvgStars span.swSprite').content[/[\d\.]+/].to_f rescue 0.0
 
           # "56 条商品评论" => 56
-          @num_of_votes = doc.at_css('table#productDetailsTable span.crAvgStars > a').content[/[\d,]+/].sub(',', '').to_i
+          @num_of_votes = doc.at_css('table#productDetailsTable span.crAvgStars > a').content[/[\d,]+/].sub(',', '').to_i rescue 0
 
           true
         end
