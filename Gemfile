@@ -20,3 +20,4 @@ gem "will_paginate"
 gem 'will_paginate-bootstrap'
 #gem 'gollum', :git => 'https://github.com/gollum/gollum.git'
 gem 'newrelic_rpm'
+gem "minitest", :group => :development
