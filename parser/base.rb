@@ -43,6 +43,7 @@ module FreeKindleCN
           when 404
             return false
           else
+            logger.info "HTTP code: #{resp.status_code}, retry"
             raise "HTTP code: #{resp.status_code}"
           end
 
@@ -50,8 +51,7 @@ module FreeKindleCN
 
           yield doc
         rescue => e
-          logger.error e.backtrace
-
+          # logger.error e.backtrace
           retry_times += 1
 
           if retry_times > 3
@@ -63,6 +63,39 @@ module FreeKindleCN
             retry
           end
         end
+      end
+
+      # parse prices: used by web_detail and mobile_detail parser
+      def parse_price_block(trs)
+        ebook_full_price = paperbook_full_price = book_price = kindle_price = paperbook_price = -1
+
+        trs.each do |tr|
+          tds = tr.css('td')
+
+          price = tds[1].text[/￥\s([\d\.]+)/, 1]
+
+          case tds[0].text.strip
+          when /电子书定价/
+            ebook_full_price = parse_price(price)
+          when /纸书定价/
+            paperbook_full_price = parse_price(price)
+          when /Kindle电子书价格/
+            kindle_price = parse_price(price)
+          when /价格/ # when parsing paperbook asin
+            paperbook_price = parse_price(price)
+          end
+        end
+
+        # listPrice有两个通常：电子书定价 / 纸书定价，一些情况下只有电子书定价，也有时候没有
+        if paperbook_full_price != -1
+          book_price = paperbook_full_price
+        elsif @ebook_full_price != -1
+          book_price = ebook_full_price
+        else
+          book_price = 0
+        end
+
+        [ebook_full_price, paperbook_full_price, book_price, kindle_price, paperbook_price]
       end
 
     end # class
