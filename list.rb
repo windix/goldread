@@ -23,7 +23,7 @@ module FreeKindleCN
       parser = Parser::WebDailyDeals.new
       parser.parse
 
-      parser.asin
+      parser.asins
     end
 
     private
