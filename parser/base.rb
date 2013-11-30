@@ -43,7 +43,6 @@ module FreeKindleCN
           when 404
             return false
           else
-            logger.info "HTTP code: #{resp.status_code}, retry"
             raise "HTTP code: #{resp.status_code}"
           end
 
@@ -57,7 +56,7 @@ module FreeKindleCN
           if retry_times > 3
             false
           else
-            logger.error "[#{retry_times}] Exception: #{e.message}"
+            logger.error "[#{@asin}] retry no.#{retry_times} Exception: #{e.message}"
             logger.debug @content
             sleep 5
             retry
