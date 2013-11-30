@@ -4,13 +4,35 @@ module FreeKindleCN
   module Parser
 
     class WebDetail < Base
+      attr_reader :ebook_full_price, :paperbook_full_price, :kindle_price, :paperbook_price
       attr_reader :bindings, :average_reviews, :num_of_votes
 
       def parse
+        @ebook_full_price = @paperbook_full_price = @kindle_price = @paperbook_price = -1
+
         # the bindings do not contain current asin
         @bindings = {}
 
         parse_with_retry("http://www.amazon.cn/dp/#{@asin}") do |doc|
+
+          # parse prices
+          doc.css('table.product tr').each do |tr|
+            tds = tr.css('td')
+
+            price = tds[1].text[/￥\s([\d\.]+)/, 1]
+
+            case tds[0].text.strip
+            when "电子书定价:"
+              @ebook_full_price = parse_price(price)
+            when "纸书定价:"
+              @paperbook_full_price = parse_price(price)
+            when "Kindle电子书价格:"
+              @kindle_price = parse_price(price)
+            when "价格:" # when parsing paperbook asin
+              @paperbook_price = parse_price(price)
+            end
+          end
+
           binding_ids = doc.css('table.twisterMediaMatrix table tbody').collect { |t| t['id'] }.compact
 
           if binding_ids.empty?
