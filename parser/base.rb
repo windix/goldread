@@ -4,7 +4,7 @@ module FreeKindleCN
   module Parser
 
     class Base
-      attr_reader :asin, :content
+      attr_reader :asin, :content, :status_code
 
       def initialize(asin)
         @asin = asin
@@ -35,7 +35,9 @@ module FreeKindleCN
         begin
           resp = client(mobile).get(url)
 
-          case(resp.status_code)
+          @status_code = resp.status_code
+
+          case(@status_code)
           when 200
             @content = resp.content
           when 404
