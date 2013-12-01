@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
+
 gem 'asin', :git => 'https://github.com/***REMOVED***/asin.git'
 gem 'httpclient'
 gem 'nokogiri'
 gem "data_mapper", "~>1.2"
 gem "dm-mysql-adapter"
 gem "sinatra"
-gem "sinatra-contrib", :group => :development
 gem "sinatra-index"
 gem "twitter"
 gem "weibo_2"
@@ -20,4 +20,9 @@ gem "will_paginate"
 gem 'will_paginate-bootstrap'
 #gem 'gollum', :git => 'https://github.com/gollum/gollum.git'
 gem 'newrelic_rpm'
-gem "minitest", :group => :development
+gem "hashie"
+
+group :development do
+  gem "sinatra-contrib"
+  gem "minitest"
+end

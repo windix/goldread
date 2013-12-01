@@ -169,6 +169,7 @@ DEPENDENCIES
   data_mapper (~> 1.2)
   dm-mysql-adapter
   douban_api!
+  hashie
   httpclient
   json
   log_buddy!
