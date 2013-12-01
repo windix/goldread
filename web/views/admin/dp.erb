@@ -1,4 +1,8 @@
-<h1><%= item.title %></h1>
+<h1>
+<% if item.deleted %>
+<span class="label label-important">DELETED</span>
+<% end %>
+<%= item.title %></h1>
 
 <div class="row">
   <div class="span4">
