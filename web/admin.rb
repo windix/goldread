@@ -8,6 +8,8 @@ require 'json'
 require 'twitter-text'
 require 'will_paginate-bootstrap'
 
+require 'updater'
+
 module FreeKindleCN
   module Web
     class Admin < Sinatra::Base
@@ -171,6 +173,16 @@ module FreeKindleCN
 
       get '/' do
         render_filter(:added) # default filter is :added
+      end
+
+      post '/asin' do
+        case params[:action]
+        when "search"
+          redirect "/admin/dp/#{params[:asin]}"
+        when "add"
+          FreeKindleCN::Updater.fetch_info(params[:asin]) if Item.is_valid_asin? params[:asin]
+          redirect "/admin"
+        end
       end
 
       get '/filter/:filter' do

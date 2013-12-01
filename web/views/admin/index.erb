@@ -1,3 +1,9 @@
+<form class="form-search" method="post" action="<%= url("/asin") %>">
+  ASIN: <input type="text" name="asin" class="input-medium search-query">
+  <button type="submit" class="btn" name="action" value="add">Add</button>
+  <button type="submit" class="btn" name="action" value="search">Search</button>
+</form>
+
 <%= item_filter_menu(current_filter) %>
 
 <table class="table table-condensed table-hover">
