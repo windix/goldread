@@ -85,6 +85,13 @@ module FreeKindleCN
         ratings(:source => source).first
       end
 
+      def cached_image_url
+        if File.exists? "#{FreeKindleCN::BOOK_IMAGE_CACHE_PATH}/#{asin}.jpg"
+          "/admin/images/asin/#{asin}.jpg"
+        else
+          image_url
+        end
+      end
     end
 
     class Price

@@ -289,7 +289,18 @@ module FreeKindleCN
             end
           end
         end
+      end
 
+      NO_IMAGE_PLACE_HOLDER = "http://g-ec4.images-amazon.com/images/G/28/x-site/icons/no-img-sm._V192562228_.gif"
+
+      def fetch_images
+        DB::Item.all.each do |item|
+          next if item.image_url == NO_IMAGE_PLACE_HOLDER
+
+          unless File.exists? "#{FreeKindleCN::BOOK_IMAGE_CACHE_PATH}/#{item.asin}.jpg"
+            puts "wget #{item.image_url} -O #{FreeKindleCN::BOOK_IMAGE_CACHE_PATH}/#{item.asin}.jpg"
+          end
+        end
       end
 
       private

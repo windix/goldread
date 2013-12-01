@@ -53,6 +53,13 @@ class CLI < Thor
     Updater.fetch_tweets
   end
 
+  desc "images", "sync asin images"
+  def images
+    logger.info "#{Time.now}: Get images..."
+
+    Updater.fetch_images
+  end
+
 end
 
 CLI.start(ARGV)

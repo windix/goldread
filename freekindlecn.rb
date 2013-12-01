@@ -11,6 +11,9 @@ module FreeKindleCN
   MYSQL_FORMAT = '%Y-%m-%d %H:%M:%S'
 
   ADMIN_ITEMS_PER_PAGE = 50
+
+  WEB_PUBLIC_PATH = File.dirname(__FILE__) + "/web/public"
+  BOOK_IMAGE_CACHE_PATH = WEB_PUBLIC_PATH + "/images/asin"
 end
 
 Bundler.setup(:default, FreeKindleCN::CONTEXT)
