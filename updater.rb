@@ -50,13 +50,20 @@ module FreeKindleCN
             book_info = douban_client.isbn(item.isbn13)
 
           rescue Douban::Error => e
-            if e.code == 106
+            if e.code == 6000
+              # book_not_found
+              logger.info "[#{book_asin}] Book not found in douban"
+              next
+
+            elsif e.code == 106
+              # access_token_has_expired
               DoubanHelper.refresh_client
               logger.info "Douban token has been refreshed"
-            end
+              retry
 
-            logger.info douban_client.get_rate_limit_info
-            raise
+            else
+              raise
+            end
           end
 
           ### SAVE TO DB
