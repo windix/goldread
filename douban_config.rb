@@ -1,6 +1,7 @@
 # encoding: UTF-8
 require 'douban_api'
 require 'hashie'
+require 'hashie/mash'
 
 DOUBAN_SCOPE = 'douban_basic_common,book_basic_r'
 
