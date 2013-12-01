@@ -1,5 +1,6 @@
 # encoding: UTF-8
 require 'douban_api'
+require 'hashie'
 
 DOUBAN_SCOPE = 'douban_basic_common,book_basic_r'
 
@@ -36,7 +37,7 @@ class DoubanHelper
     end
 
     def client
-      Douban.client(config)
+      @client ||= Douban.client(YAML::load_file(config_file))
     end
 
     def refresh_client
@@ -60,9 +61,5 @@ class DoubanHelper
       end
     end
 
-    def config
-      # http://stackoverflow.com/questions/800122/best-way-to-convert-strings-to-symbols-in-hash
-      YAML::load_file(config_file).inject({}){|memo,(k,v)| memo[k.to_sym] = v; memo}
-    end
   end
 end
