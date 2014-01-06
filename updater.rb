@@ -168,6 +168,8 @@ module FreeKindleCN
                       if kindle_price != -1 && db_item.last_price != kindle_price
                         # insert new price
 
+                        now = Time.now
+
                         # first clear orders for existing prices
                         db_item.prices.update(:orders => 0)
 
