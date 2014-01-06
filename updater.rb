@@ -158,13 +158,12 @@ module FreeKindleCN
                     db_item.update(:deleted => true)
                     logger.info "[#{db_item.asin}] **** REMOVED ****"
                   else
-                    if db_item.book_price != book_price ||
-                      db_item.kindle_price != kindle_price ||
+                    db_item.deleted = false
+                    db_item.book_price = book_price
+
+                    if db_item.kindle_price != kindle_price ||
                       db_item.prices.empty? ||
                       db_item.last_price != kindle_price
-
-                      discount_rate = (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0
-                      now = Time.now
 
                       if kindle_price != -1 && db_item.last_price != kindle_price
                         # insert new price
@@ -185,14 +184,17 @@ module FreeKindleCN
                           :retrieved_at => now,
                           :orders => -1
                         )
-                      end
 
-                      db_item.update(
-                        :book_price => book_price,
-                        :kindle_price => kindle_price,
-                        :discount_rate => discount_rate,
-                        :updated_at => now
-                      )
+                        db_item.kindle_price = kindle_price
+
+                        # only update updated_at when kindle price changed
+                        db_item.updated_at = now
+                      end
+                    end
+
+                    unless db_item.clean?
+                      db_item.discount_rate = (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0
+                      db_item.save
 
                       logger.info "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
                     end
