@@ -125,7 +125,7 @@ module FreeKindleCN
 
           if db_item
             # skip updating deleted item
-            next if db_item.deleted
+            # next if db_item.deleted
 
             db_items << db_item
           else

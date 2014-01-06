@@ -39,11 +39,18 @@ class CLI < Thor
     logger.info "Done!"
   end
 
-  desc "all", "refetch price for all books"
+  desc "all", "refetch price for all books (exclude deleted)"
   def all
     logger.info "#{Time.now}: Updating all..."
 
-    Updater.fetch_info(DB::Item.all(:fields => [:asin]).collect { |item| item.asin })
+    Updater.fetch_info(DB::Item.all(:deleted => false, :fields => [:asin]).collect { |item| item.asin })
+  end
+
+  desc "deleted", "refetch price for deleted books"
+  def deleted
+    logger.info "#{Time.now}: Updating deleted..."
+
+    Updater.fetch_info(DB::Item.all(:deleted => true, :fields => [:asin]).collect { |item| item.asin })
   end
 
   desc "tweets", "sync tweets"
