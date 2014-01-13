@@ -158,9 +158,6 @@ module FreeKindleCN
                     db_item.update(:deleted => true)
                     logger.info "[#{db_item.asin}] **** REMOVED ****"
                   else
-                    db_item.deleted = false
-                    db_item.book_price = book_price
-
                     if db_item.kindle_price != kindle_price ||
                       db_item.prices.empty? ||
                       db_item.last_price != kindle_price
@@ -193,6 +190,9 @@ module FreeKindleCN
                         db_item.updated_at = now
                       end
                     end
+
+                    db_item.deleted = false
+                    db_item.book_price = book_price
 
                     unless db_item.clean?
                       db_item.discount_rate = (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0
