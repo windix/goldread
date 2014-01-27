@@ -18,7 +18,7 @@ end
 
 Bundler.setup(:default, FreeKindleCN::CONTEXT)
 
-require 'newrelic_rpm' if FreeKindleCN::CONTEXT == :production
+#require 'newrelic_rpm' if FreeKindleCN::CONTEXT == :production
 
 require 'log_buddy'
 
