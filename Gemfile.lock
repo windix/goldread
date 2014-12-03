@@ -9,8 +9,8 @@ GIT
       httpi (>= 0.9)
 
 GIT
-  remote: https://github.com/***REMOVED***/douban_api
-  revision: 961ccb3a7dad0f263b40b43a6efb7752a29e1241
+  remote: https://github.com/***REMOVED***/douban_api.git
+  revision: c4f928ba0810d1ee624c9abea3b16b6cc354f009
   specs:
     douban_api (0.1.5)
       faraday (>= 0.7, < 0.9)
@@ -86,8 +86,8 @@ GEM
       data_objects (= 0.10.13)
     faraday (0.8.8)
       multipart-post (~> 1.2.0)
-    faraday_middleware (0.9.0)
-      faraday (>= 0.7.4, < 0.9)
+    faraday_middleware (0.9.1)
+      faraday (>= 0.7.4, < 0.10)
     fastercsv (1.5.5)
     hashie (2.0.5)
     httpauth (0.2.0)
