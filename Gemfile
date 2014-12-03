@@ -25,4 +25,5 @@ gem "hashie"
 group :development do
   gem "sinatra-contrib"
   gem "minitest"
+  gem "pry"
 end

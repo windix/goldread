@@ -22,6 +22,9 @@ class CLI < Thor
     logger.info "Daily Deals"
     Updater.fetch_info(list.daily_deal)
 
+    logger.info "Weekly Deals"
+    Updater.fetch_info(list.weekly_deal)
+
     logger.info "销售飙升榜"
     Updater.fetch_info(list.movers_and_shakers(5))
 

@@ -20,10 +20,11 @@ module FreeKindleCN
     end
 
     def daily_deal
-      parser = Parser::WebDailyDeals.new
-      parser.parse
+      daily_deal_parser.daily_asins
+    end
 
-      parser.asins
+    def weekly_deal
+      daily_deal_parser.weekly_asins
     end
 
     private
@@ -46,6 +47,15 @@ module FreeKindleCN
       part2.parse
 
       part1.asins + part2.asins
+    end
+
+    def daily_deal_parser
+      unless @daily_deal_parser
+        @daily_deal_parser = Parser::WebDailyDeals.new
+        @daily_deal_parser.parse
+      end
+
+      @daily_deal_parser
     end
   end
 
