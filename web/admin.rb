@@ -222,7 +222,9 @@ module FreeKindleCN
       end
 
       get '/amazon/asin/:asin' do
-        client = ASIN::Client.instance
+        # TODO: this is currently broken
+
+        client = ASINHelper.new
         client.lookup(params[:asin])
 
         content_type :xml

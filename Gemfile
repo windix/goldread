@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'asin', :git => 'https://github.com/***REMOVED***/asin.git'
+gem 'asin', "~> 2.0"
 gem 'httpclient'
 gem 'nokogiri'
 gem "data_mapper", "~>1.2"

@@ -9,7 +9,7 @@ module FreeKindleCN
     class << self
 
       def fetch_bindings_and_ratings(asin)
-        asin_client = ASIN::Client.instance
+        asin_client = ASINHelper.new
         douban_client = DoubanHelper.client
 
         db_item = DB::Item.first(:asin => asin)

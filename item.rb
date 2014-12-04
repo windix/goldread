@@ -1,12 +1,18 @@
 # encoding: UTF-8
 
 module FreeKindleCN
-  class Item < ASIN::SimpleItem
+  class Item < Hashie::Rash
 
-    # asin, title, details_url, review, image_url
+    # asin, title, amount, details_url, review*, image_url, author*,
+    # binding, brand, ean, edition, isbn, 
+    # item_dimensions, item_height, item_length, item_width, item_weight,
+    # package_dimensions, package_height, package_length, package_width, package_weight,
+    # label, language, formatted_price, manufacturer, mpn, 
+    # page_count*, part_number, product_group, publication_date, publisher*,
+    # sku, studio, total_new, total_used
 
     def thumb_url
-      @raw.MediumImage!.URL
+      medium_image!.url
     end
 
     def book_price
@@ -27,33 +33,29 @@ module FreeKindleCN
     # - empty string
     def author
       @author ||=
-        convert_content(@raw.ItemAttributes!.Author) ||
-        convert_content(@raw.ItemAttributes!.Creator) ||
+        convert_content(item_attributes!.author) ||
+        convert_content(item_attributes!.creator) ||
         ""
     end
 
-    def publisher
-      @raw.ItemAttributes!.Publisher.to_s
+    def review
+      convert_content(editorial_reviews!.editorial_review!, true).content
     end
 
-    def review
-      convert_content(@raw.EditorialReviews!.EditorialReview!, true).Content
+    def publisher
+      publisher.to_s
     end
 
     def num_of_pages
-      @raw.ItemAttributes!.NumberOfPages.to_i
-    end
-
-    def publication_date
-      @raw.ItemAttributes!.PublicationDate
+      page_count.to_i
     end
 
     def release_date
-      @raw.ItemAttributes!.ReleaseDate
+      item_attributes!.release_date
     end
 
     def binding
-      case @raw.ItemAttributes!.binding
+      case item_attributes!.binding
       when "平装"
         "paperback"
       when "Kindle版"
@@ -69,7 +71,7 @@ module FreeKindleCN
     def isbn13
       # only keep first 13 digits
       # e.g. for B008H0H9FO, the EAN is 9787510407550 01
-      @raw.ItemAttributes!.EAN[0..12] rescue nil
+      ean[0..12] rescue nil
     end
 
     def save
