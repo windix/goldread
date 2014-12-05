@@ -1,15 +1,22 @@
 # encoding: UTF-8
-
 module FreeKindleCN
-  class Item < Hashie::Rash
+  class Item
+
+    def initialize(subject)
+      @subject = subject
+    end
 
     # asin, title, amount, details_url, review*, image_url, author*,
-    # binding, brand, ean, edition, isbn, 
+    # binding*, brand, ean, edition, isbn, 
     # item_dimensions, item_height, item_length, item_width, item_weight,
     # package_dimensions, package_height, package_length, package_width, package_weight,
     # label, language, formatted_price, manufacturer, mpn, 
     # page_count*, part_number, product_group, publication_date, publisher*,
     # sku, studio, total_new, total_used
+
+    def method_missing(sym, *args, &block)
+      @subject.send sym, *args, &block
+    end
 
     def thumb_url
       medium_image!.url
@@ -43,7 +50,8 @@ module FreeKindleCN
     end
 
     def publisher
-      publisher.to_s
+      # have to prefix @subject to avoid loop
+      @subject.publisher.to_s
     end
 
     def num_of_pages
@@ -59,6 +67,7 @@ module FreeKindleCN
       when "平装"
         "paperback"
       when "Kindle版"
+      when "Kindle电子书"
         "kindle"
       when "精装"
         "hardcover"
