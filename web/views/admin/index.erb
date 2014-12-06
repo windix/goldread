@@ -6,6 +6,6 @@
 
 <%= item_filter_menu(current_filter) %>
 
-<%= erb :item_list %>
+<%= erb :_item_list, :locals => { :items => items } %>
 
 <%= will_paginate items, renderer: BootstrapPagination::Sinatra unless current_filter == :all %>
