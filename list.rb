@@ -98,7 +98,7 @@ module FreeKindleCN
         }
 
         # this is bit stupid -- should be done by one join
-        DB::List.all(:type => list_type).each do |list_item|
+        DB::List.all(:type => type).each do |list_item|
           result[:items] << DB::Item.first(:asin => list_item.asin)
         end
 
