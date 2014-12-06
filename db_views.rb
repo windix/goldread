@@ -39,7 +39,7 @@ module FreeKindleCN
           @order_sql = "ORDER BY id %ORDER%"
           @filter_sql = "HAVING kindle_price = 0"
         when :list
-          @join_with_lists_sql = "LEFT JOIN lists ON (lists.asin = items.asin AND lists.type = '#{@list_type}')"
+          @join_with_lists_sql = "INNER JOIN lists ON (lists.asin = items.asin AND lists.type = '#{@list_type}')"
           @order_sql = "ORDER BY lists.id %ORDER%"
           @use_pagination = false
         end
