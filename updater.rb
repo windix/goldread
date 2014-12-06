@@ -134,7 +134,7 @@ module FreeKindleCN
         end
 
         if unloaded_asins.length > 0
-          client = ASIN::Client.instance
+          client = ASINHelper.new
 
           unloaded_asins.each_slice(10) do |slice|
             lookup(client, slice).each do |item|
