@@ -6,6 +6,8 @@ module FreeKindleCN
   module DB
     class ItemView
 
+      attr_accessor :list_type
+
       def set_order(method, order = :desc)
         @use_pagination = true
 
@@ -36,6 +38,10 @@ module FreeKindleCN
         when :free
           @order_sql = "ORDER BY id %ORDER%"
           @filter_sql = "HAVING kindle_price = 0"
+        when :list
+          @join_with_lists_sql = "LEFT JOIN lists ON (lists.asin = items.asin AND lists.type = '#{@list_type}')"
+          @order_sql = "ORDER BY lists.id %ORDER%"
+          @use_pagination = false
         end
 
         @order_sql.gsub! "%ORDER%", (order == :asc) ? "ASC" : "DESC"
@@ -87,6 +93,7 @@ module FreeKindleCN
         LEFT JOIN ratings AS amazon ON (amazon.item_id = items.id AND amazon.source = 'amazon')
         LEFT JOIN ratings AS douban ON (douban.item_id = items.id AND douban.source = 'douban')
         LEFT JOIN tweet_archives ON (tweet_archives.item_id = items.id)
+        #{@join_with_lists_sql}
         GROUP BY items.id
         #{@filter_sql}
         #{@order_sql}

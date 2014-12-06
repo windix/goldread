@@ -92,17 +92,14 @@ module FreeKindleCN
       }
 
       all_lists.collect do |type, name|
-        result = {
+        view = DB::ItemView.new
+        view.list_type = type
+        view.set_order(:list, :asc)
+
+        {
           :name => name,
-          :items => []
+          :items => view.fetch
         }
-
-        # this is bit stupid -- should be done by one join
-        DB::List.all(:type => type).each do |list_item|
-          result[:items] << DB::Item.first(:asin => list_item.asin)
-        end
-
-        result
       end
     end
 
