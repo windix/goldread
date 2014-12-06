@@ -1,0 +1,4 @@
+<% lists.each do |list| %>
+  <h2><%= list[:name] %></h2>
+  <% erb :_item_list, :locals => { :items => list[:items] } %>
+<% end %>

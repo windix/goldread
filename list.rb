@@ -81,6 +81,31 @@ module FreeKindleCN
       end
     end
 
+    def self.get_all
+      all_lists = {
+        'daily-deals' => '每日特价',
+        'weekly-deals' => '每周特价',
+        'movers-and-shakers' => '销售飙升榜',
+        'new-releases' => '新品排行榜',
+        'paid-bestsellers' => '商品销售榜(付费)',
+        'free-bestsellers' => '商品销售榜(免费)',
+      }
+
+      all_lists.collect do |type, name|
+        result = {
+          :name => name,
+          :items => []
+        }
+
+        # this is bit stupid -- should be done by one join
+        DB::List.all(:type => list_type).each do |list_item|
+          result[:items] << DB::Item.first(:asin => list_item.asin)
+        end
+
+        result
+      end
+    end
+
   end
 
 end

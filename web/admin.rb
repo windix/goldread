@@ -235,6 +235,10 @@ module FreeKindleCN
         erb :tweets, :locals => { :tweets => DB::TweetArchive.all(:order => [:published_at.desc]) }
       end
 
+      get '/list' do
+        erb :list, :locals => { :lists => FreeKindleCN::AsinList.get_all }
+      end
+
       private
 
       def render_filter(current_filter)
