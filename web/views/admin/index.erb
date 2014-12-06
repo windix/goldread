@@ -6,40 +6,6 @@
 
 <%= item_filter_menu(current_filter) %>
 
-<table class="table table-condensed table-hover">
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th width="120">Last Update</th>
-      <th>ASIN</th>
-      <th>title</th>
-      <th>author</th>
-      <th>book</th>
-      <th>kindle</th>
-      <th>discount</th>
-      <th width="70">amazon</th>
-      <th width="70">douban</th>
-      <th>notes</th>
-    </tr>
-  </thead>
-  <tbody>
-  <% items.each do |item| %>
-    <% item_tr_css_class = tr_color(item) %>
-    <tr <%= "class='#{item_tr_css_class}'" if item_tr_css_class %>>
-      <td><%= item.id %></td>
-      <td><%= item.updated_at.strftime(FreeKindleCN::DATETIME_FORMAT) %></td>
-      <td><a href="<%= url("dp/#{item.asin}") %>"><%= item.asin %></a></td>
-      <td><a href="<%= item.details_url %>"><%= (item.title || "")[0..20] %></a></td>
-      <td><%= (item.author || "")[0..10] %></td>
-      <td><a href="<%= FreeKindleCN::Item.amazon_url(item.book_asin) %>"><%= item.book_price.format_price %></a></td>
-      <td><%= price_color(item) %> <em>(<%= item.price_change_count %>)</em></td>
-      <td><%= FreeKindleCN::Item.formatted_discount_rate(item.discount_rate) %></td>
-      <td><%= FreeKindleCN::Item.formatted_rating(item.amazon_average, item.amazon_votes) %></td>
-      <td><a href="<%= FreeKindleCN::Item.douban_page_url(item.douban_id) %>"><%= FreeKindleCN::Item.formatted_rating(item.douban_average, item.douban_votes) %></a></td>
-      <td><%= note(item) %></td>
-    </tr>
-  <% end %>
-  </tbody>
-</table>
+<%= erb :item_list %>
 
 <%= will_paginate items, renderer: BootstrapPagination::Sinatra unless current_filter == :all %>
