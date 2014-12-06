@@ -5,26 +5,41 @@ module FreeKindleCN
 
     # 销售飙升榜
     def movers_and_shakers(total_pages = 1)
-      handle_page("movers-and-shakers", total_pages)
+      asins = handle_page("movers-and-shakers", total_pages)
+      update_list('movers-and-shakers', asins)
+
+      asins
     end
 
     # 新品排行榜
     def new_releases(total_pages = 1)
-      handle_page("new-releases", total_pages)
+      asins = handle_page("new-releases", total_pages)
+      update_list('new-releases', asins)
+
+      asins
     end
 
     # 商品销售榜 (付费, 免费)
     def bestsellers(total_pages = 1)
       all = handle_page("bestsellers", total_pages)
+      update_list('paid-bestsellers', all.odd_values)
+      update_list('free-bestsellers', all.even_values)
+
       [all.odd_values, all.even_values]
     end
 
     def daily_deal
-      daily_deal_parser.daily_asins
+      asins = daily_deal_parser.daily_asins
+      update_list('daily-deals', asins)
+
+      asins
     end
 
     def weekly_deal
-      daily_deal_parser.weekly_asins
+      asins = daily_deal_parser.weekly_asins
+      update_list('weekly-deals', asins)
+
+      asins
     end
 
     private
@@ -57,6 +72,15 @@ module FreeKindleCN
 
       @daily_deal_parser
     end
+
+    def update_list(list_type, asins)
+      DB::List.all(:type => list_type).destroy
+
+      asins.each do |asin|
+        DB::List.create(:type => list_type, :asin => asin)
+      end
+    end
+
   end
 
 end
