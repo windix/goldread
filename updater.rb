@@ -8,8 +8,11 @@ module FreeKindleCN
 
     class << self
 
+      def asin_client
+        @asin_client ||= ASINHelper.new
+      end
+
       def fetch_bindings_and_ratings(asin)
-        asin_client = ASINHelper.new
         douban_client = DoubanHelper.client
 
         db_item = DB::Item.first(:asin => asin)
@@ -134,10 +137,8 @@ module FreeKindleCN
         end
 
         if unloaded_asins.length > 0
-          client = ASINHelper.new
-
           unloaded_asins.each_slice(10) do |slice|
-            lookup(client, slice).each do |item|
+            asin_client.lookup(slice).each do |item|
               db_item = item.save
               db_items << db_item if db_item
             end
@@ -303,26 +304,6 @@ module FreeKindleCN
 
           unless File.exists? "#{FreeKindleCN::BOOK_IMAGE_CACHE_PATH}/#{item.asin}.jpg"
             puts "wget #{item.image_url} -O #{FreeKindleCN::BOOK_IMAGE_CACHE_PATH}/#{item.asin}.jpg"
-          end
-        end
-      end
-
-      private
-
-      def lookup(client, asins)
-        retry_times = 0
-
-        begin
-          client.lookup(asins)
-        rescue Exception # => e
-          retry_times += 1
-
-          if retry_times > 3
-            raise
-          else
-            logger.error "[#{retry_times}] Exception: #{$!}"
-            sleep 5
-            retry
           end
         end
       end
