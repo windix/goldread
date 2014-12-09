@@ -3,8 +3,9 @@
 module FreeKindleCN
   module Parser
 
+    # 亚马逊排行榜
     class WebList < Base
-      attr_reader :asins, :titles
+      attr_reader :asins, :titles, :prices
 
       # name: 'movers-and-shakers', 'new-releases', 'bestsellers'
       def initialize(name, page = 1, above_the_fold = true)
@@ -18,6 +19,7 @@ module FreeKindleCN
         parse_with_retry(@url) do |doc|
           @asins = doc.css("span.asinReviewsSummary").collect { |span| span['name'] }
           @titles = doc.css("div.zg_title a").collect { |a| a.content }
+          @prices = doc.css("strong.price").collect { |strong| strong.content }
           true
         end
       end

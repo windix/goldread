@@ -21,11 +21,19 @@ module FreeKindleCN
 
     # 商品销售榜 (付费, 免费)
     def bestsellers(total_pages = 1)
-      all = handle_page("bestsellers", total_pages)
-      update_list('paid-bestsellers', all.odd_values)
-      update_list('free-bestsellers', all.even_values)
+      total_paid_asins, total_free_asins = [], []
 
-      [all.odd_values, all.even_values]
+      (1..total_pages).each do |i|
+        paid_asins, free_asins = best_seller_parser(i)
+
+        total_paid_asins += paid_asins
+        total_free_asins += free_asins
+      end
+
+      update_list('paid-bestsellers', total_paid_asins)
+      update_list('free-bestsellers', total_free_asins)
+
+      [total_paid_asins, total_free_asins]
     end
 
     def daily_deal
@@ -62,6 +70,25 @@ module FreeKindleCN
       part2.parse
 
       part1.asins + part2.asins
+    end
+
+    def best_seller_parser(page)
+      paid_asins, free_asins = [], []
+
+      [true, false].each do |option|
+        part = Parser::WebList.new('bestsellers', page, option)
+        part.parse
+
+        part.prices.each_with_index do |price, index|
+          if price == '免费'
+            free_asins << part.asins[index]
+          else
+            paid_asins << part.asins[index]
+          end
+        end
+      end
+
+      [paid_asins, free_asins]
     end
 
     def daily_deal_parser
