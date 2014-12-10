@@ -95,6 +95,8 @@ module FreeKindleCN
             @kindle_price = price
           when /价格/ # when parsing paperbook asin
             @paperbook_price = price
+          when /为您节省/
+            # skip
           else
             logger.error "parse_price_block: unknown price tag '#{tds[0].text.strip}', price=#{price}"
           end
