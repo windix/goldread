@@ -174,22 +174,25 @@ module FreeKindleCN
                       db_item.deleted = false
                       db_item.book_price = book_price if book_price != -1
 
+                      prices = db_item.prices(:order => [:id.asc])
+
                       if db_item.kindle_price != kindle_price ||
                         db_item.last_price != kindle_price ||
-                        db_item.prices.empty?
+                        prices.empty?
+
+                        logger.info "[#{db_item.asin}] UPDATE PRICE #{db_item.kindle_price} -> #{kindle_price}"
 
                         # save new price
                         now = Time.now
 
-                        # first clear orders for existing prices
-                        db_item.prices.update(:orders => 0)
+                        unless prices.empty?
+                          last_prices_id = prices[-1].id
 
-                        # set correct orders
-                        prices = db_item.prices(:order => [:id.asc])
+                          # first clear orders for existing prices
+                          db_item.prices.update(:orders => 0) unless prices.length == 1
 
-                        # only need to mark the second last -- since the new entry will be the last one
-                        if last = prices[-1]
-                          last.update(:orders => -2)
+                          # only need to mark the second last -- since the new entry will be the last one
+                          DB::Price.first(:id => last_prices_id).update(:orders => -2)
                         end
 
                         db_item.prices.create(
@@ -228,6 +231,7 @@ module FreeKindleCN
                   end
 
                 rescue => e
+                  logger.error e.backtrace
                   logger.error "(fetch price) Skip #{db_item.asin} because of Exception: #{e.message}"
                 end
               end # Thread.new
