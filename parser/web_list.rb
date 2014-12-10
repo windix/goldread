@@ -17,9 +17,9 @@ module FreeKindleCN
 
       def parse
         parse_with_retry(@url) do |doc|
-          @asins = doc.css("span.asinReviewsSummary").collect { |span| span['name'] }
+          @asins = doc.css("div.zg_title a").collect { |a| a['href'][%r{/dp/([A-Z0-9]+)/}, 1] }
           @titles = doc.css("div.zg_title a").collect { |a| a.content }
-          @prices = doc.css("strong.price").collect { |strong| strong.content }
+          @prices = doc.css("div.zg_itemPriceBlock_compact strong.price").collect { |strong| strong.content }
           true
         end
       end
