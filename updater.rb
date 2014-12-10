@@ -185,21 +185,24 @@ module FreeKindleCN
                         # save new price
                         now = Time.now
 
-                        unless prices.empty?
-                          last_prices_id = prices[-1].id
+                        if db_item.last_price != kindle_price
+                          unless prices.empty?
+                            last_prices_id = prices[-1].id
 
-                          # first clear orders for existing prices
-                          db_item.prices.update(:orders => 0) unless prices.length == 1
+                            # first clear orders for existing prices
+                            #prices.update(:orders => 0) unless prices.length == 1
+                            DB::Price.all(:item_id => db_item.id).update(:orders => 0) unless prices.length == 1
 
-                          # only need to mark the second last -- since the new entry will be the last one
-                          DB::Price.first(:id => last_prices_id).update(:orders => -2)
+                            # only need to mark the second last -- since the new entry will be the last one
+                            DB::Price.first(:id => last_prices_id).update(:orders => -2)
+                          end
+
+                          db_item.prices.create(
+                            :kindle_price => kindle_price,
+                            :retrieved_at => now,
+                            :orders => -1
+                          )
                         end
-
-                        db_item.prices.create(
-                          :kindle_price => kindle_price,
-                          :retrieved_at => now,
-                          :orders => -1
-                        )
 
                         db_item.kindle_price = kindle_price
 
