@@ -4,7 +4,12 @@ module FreeKindleCN
   module Parser
 
     class Base
-      attr_reader :asin, :content, :status_code
+
+      RESULT_FAILED = 0      # failed to parse (due to network issue, temporarily)
+      RESULT_SUCCESSFUL = 1  # successful
+      RESULT_DELETED = 2     # book has been deleted
+
+      attr_reader :asin, :content, :parse_result, :status_code
 
       def initialize(asin)
         @asin = asin
@@ -39,10 +44,14 @@ module FreeKindleCN
 
           case(@status_code)
           when 200
+            @parse_result = RESULT_SUCCESSFUL
             @content = resp.content
-          when 404
+          when 404, 302
+            # when using mobile mode, deleted book returns 302
+            @parse_result = RESULT_DELETED
             return false
           else
+            @parse_result = RESULT_FAILED
             raise "HTTP code: #{resp.status_code}"
           end
 
@@ -57,7 +66,6 @@ module FreeKindleCN
             false
           else
             logger.error "[#{@asin}] retry no.#{retry_times} Exception: #{e.message}"
-            logger.debug @content
             sleep 5
             retry
           end
@@ -66,35 +74,40 @@ module FreeKindleCN
 
       # parse prices: used by web_detail and mobile_detail parser
       def parse_price_block(trs)
-        ebook_full_price = paperbook_full_price = book_price = kindle_price = paperbook_price = -1
+        @ebook_full_price = -1      # 电子书定价
+        @paperbook_full_price = -1  # 纸书定价
+        @paperbook_price = -1       # 纸书特价
+        @kindle_price = -1          # 电子书特价
+
+        @book_price = -1            # 图书价格 -- 派生自前三者
 
         trs.each do |tr|
           tds = tr.css('td')
 
-          price = tds[1].text[/￥\s([\d\.]+)/, 1]
+          price = parse_price(tds[1].text[/￥\s([\d\.]+)/, 1])
 
           case tds[0].text.strip
           when /电子书定价/
-            ebook_full_price = parse_price(price)
+            @ebook_full_price = price
           when /纸书定价/
-            paperbook_full_price = parse_price(price)
+            @paperbook_full_price = price
           when /Kindle电子书价格/
-            kindle_price = parse_price(price)
+            @kindle_price = price
           when /价格/ # when parsing paperbook asin
-            paperbook_price = parse_price(price)
+            @paperbook_price = price
+          else
+            logger.error "parse_price_block: unknown price tag '#{tds[0].text.strip}', price=#{price}"
           end
         end
 
         # listPrice有两个通常：电子书定价 / 纸书定价，一些情况下只有电子书定价，也有时候没有
-        if paperbook_full_price != -1
-          book_price = paperbook_full_price
+        if @paperbook_full_price != -1
+          @book_price = @paperbook_full_price
         elsif @ebook_full_price != -1
-          book_price = ebook_full_price
+          @book_price = @ebook_full_price
         else
-          book_price = 0
+          @book_price = 0
         end
-
-        [ebook_full_price, paperbook_full_price, book_price, kindle_price, paperbook_price]
       end
 
     end # class

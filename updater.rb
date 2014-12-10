@@ -113,7 +113,9 @@ module FreeKindleCN
         parser = Parser::MobileDetail.new(asin)
         parser.parse
 
-        [ parser.book_price, parser.kindle_price ]
+        #[ parser.book_price, parser.kindle_price ]
+
+        parser
       end
 
       def fetch_info(asins, to_fetch_price = true, to_fetch_bindings_and_ratings = true)
@@ -152,20 +154,31 @@ module FreeKindleCN
             slice.each do |db_item|
               threads << Thread.new do
                 begin
-                  # TODO: also check timestamp
-                  book_price, kindle_price = fetch_price(db_item.asin)
+                  parser = fetch_price(db_item.asin)
 
-                  unless kindle_price
+                  case parser.parse_result
+                  when Parser::Base::RESULT_DELETED
                     db_item.update(:deleted => true)
                     logger.info "[#{db_item.asin}] **** REMOVED ****"
-                  else
-                    if db_item.kindle_price != kindle_price ||
-                      db_item.prices.empty? ||
-                      db_item.last_price != kindle_price
 
-                      if kindle_price != -1 && db_item.last_price != kindle_price
-                        # insert new price
+                  when Parser::Base::RESULT_FAILED
+                    logger.info "[#{db_item.asin}] **** SKIP - failed to fetch price ****"
 
+                  when Parser::Base::RESULT_SUCCESSFUL
+                    kindle_price = parser.kindle_price
+                    book_price = parser.book_price
+
+                    if kindle_price == -1
+                      logger.info "[#{db_item.asin}] **** SKIP - invalid kindle price ****"
+                    else
+                      db_item.deleted = false
+                      db_item.book_price = book_price if book_price != -1
+
+                      if db_item.kindle_price != kindle_price ||
+                        db_item.last_price != kindle_price ||
+                        db_item.prices.empty?
+
+                        # save new price
                         now = Time.now
 
                         # first clear orders for existing prices
@@ -189,29 +202,31 @@ module FreeKindleCN
 
                         # only update updated_at when kindle price changed
                         db_item.updated_at = now
+
+                      else
+                        # price is unchanged
                       end
-                    end
 
-                    db_item.deleted = false
-                    db_item.book_price = book_price
+                      # save to DB if anything changed
+                      unless db_item.clean?
+                        db_item.discount_rate = (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0
+                        db_item.save
 
-                    unless db_item.clean?
-                      db_item.discount_rate = (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0
-                      db_item.save
-
-                      logger.info "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
-                    end
-
-                    if to_fetch_bindings_and_ratings
-                      begin
-                        fetch_bindings_and_ratings(db_item.asin)
-                      rescue => e
-                        logger.error e.backtrace
-                        logger.error "(fetch bindings and ratings) Skip #{db_item.asin} because of Exception: #{e.message}"
+                        logger.info "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
                       end
-                    end
 
+                      if to_fetch_bindings_and_ratings
+                        begin
+                          fetch_bindings_and_ratings(db_item.asin)
+                        rescue => e
+                          logger.error e.backtrace
+                          logger.error "(fetch bindings and ratings) Skip #{db_item.asin} because of Exception: #{e.message}"
+                        end
+                      end
+
+                    end
                   end
+
                 rescue => e
                   logger.error "(fetch price) Skip #{db_item.asin} because of Exception: #{e.message}"
                 end

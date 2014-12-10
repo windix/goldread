@@ -111,7 +111,12 @@ module FreeKindleCN
     private
 
     def load_price
-      @book_price, @kindle_price = Updater.fetch_price(asin)
+      parser = Updater.fetch_price(asin)
+
+      if parser.parse_result == FreeKindleCN::Parser::Base::RESULT_SUCCESSFUL
+        @kindle_price = parser.kindle_price
+        @book_price = parser.book_price
+      end
     end
 
     # when content is an array, return first element or CSV string

@@ -4,22 +4,30 @@ module FreeKindleCN
   module Parser
 
     class MobileDetail < Base
-      attr_reader :ebook_full_price, :paperbook_full_price, :book_price, :kindle_price, :paperbook_price
+      attr_reader :ebook_full_price,      # 纸书定价
+                  :paperbook_full_price,  # 电子书定价
+                  :paperbook_price,       # 纸书特价
+
+                  :kindle_price,          # 电子书特价
+                  :book_price             # 图书价格 -- 派生自前三者
 
       def parse
         parse_with_retry("http://www.amazon.cn/gp/aw/d/#{@asin}", true) do |doc|
           if doc.css('p.infoText').text == '该商品目前无法进行购买'
             # book is temporary unavailable
+            @parse_result = RESULT_FAILED
             return false
 
           elsif doc.css('input[name="ASIN.0"]').length == 1
             # book is available
-            @ebook_full_price, @paperbook_full_price, @book_price, @kindle_price, @paperbook_price = parse_price_block(doc.css('div#kindle-price-block table tr'))
+            parse_price_block(doc.css('div#kindle-price-block table tr'))
             true
           else
             # book is permanently unavailable -- the ASIN becomes invalid
             # but we need to verify it: the web dp page will be 404 if it is PERMANENTLY unavailable
             # return nil if HTTPClient.get("http://www.amazon.cn/dp/#{asin}").status_code == 404
+
+            @parser_result = RESULT_DELETED
             false
           end
         end

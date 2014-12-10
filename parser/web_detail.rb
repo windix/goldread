@@ -4,7 +4,13 @@ module FreeKindleCN
   module Parser
 
     class WebDetail < Base
-      attr_reader :ebook_full_price, :paperbook_full_price, :book_price, :kindle_price, :paperbook_price
+      attr_reader :ebook_full_price,      # 纸书定价
+                  :paperbook_full_price,  # 电子书定价
+                  :paperbook_price,       # 纸书特价
+
+                  :kindle_price,          # 电子书特价
+                  :book_price             # 图书价格 -- 派生自前三者
+
       attr_reader :bindings, :average_reviews, :num_of_votes
 
       def parse
@@ -12,11 +18,13 @@ module FreeKindleCN
         @bindings = {}
 
         parse_with_retry("http://www.amazon.cn/dp/#{@asin}") do |doc|
-          @ebook_full_price, @paperbook_full_price, @book_price, @kindle_price, @paperbook_price = parse_price_block(doc.css('table.product tr'))
+          parse_price_block(doc.css('table.product tr'))
 
           binding_ids = doc.css('table.twisterMediaMatrix table tbody').collect { |t| t['id'] }.compact
 
           if binding_ids.empty?
+            @parser_result = RESULT_DELETED
+
             logger.debug "[#{asin}] No binding id found, skip..."
             return false
           end
