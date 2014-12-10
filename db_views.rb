@@ -69,7 +69,7 @@ module FreeKindleCN
             prices_count.count AS price_change_count,
             items.discount_rate,
             items.created_at,
-            items.updated_at,
+            last_price.retrieved_at AS updated_at,
             items.deleted,
             bindings.asin AS book_asin,
             bindings.douban_id,
