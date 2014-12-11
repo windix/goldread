@@ -80,7 +80,8 @@ module FreeKindleCN
     def isbn13
       # only keep first 13 digits
       # e.g. for B008H0H9FO, the EAN is 9787510407550 01
-      ean[0..12] rescue nil
+      isbn = ean[0..12] rescue nil
+      self.class.is_valid_isbn?(isbn) ? isbn : nil
     end
 
     def save
@@ -136,6 +137,10 @@ module FreeKindleCN
       # this is probably wrong in some case for paper book (some even uses ISBN directly)
       def is_valid_asin?(asin)
         asin =~ /^B[A-Z0-9]{9}$/
+      end
+
+      def is_valid_isbn?(isbn)
+        isbn =~ /^\d+$/
       end
 
       def douban_api_url(douban_id)

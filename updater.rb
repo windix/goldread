@@ -44,8 +44,8 @@ module FreeKindleCN
           ### DOUBAN API
 
           # invalid isbn13
-          unless item.isbn13
-            logger.debug "ISBN for [#{book_asin}] is empty, skip..."
+          unless item.isbn13 
+            logger.debug "ISBN for [#{book_asin}] is empty or invalid, skip..."
             next
           end
 
