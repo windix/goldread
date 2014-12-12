@@ -82,6 +82,9 @@ module FreeKindleCN
       end
 
       def fetch_douban_rating(db_item)
+        # TEMPORARY: only fetch when douban rating does not exist
+        return if db_item.ratings.first(:source => 'douban')
+
         perferred_binding = db_item.bindings.first(preferred: true)
 
         if (perferred_binding)
@@ -89,7 +92,7 @@ module FreeKindleCN
           book_info = DoubanHelper.lookup(perferred_binding.isbn)
 
           # DOUBAN RATING - same for different bindings of the same book
-          if book_info
+          if book_info && book_info[:rating]
             average = book_info[:rating][:average].to_f
             num_of_votes = book_info[:rating][:numRaters].to_i
 
