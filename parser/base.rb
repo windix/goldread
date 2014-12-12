@@ -3,6 +3,20 @@
 module FreeKindleCN
   module Parser
 
+    class << self
+      def factory(name, asin)
+        parser = case name
+                when 'mobile' then MobileDetail.new(asin)
+                when 'web' then WebDetail.new(asin)
+                else raise "Invalid Parser Name!"
+                end
+
+        parser.parse
+
+        parser
+      end
+    end
+
     class Base
 
       RESULT_FAILED = 0      # failed to parse (due to network issue, temporarily)
@@ -65,7 +79,7 @@ module FreeKindleCN
           if retry_times > 3
             false
           else
-            logger.error "[#{@asin}] retry no.#{retry_times} Exception: #{e.message}"
+            logger.debug "[#{@asin}] retry no.#{retry_times} Exception: #{e.message}"
             sleep 5
             retry
           end

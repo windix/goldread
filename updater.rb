@@ -3,8 +3,7 @@
 module FreeKindleCN
 
   class Updater
-    NUM_OF_THREADS_FETCHING_PRICE = 15
-    # NUM_OF_THREADS_FETCHING_BINDINGS_AND_RATINGS = 5
+    NUM_OF_THREADS_TO_FETCH_INFO = 15
 
     class << self
 
@@ -12,113 +11,178 @@ module FreeKindleCN
         @asin_client ||= ASINHelper.new
       end
 
-      def fetch_bindings_and_ratings(asin)
-        douban_client = DoubanHelper.client
+      def douban_client
+        @douban_client ||= DoubanHelper.client
+      end
 
-        db_item = DB::Item.first(:asin => asin)
-
-        unless db_item.bindings.empty?
-          logger.debug "[#{asin}] #{db_item.bindings.length} bindings exist, skip..."
-          return
+      def fetch_bindings(db_item)
+        if db_item.bindings.length == db_item.web_parser.bindings.length
+          logger.debug "[#{db_item.asin}] no binding changes"
         else
-          logger.debug "[#{asin}] #{db_item.title}"
+          logger.info "[#{db_item.asin}] Parse bindings for #{db_item.title}"
+
+          ### WEB PARSER: for bindings and amazon rating
+          db_item.web_parser.bindings.each do |binding_type, book_asin|
+            book_isbn = nil
+
+            if binding_type != :kindle
+              # skip douban lookup for kindle book
+
+              ### AMAZON API, only for ISBN at moment
+              item = asin_client.lookup_one(book_asin)
+
+              unless item
+                logger.debug "[#{db_item.asin}] Cannot find Book ASIN: #{book_asin}, skip..."
+                next
+              end
+
+              book_isbn = item.isbn13
+
+              ### DOUBAN API, for douban ID and douban rating
+              book_info = DoubanHelper.lookup(item.isbn13)
+            end
+
+            unless db_item.bindings.first(:asin => book_asin)
+              # SAVE TO DB
+              logger.info "[#{db_item.asin}] #{binding_type}: #{book_asin}" + (book_isbn ? ", #{book_isbn}" : "")
+
+              db_item.bindings.create(
+                :type => binding_type.to_s,
+                :asin => book_asin,
+                :isbn => book_isbn,
+                :douban_id => book_info ? book_info[:id] : nil,
+                :preferred => (db_item.bindings.count(preferred: true) == 0 && binding_type != :kindle)
+              )
+            end
+          end # end of bindings
         end
+      #rescue => e
+      #  logger.error "[#{db_item.asin}] (fetch_bindings) Skip because of Exception: #{e.message}"
+      #  logger.debug e.backtrace
+      end
 
-        ### PARSE WEB PAGE
-        parser = Parser::WebDetail.new(asin)
-        parser.parse
+      def fetch_amazon_rating(db_item)
+        # AMAZON RATING - same for different bindings of the same book
+        average = db_item.web_parser.average_reviews
+        num_of_votes = db_item.web_parser.num_of_votes
 
-        is_preferred = true
-        parser.bindings.each do |binding_type, book_asin|
-          ### AMAZON API
+        db_item.ratings.first_or_create({
+            :source => 'amazon'
+          }, {
+            :source => 'amazon',
+            :average => average * 10,
+            :num_of_votes => num_of_votes
+          }
+        ).save
 
-          items = asin_client.lookup(book_asin)
+        logger.info "[#{db_item.asin}] amazon rating: #{average} (#{num_of_votes})"
+      rescue => e
+        logger.error "[#{db_item.asin}] (fetch_amazon_rating) Skip because of Exception: #{e.message}"
+        logger.debug e.backtrace
+      end
 
-          if items.empty?
-            logger.debug "Cannot find Book ASIN: #{book_asin}, skip..." unless binding_type == :kindle
-            next
+      def fetch_douban_rating(db_item)
+        perferred_binding = db_item.bindings.first(preferred: true)
+
+        if (perferred_binding)
+          ### DOUBAN API, for douban ID and douban rating
+          book_info = DoubanHelper.lookup(perferred_binding.isbn)
+
+          # DOUBAN RATING - same for different bindings of the same book
+          if book_info
+            average = book_info[:rating][:average].to_f
+            num_of_votes = book_info[:rating][:numRaters].to_i
+
+            db_item.ratings.first_or_create({
+                :source => 'douban',
+              }, {
+                :source => 'douban',
+                :average => average * 10,
+                :num_of_votes => num_of_votes
+              }
+            ).save
+
+            logger.info "[#{db_item.asin}] douban rating: #{average} (#{num_of_votes})"
+          end
+        end
+      rescue => e
+        logger.error "[#{db_item.asin}] (fetch_douban_rating) Skip because of Exception: #{e.message}"
+        logger.debug e.backtrace
+      end
+
+      def fetch_price(db_item)
+        case db_item.mobile_parser.parse_result
+        when Parser::Base::RESULT_DELETED
+          db_item.update(:deleted => true)
+          logger.info "[#{db_item.asin}] **** REMOVED ****"
+
+        when Parser::Base::RESULT_FAILED
+          logger.info "[#{db_item.asin}] **** SKIP - failed to fetch price ****"
+
+        when Parser::Base::RESULT_SUCCESSFUL
+          kindle_price = db_item.mobile_parser.kindle_price
+          book_price = db_item.mobile_parser.book_price
+
+          if kindle_price == -1
+            logger.info "[#{db_item.asin}] **** SKIP - invalid kindle price ****"
           else
-            item = items.first
-          end
+            db_item.deleted = false
+            db_item.book_price = book_price if book_price != -1
 
-          ### DOUBAN API
+            prices = db_item.prices(:order => [:id.asc])
 
-          # invalid isbn13
-          unless item.isbn13 
-            logger.debug "ISBN for [#{book_asin}] is empty or invalid, skip..."
-            next
-          end
+            if db_item.kindle_price != kindle_price ||
+              db_item.last_price != kindle_price ||
+              prices.empty?
 
-          begin
-            book_info = douban_client.isbn(item.isbn13)
+              logger.debug "[#{db_item.asin}] UPDATE PRICE #{db_item.kindle_price} -> #{kindle_price}"
 
-          rescue Douban::Error => e
-            if e.code == 6000
-              # book_not_found
-              logger.info "[#{book_asin}] Book not found in douban"
-              next
+              # save new price
+              now = Time.now
 
-            elsif e.code == 106
-              # access_token_has_expired
-              DoubanHelper.refresh_client
-              logger.info "Douban token has been refreshed"
-              retry
+              if db_item.last_price != kindle_price
+                unless prices.empty?
+                  last_prices_id = prices[-1].id
+
+                  # first clear orders for existing prices
+                  #prices.update(:orders => 0) unless prices.length == 1
+                  DB::Price.all(:item_id => db_item.id).update(:orders => 0) unless prices.length == 1
+
+                  # only need to mark the second last -- since the new entry will be the last one
+                  DB::Price.first(:id => last_prices_id).update(:orders => -2)
+                end
+
+                db_item.prices.create(
+                  :kindle_price => kindle_price,
+                  :retrieved_at => now,
+                  :orders => -1
+                )
+              end
+
+              db_item.kindle_price = kindle_price
+
+              # only update updated_at when kindle price changed
+              db_item.updated_at = now
 
             else
-              raise
+              # price is unchanged
+            end
+
+            # save to DB if anything changed
+            unless db_item.clean?
+              db_item.discount_rate = (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0
+              db_item.save
+
+              logger.info "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
             end
           end
-
-          ### SAVE TO DB
-
-          logger.info "[#{asin}] #{binding_type}#{is_preferred ? "*" : ""}: "\
-            "#{book_asin}, #{item.isbn13}, "\
-            "a: #{parser.average_reviews} of #{parser.num_of_votes}, "\
-            "d: #{book_info[:rating][:average]} of #{book_info[:rating][:numRaters]}"
-
-          # BINDING
-          db_item.bindings.create(
-            :type => binding_type.to_s,
-            :asin => book_asin,
-            :isbn => item.isbn13,
-            :douban_id => book_info[:id],
-            :preferred => binding_type == :kindle ? false : is_preferred,
-            :created_at => Time.now
-          )
-
-          if binding_type != :kindle && is_preferred
-            # AMAZON RATING
-            db_item.ratings.create(
-              :source => 'amazon',
-              :average => parser.average_reviews * 10,
-              :num_of_votes => parser.num_of_votes,
-              :updated_at => Time.now
-            )
-
-            # DOUBAN RATING
-            db_item.ratings.create(
-              :source => 'douban',
-              :average => book_info[:rating][:average].to_f * 10,
-              :num_of_votes => book_info[:rating][:numRaters].to_i,
-              :updated_at => Time.now
-            )
-
-            is_preferred = false
-          end
-        end # of bindings
+        end # case
+      rescue => e
+        logger.error "[#{db_item.asin}] (fetch_price) Skip because of Exception: #{e.message}"
+        logger.debug e.backtrace
       end
 
-      def fetch_price(asin)
-        # mobile chrome, 这个是可购买的手机版本页面
-        parser = Parser::MobileDetail.new(asin)
-        parser.parse
-
-        #[ parser.book_price, parser.kindle_price ]
-
-        parser
-      end
-
-      def fetch_info(asins, to_fetch_price = true, to_fetch_bindings_and_ratings = true)
+      def fetch_info(asins)
         # if passed one single ASIN convert it to array
         asins = [asins] unless asins.respond_to?(:each)
 
@@ -147,122 +211,24 @@ module FreeKindleCN
           end
         end
 
-        if to_fetch_price
-          db_items.each_slice(NUM_OF_THREADS_FETCHING_PRICE) do |slice|
+        db_items.each_slice(NUM_OF_THREADS_TO_FETCH_INFO) do |slice|
+          threads = []
+          slice.each do |db_item|
+            threads << Thread.new do
 
-            threads = []
-            slice.each do |db_item|
-              threads << Thread.new do
-                begin
-                  parser = fetch_price(db_item.asin)
+              fetch_price(db_item)
 
-                  case parser.parse_result
-                  when Parser::Base::RESULT_DELETED
-                    db_item.update(:deleted => true)
-                    logger.info "[#{db_item.asin}] **** REMOVED ****"
+              fetch_bindings(db_item)
 
-                  when Parser::Base::RESULT_FAILED
-                    logger.info "[#{db_item.asin}] **** SKIP - failed to fetch price ****"
+              fetch_amazon_rating(db_item)
 
-                  when Parser::Base::RESULT_SUCCESSFUL
-                    kindle_price = parser.kindle_price
-                    book_price = parser.book_price
+              fetch_douban_rating(db_item)
 
-                    if kindle_price == -1
-                      logger.info "[#{db_item.asin}] **** SKIP - invalid kindle price ****"
-                    else
-                      db_item.deleted = false
-                      db_item.book_price = book_price if book_price != -1
+            end # Thread.new
+          end # slice.each
 
-                      prices = db_item.prices(:order => [:id.asc])
-
-                      if db_item.kindle_price != kindle_price ||
-                        db_item.last_price != kindle_price ||
-                        prices.empty?
-
-                        logger.info "[#{db_item.asin}] UPDATE PRICE #{db_item.kindle_price} -> #{kindle_price}"
-
-                        # save new price
-                        now = Time.now
-
-                        if db_item.last_price != kindle_price
-                          unless prices.empty?
-                            last_prices_id = prices[-1].id
-
-                            # first clear orders for existing prices
-                            #prices.update(:orders => 0) unless prices.length == 1
-                            DB::Price.all(:item_id => db_item.id).update(:orders => 0) unless prices.length == 1
-
-                            # only need to mark the second last -- since the new entry will be the last one
-                            DB::Price.first(:id => last_prices_id).update(:orders => -2)
-                          end
-
-                          db_item.prices.create(
-                            :kindle_price => kindle_price,
-                            :retrieved_at => now,
-                            :orders => -1
-                          )
-                        end
-
-                        db_item.kindle_price = kindle_price
-
-                        # only update updated_at when kindle price changed
-                        db_item.updated_at = now
-
-                      else
-                        # price is unchanged
-                      end
-
-                      # save to DB if anything changed
-                      unless db_item.clean?
-                        db_item.discount_rate = (book_price != 0) ? kindle_price.to_f / book_price.to_f : 0.0
-                        db_item.save
-
-                        logger.info "[#{db_item.asin}] #{db_item.author} - #{db_item.title}: #{kindle_price} / #{book_price}"
-                      end
-
-                      if to_fetch_bindings_and_ratings
-                        begin
-                          fetch_bindings_and_ratings(db_item.asin)
-                        rescue => e
-                          logger.error e.backtrace
-                          logger.error "(fetch bindings and ratings) Skip #{db_item.asin} because of Exception: #{e.message}"
-                        end
-                      end
-
-                    end
-                  end
-
-                rescue => e
-                  logger.error e.backtrace
-                  logger.error "(fetch price) Skip #{db_item.asin} because of Exception: #{e.message}"
-                end
-              end # Thread.new
-            end # slice.each
-
-            threads.each { |thread| thread.join }
-
-          end # db_items.each_slice
-        end
-
-        # if to_fetch_bindings_and_ratings
-        #   db_items.each_slice(NUM_OF_THREADS_FETCHING_BINDINGS_AND_RATINGS) do |slice|
-
-        #     threads = []
-        #     slice.each do |db_item|
-        #       threads << Thread.new do
-        #         begin
-        #           fetch_bindings_and_ratings(db_item.asin)
-        #         rescue => e
-        #           logger.error "(fetch bindings and ratings) Skip #{db_item.asin} because of Exception: #{e.message}"
-        #         end
-        #       end # Thread.new
-        #     end # slice.each
-
-        #     threads.each { |thread| thread.join }
-
-        #   end # db_items.each_slice
-        # end
+          threads.each { |thread| thread.join }
+        end # db_items.each_slice
 
         db_items
       end

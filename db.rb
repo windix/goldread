@@ -44,6 +44,14 @@ module FreeKindleCN
       has n, :ratings
       has n, :tweet_archives
 
+      def web_parser
+        @web_parser ||= Parser.factory('web', asin)
+      end
+
+      def mobile_parser
+        @mobile_parser ||= Parser.factory('mobile', asin)
+      end
+
       # return price fluctuation of previous two prices
       def price_fluc
         # return nil when current price is unavailable

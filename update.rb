@@ -2,7 +2,6 @@
 # encoding: UTF-8
 
 require './freekindlecn'
-require 'updater'
 require 'thor'
 
 include FreeKindleCN

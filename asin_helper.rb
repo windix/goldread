@@ -10,6 +10,7 @@ class ASINHelper
   end
 
   def lookup(*asins)
+    # asins is ALWAYS ARRAY
     retry_times = 0
 
     begin
@@ -25,6 +26,12 @@ class ASINHelper
         retry
       end
     end
+  end
+
+  # lookup for single asin
+  def lookup_one(asin)
+    result = lookup(asin)
+    result.empty? ? nil : result.first
   end
 
 end

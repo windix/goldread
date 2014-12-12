@@ -41,8 +41,33 @@ class DoubanHelper
       @client ||= Douban.client(YAML::load_file(config_file))
     end
 
+    def lookup(isbn)
+      if isbn.to_s.empty?
+        logger.info "Douban: invalid ISBN"
+        false
+      else
+        client.isbn(isbn)
+      end
+    rescue Douban::Error => e
+      if e.code == 6000
+        # book_not_found
+        logger.info "Douban: cannot find ISBN #{isbn}"
+        false
+
+      elsif e.code == 106
+        # access_token_has_expired
+        refresh_client
+        logger.info "Douban: token has been refreshed, retry..."
+
+        # try again
+        lookup(isbn)
+
+      else
+        raise
+      end
+    end
+
     def refresh_client
-      client = self.client
       resp = client.refresh
       save_config(resp)
 

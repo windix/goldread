@@ -8,8 +8,6 @@ require 'json'
 require 'twitter-text'
 require 'will_paginate-bootstrap'
 
-require 'updater'
-
 module FreeKindleCN
   module Web
     class Admin < Sinatra::Base

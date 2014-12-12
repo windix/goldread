@@ -1,5 +1,4 @@
 require '../freekindlecn'
-require 'updater'
 
 include FreeKindleCN
 

@@ -2,7 +2,7 @@
 
 module FreeKindleCN
   module Parser
-
+    # mobile chrome, 这个是可购买的手机版本页面
     class MobileDetail < Base
       attr_reader :ebook_full_price,      # 纸书定价
                   :paperbook_full_price,  # 电子书定价
