@@ -56,9 +56,9 @@ module FreeKindleCN
             end
           end # end of bindings
         end
-      #rescue => e
-      #  logger.error "[#{db_item.asin}] (fetch_bindings) Skip because of Exception: #{e.message}"
-      #  logger.debug e.backtrace
+      rescue => e
+        logger.error "[#{db_item.asin}] (fetch_bindings) Skip because of Exception: #{e.message}"
+        logger.debug e.backtrace
       end
 
       def fetch_amazon_rating(db_item)
