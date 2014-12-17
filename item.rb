@@ -89,7 +89,6 @@ module FreeKindleCN
 
       DB::Item.first_or_create({:asin => asin},
         {:title => title,
-        :details_url => details_url,
         :review => review,
         :image_url => image_url,
         :thumb_url => thumb_url,

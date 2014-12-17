@@ -23,7 +23,6 @@ module FreeKindleCN
       property :id, Serial
       property :asin, String, :length => 10, :unique => true
       property :title, String, :length => 200
-      property :details_url, String, :length => 1000
       property :review, Text
       property :image_url, String, :length => 200
       property :thumb_url, String, :length => 200
@@ -94,7 +93,7 @@ module FreeKindleCN
       end
 
       def amazon_url
-        "http://www.amazon.cn/dp/#{asin}"
+        FreeKindleCN::Item.amazon_url(asin)
       end
 
       def cached_image_url

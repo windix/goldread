@@ -60,7 +60,6 @@ module FreeKindleCN
             items.asin,
             items.title,
             items.author,
-            items.details_url,
             items.book_price,
             items.kindle_price,
             last_price.kindle_price AS p1,
