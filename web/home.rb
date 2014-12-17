@@ -3,6 +3,7 @@
 require 'sinatra/base'
 require 'sinatra-index'
 require 'erb'
+require 'chartkick'
 
 module FreeKindleCN
   module Web
@@ -17,6 +18,21 @@ module FreeKindleCN
 
       set :views, "#{File.expand_path(File.dirname(__FILE__))}/views/home"
 
+      helpers do
+        # TODO shared from admin
+        def min_file_suffix
+          (settings.environment == :development) ? "" : ".min"
+        end
+
+        def prices_data_for_chart(item)
+          data = item.prices.collect { |p| [p.retrieved_at, p.kindle_price.to_f / 100] }
+
+          # push current datetime as the endpoint
+          data << [Time.now, data.last[1]] unless data.empty?
+        end
+      end
+
+
 #      get '/' do
 #        erb :index
 #      end
@@ -25,7 +41,7 @@ module FreeKindleCN
         if Item.is_valid_asin?(params[:asin]) &&
           item = DB::Item.first(:asin => params[:asin])
 
-          redirect item.amazon_url
+          erb :dp, :locals => { :item => item }
         else
           [404, "Not Found"]
         end

@@ -1,0 +1,19 @@
+<p><strong><%= item.title %></strong></p>
+
+<p><%= item.author %></p>
+
+<p><%= item.publisher %></p>
+
+<p><a href="<%= item.amazon_url %>"><img class="img-polaroid" src="<%= item.cached_image_url %>" /></a></p>
+
+<p><a href="<%= item.amazon_url %>">购买</a></p>
+
+<p>亚马逊评分: <%= item.rating_by_source('amazon') || "-" %></p>
+
+<p>豆瓣评分: <a href="<%= item.preferred_binding.douban_page_url rescue "#" %>"><%= item.rating_by_source('douban') || "-" %></a></p>
+
+<p>价格历史：</p>
+
+<p><%= line_chart prices_data_for_chart(item) %></p>
+
+<p><a href="https://twitter.com/goldreadchina">@goldreadchina</a> 金玉良读 2013-2014</p>
