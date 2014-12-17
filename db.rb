@@ -93,6 +93,10 @@ module FreeKindleCN
         ratings(:source => source).first
       end
 
+      def amazon_url
+        "http://www.amazon.cn/dp/#{asin}"
+      end
+
       def cached_image_url
         if File.exists? "#{FreeKindleCN::BOOK_IMAGE_CACHE_PATH}/#{asin}.jpg"
           "/admin/images/asin/#{asin}.jpg"

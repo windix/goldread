@@ -25,7 +25,7 @@ module FreeKindleCN
         if Item.is_valid_asin?(params[:asin]) &&
           item = DB::Item.first(:asin => params[:asin])
 
-          redirect item.details_url
+          redirect item.amazon_url
         else
           [404, "Not Found"]
         end
