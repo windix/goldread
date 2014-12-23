@@ -189,6 +189,13 @@ module FreeKindleCN
         # if passed one single ASIN convert it to array
         asins = [asins] unless asins.respond_to?(:each)
 
+        asins.each { |asin| FetchWorker.perform_async asin }
+      end
+
+      def fetch_info_old(asins)
+        # if passed one single ASIN convert it to array
+        asins = [asins] unless asins.respond_to?(:each)
+
         db_items = []
         unloaded_asins = []
 

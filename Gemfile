@@ -21,6 +21,7 @@ gem 'will_paginate-bootstrap'
 #gem 'gollum', :git => 'https://github.com/gollum/gollum.git'
 #gem 'newrelic_rpm'
 gem "hashie"
+gem "sidekiq", "~>2.17"
 
 group :development do
   gem "sinatra-contrib"

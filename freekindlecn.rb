@@ -41,3 +41,4 @@ require 'db_views'
 require 'tweet'
 require 'douban_config'
 
+require 'worker/fetch_worker'
