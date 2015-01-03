@@ -53,11 +53,20 @@ module FreeKindleCN
 
     def send_to_facebook
       page = FbGraph::Page.new(***REMOVED***)
-      page.feed!(
-        :access_token => 'CAAMV1jrDfqQBAJWM4dYMKmu3rUcfwittUar7id2ap8YAmZAqcbnW2oIfUYTb4a2pnEDLeL1qRH8ttBBOVmBrRn75kYajYosy2nBe3AZA5SaXLtiPkfESIjqzws7uzEruHjmeZAZB4NwcUhuN6ZBeUci0ol3ZB2sH4rt6vOJYvbLx9HmdZAEUWRoDYQAXppNYgu1qdwCZBtGncgZDZD',
-        :message => @text,
-        :link => @asin ? "http://www.goldread.net/dp/#{@asin}" : nil,
-      )
+      if @image_file
+        page.photo!(
+          :access_token => '***REMOVED***',
+          :message => @text,
+          :source => @image_file,
+          :no_story => false,
+        )
+      else
+        page.feed!(
+          :access_token => '***REMOVED***',
+          :message => @text,
+          :link => @asin ? "http://www.goldread.net/dp/#{@asin}" : nil,
+        )
+      end
     end
 
     private
