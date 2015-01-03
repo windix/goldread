@@ -162,7 +162,7 @@ module FreeKindleCN
 
       def self.new(*)
         app = Rack::Auth::Digest::MD5.new(super) do |username|
-          {'***REMOVED***' => '***REMOVED***', '***REMOVED***' => '***REMOVED***'}[username]
+          {'***REMOVED***' => '***REMOVED***', '***REMOVED***' => '***REMOVED***', 'zellux' => '***REMOVED***'}[username]
         end
         app.realm = 'Protected Area'
         app.opaque = 'secretkey'
