@@ -202,7 +202,8 @@ module FreeKindleCN
 
         tweet = Tweet.new params[:tweet_text],
           params[:tweet_hashtag],
-          params[:tweet_upload_picture] ? params[:tweet_image_url] : nil
+          params[:tweet_upload_picture] ? params[:tweet_image_url] : nil,
+          params[:tweet_asin]
 
         any_successful = false
         result = params[:tweet_to].collect do |t|

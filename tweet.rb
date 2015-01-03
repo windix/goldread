@@ -3,11 +3,12 @@
 require "open-uri"
 require "twitter_config"
 require "weibo_config"
+require 'fb_graph'
 
 module FreeKindleCN
   class Tweet
-    def initialize(text, tag = nil, image_url = nil)
-      @text, @tag = text, tag
+    def initialize(text, tag=nil, image_url=nil, asin=nil)
+      @text, @tag, @asin = text, tag, asin
       @image_file = open(image_url) if image_url
     end
 
@@ -48,6 +49,15 @@ module FreeKindleCN
     rescue => e
       @error = e.message
       return false
+    end
+
+    def send_to_facebook
+      page = FbGraph::Page.new(***REMOVED***)
+      page.feed!(
+        :access_token => 'CAAMV1jrDfqQBAJWM4dYMKmu3rUcfwittUar7id2ap8YAmZAqcbnW2oIfUYTb4a2pnEDLeL1qRH8ttBBOVmBrRn75kYajYosy2nBe3AZA5SaXLtiPkfESIjqzws7uzEruHjmeZAZB4NwcUhuN6ZBeUci0ol3ZB2sH4rt6vOJYvbLx9HmdZAEUWRoDYQAXppNYgu1qdwCZBtGncgZDZD',
+        :message => @text,
+        :link => @asin ? "http://www.goldread.net/dp/#{@asin}" : nil,
+      )
     end
 
     private
