@@ -22,6 +22,7 @@ gem 'will_paginate-bootstrap'
 #gem 'newrelic_rpm'
 gem "hashie"
 gem "fb_graph"
+gem "sidekiq", "~>2.17"
 
 group :development do
   gem "sinatra-contrib"
