@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'asin', "~> 2.0"
-gem 'httpclient'
+gem 'httpclient', '~> 2.4.0'
 gem 'nokogiri'
 gem "data_mapper", "~>1.2"
 gem "dm-mysql-adapter"
@@ -21,6 +21,7 @@ gem 'will_paginate-bootstrap'
 #gem 'gollum', :git => 'https://github.com/gollum/gollum.git'
 #gem 'newrelic_rpm'
 gem "hashie"
+gem "fb_graph"
 
 group :development do
   gem "sinatra-contrib"

@@ -2,10 +2,14 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>GoldRead 金玉良读</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <title><%= item.title %> | GoldRead 金玉良读</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta property="fb:app_id" content="***REMOVED***" />
+    <meta property="og:url" content="http://www.goldread.net/dp/<%= item.asin %>" />
+    <meta property="og:title" content="<%= item.title %> | GoldRead 金玉良读" />
+    <meta property="og:image" content="<%= item.cached_image_url %>" />
 
     <!-- Le styles -->
     <link href="<%= url("/css/bootstrap#{min_file_suffix}.css") %>" rel="stylesheet">

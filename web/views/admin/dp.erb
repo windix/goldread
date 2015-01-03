@@ -108,6 +108,7 @@
     </script>
 
     <form action="<%= url("/tweet") %>" method="POST">
+      <input type="hidden" name="tweet_asin" value="<%= item.asin %>">
       <input type="hidden" name="tweet_image_url" value="<%= item.image_url %>">
 
       <label class="checkbox">
@@ -116,6 +117,10 @@
 
       <label class="checkbox">
         <input type="checkbox" name="tweet_to[weibo]" checked>Weibo
+      </label>
+
+      <label class="checkbox">
+        <input type="checkbox" name="tweet_to[facebook]" checked>Facebook
       </label>
 
       <label class="radio">
