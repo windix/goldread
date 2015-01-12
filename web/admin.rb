@@ -198,8 +198,6 @@ module FreeKindleCN
       end
 
       post '/tweet' do
-        require 'updater'
-
         tweet = Tweet.new params[:tweet_text],
           params[:tweet_hashtag],
           params[:tweet_upload_picture] ? params[:tweet_image_url] : nil,
