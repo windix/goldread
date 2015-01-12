@@ -244,8 +244,6 @@ module FreeKindleCN
       end
 
       def fetch_tweets
-        require 'twitter_config'
-
         tweets = Twitter.user_timeline(TWITTER_ACCOUNT,
           :count => 100,
           :exclude_replies => true,

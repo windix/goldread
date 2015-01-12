@@ -48,13 +48,11 @@ module FreeKindleCN
       end
 
       get '/oauth/weibo' do
-        require 'weibo_config'
         client = WeiboOAuth2::Client.new
         redirect client.authorize_url
       end
 
       get '/oauth/callback/weibo' do
-        require 'weibo_config'
         client = WeiboOAuth2::Client.new
         access_token = client.auth_code.get_token(params[:code])
 
@@ -62,12 +60,10 @@ module FreeKindleCN
       end
 
       get '/oauth/douban' do
-        require 'douban_config'
         redirect DoubanHelper.auth_url
       end
 
       get '/oauth/callback/douban' do
-        require 'douban_config'
         DoubanHelper.handle_callback(params[:code])
 
         "Done!"
