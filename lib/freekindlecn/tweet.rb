@@ -1,9 +1,15 @@
 # encoding: UTF-8
 
 require "open-uri"
-require "twitter_config"
-require "weibo_config"
+
+require 'twitter'
+require FreeKindleCN::CONFIG_PATH + '/twitter'
+
+require 'weibo_2'
+require FreeKindleCN::CONFIG_PATH + '/weibo'
+
 require 'fb_graph'
+require FreeKindleCN::CONFIG_PATH + '/facebook'
 
 module FreeKindleCN
   class Tweet
@@ -55,14 +61,14 @@ module FreeKindleCN
       page = FbGraph::Page.new(***REMOVED***)
       if @image_file
         page.photo!(
-          :access_token => '***REMOVED***',
+          :access_token => FACEBOOK_TOKEN,
           :message => @text,
           :source => @image_file,
           :no_story => false,
         )
       else
         page.feed!(
-          :access_token => '***REMOVED***',
+          :access_token => FACEBOOK_TOKEN,
           :message => @text,
           :link => @asin ? "http://www.goldread.net/dp/#{@asin}" : nil,
         )

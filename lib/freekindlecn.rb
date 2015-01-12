@@ -1,6 +1,10 @@
 # encoding: UTF-8
 
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
 require 'bundler'
+require 'freekindlecn/version'
 
 # Constants
 module FreeKindleCN
@@ -12,7 +16,9 @@ module FreeKindleCN
 
   ADMIN_ITEMS_PER_PAGE = 50
 
-  WEB_PUBLIC_PATH = File.dirname(__FILE__) + "/web/public"
+  BASE_PATH = File.expand_path('../../', __FILE__) 
+  CONFIG_PATH = BASE_PATH + "/config"
+  WEB_PUBLIC_PATH = BASE_PATH + "/web"
   BOOK_IMAGE_CACHE_PATH = WEB_PUBLIC_PATH + "/images/asin"
 end
 
@@ -27,18 +33,25 @@ LogBuddy.logger.level = (FreeKindleCN::CONTEXT == :development) ? Logger::DEBUG 
 
 logger.info "Current Environment: #{FreeKindleCN::CONTEXT}"
 
-$LOAD_PATH.unshift(File.dirname(__FILE__))
-
 require 'monkey_patch'
-require 'parser'
 
-require 'asin_config'
+require 'freekindlecn/parser'
 
-require 'list'
+require 'asin'
+require 'asin/adapter'
+require 'rash'
+require 'asin_helper'
+require FreeKindleCN::CONFIG_PATH + "/asin"
 
-require 'db'
-require 'db_views'
-require 'tweet'
-require 'douban_config'
+require 'freekindlecn/item'
+require 'freekindlecn/updater'
+require 'freekindlecn/asin_list'
 
-require 'worker/fetch_worker'
+require 'freekindlecn/db'
+require 'freekindlecn/db/item_view'
+require 'freekindlecn/tweet'
+
+require 'douban_helper'
+
+require 'freekindlecn/worker/fetch_worker'
+

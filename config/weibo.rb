@@ -1,6 +1,3 @@
-# encoding: UTF-8
-require 'weibo_2'
-
 if FreeKindleCN::CONTEXT == :production
   # production: goldreadchina
   WeiboOAuth2::Config.api_key = '***REMOVED***'

@@ -3,8 +3,8 @@
 require 'httpclient'
 require 'nokogiri'
 
-require 'parser/base'
-require 'parser/mobile_detail'
-require 'parser/web_detail'
-require 'parser/web_list'
-require 'parser/web_daily_deals'
+require 'freekindlecn/parser/base'
+require 'freekindlecn/parser/mobile_detail'
+require 'freekindlecn/parser/web_detail'
+require 'freekindlecn/parser/web_list'
+require 'freekindlecn/parser/web_daily_deals'
