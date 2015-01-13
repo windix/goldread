@@ -61,14 +61,14 @@ module FreeKindleCN
       page = FbGraph::Page.new(***REMOVED***)
       if @image_file
         page.photo!(
-          :access_token => FACEBOOK_TOKEN,
+          :access_token => FACEBOOK_ACCESS_TOKEN,
           :message => @text,
           :source => @image_file,
           :no_story => false,
         )
       else
         page.feed!(
-          :access_token => FACEBOOK_TOKEN,
+          :access_token => FACEBOOK_ACCESS_TOKEN,
           :message => @text,
           :link => @asin ? "http://www.goldread.net/dp/#{@asin}" : nil,
         )
