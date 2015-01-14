@@ -150,6 +150,10 @@ module FreeKindleCN
         douban_id ? "http://book.douban.com/subject/#{douban_id}/" : "#"
       end
 
+      def goldread_url(asin)
+        asin ? "http://goldread.net/dp/#{asin}" : "#"
+      end
+
       def amazon_url(asin)
         asin ? "http://www.amazon.cn/dp/#{asin}" : "#"
       end

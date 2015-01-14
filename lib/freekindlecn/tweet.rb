@@ -58,19 +58,20 @@ module FreeKindleCN
     end
 
     def send_to_facebook
-      page = FbGraph::Page.new(***REMOVED***)
+      page = FbGraph::Page.new(FacebookConfig::PAGE_ID)
       if @image_file
+        @image_file.rewind        
         page.photo!(
-          :access_token => FACEBOOK_ACCESS_TOKEN,
+          :access_token => FacebookConfig::ACCESS_TOKEN,
           :message => @text,
           :source => @image_file,
           :no_story => false,
         )
       else
         page.feed!(
-          :access_token => FACEBOOK_ACCESS_TOKEN,
+          :access_token => FacebookConfig::ACCESS_TOKEN,
           :message => @text,
-          :link => @asin ? "http://www.goldread.net/dp/#{@asin}" : nil,
+          :link => Item.goldread_url(@asin),
         )
       end
     end

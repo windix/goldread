@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="" />
     <meta name="author" content="" />
-    <meta property="fb:app_id" content="***REMOVED***" />
-    <meta property="og:url" content="http://www.goldread.net/dp/<%= item.asin %>" />
+    <meta property="fb:app_id" content="<%= FacebookConfig::PAGE_ID %>" />
+    <meta property="og:url" content="<%= FreeKindleCN::Item.goldread_url(item.asin) %>" />
     <meta property="og:title" content="<%= item.title %> | GoldRead 金玉良读" />
     <meta property="og:image" content="<%= item.cached_image_url %>" />
 

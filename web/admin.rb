@@ -65,7 +65,7 @@ module FreeKindleCN
           end
 
           #discount = "(#{item.formatted_discount_rate}，省#{item.save_amount})"
-          url = "购买: http://goldread.net/dp/#{item.asin}"
+          url = "购买: #{Item.goldread_url(item.asin)}"
 
           "#{title_and_author} #{paper_book_price} / #{kindle_book_price} #{url}"
         end
