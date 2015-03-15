@@ -1,10 +1,6 @@
 #!/usr/bin/env ruby
-# encoding: UTF-8
 
-lib = File.expand_path('../../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-
-require 'freekindlecn'
+require __dir__ + '/../bootstrap'
 require 'thor'
 
 include FreeKindleCN

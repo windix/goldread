@@ -16,7 +16,7 @@ module FreeKindleCN
       register Sinatra::Index
       use_static_index 'index.html'
 
-      set :views, "#{File.expand_path(File.dirname(__FILE__))}/views/home"
+      set :views, "#{__dir__}/views/home"
 
       helpers do
         # TODO shared from admin

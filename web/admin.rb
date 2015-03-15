@@ -16,8 +16,8 @@ module FreeKindleCN
         register Sinatra::Reloader
       end
 
-      set :views, "#{File.expand_path(File.dirname(__FILE__))}/views/admin"
-      # set :public_folder, "#{File.expand_path(File.dirname(__FILE__))}/public"
+      set :views, "#{__dir__}/views/admin"
+      # set :public_folder, "#{__dir__}/public"
 
       helpers WillPaginate::Sinatra::Helpers
 
