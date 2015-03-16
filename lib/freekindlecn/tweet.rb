@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require "open-uri"
 
 require 'twitter'

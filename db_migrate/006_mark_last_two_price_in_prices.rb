@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 =begin
 
 ALTER TABLE `prices`

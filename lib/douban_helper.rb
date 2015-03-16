@@ -1,4 +1,3 @@
-# encoding: UTF-8
 require 'douban_api'
 require 'hashie'
 require 'hashie/mash'

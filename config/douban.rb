@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 DOUBAN_SCOPE = 'douban_basic_common,book_basic_r'
 
 if FreeKindleCN::CONTEXT == :production

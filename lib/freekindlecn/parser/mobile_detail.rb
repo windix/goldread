@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 module FreeKindleCN
   module Parser
     # mobile chrome, 这个是可购买的手机版本页面

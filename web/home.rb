@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'sinatra/base'
 require 'sinatra-index'
 require 'erb'

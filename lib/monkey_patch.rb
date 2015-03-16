@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 class Array
   def odd_values
     self.values_at(* self.each_index.select(&:even?))
