@@ -184,6 +184,9 @@ GEM
       unf_ext
     unf_ext (0.0.6)
     uuidtools (2.1.4)
+    webmock (1.17.4)
+      addressable (>= 2.2.7)
+      crack (>= 0.3.2)
     weibo_2 (0.1.4)
       hashie (~> 2.0.4)
       multi_json (~> 1.7.2)
@@ -218,6 +221,7 @@ DEPENDENCIES
   thor
   twitter
   twitter-text
+  webmock
   weibo_2
   will_paginate
   will_paginate-bootstrap

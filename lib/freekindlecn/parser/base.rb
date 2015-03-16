@@ -84,6 +84,17 @@ module FreeKindleCN
         end
       end
 
+      def asin_from_url(url)      
+        formats = [
+          %r{/gp/product/([A-Z0-9]+)}, # format1: /gp/product/{asin}/
+          %r{/dp/([A-Z0-9]+)}          # format2: /dp/{asin}/
+        ]
+
+        formats.each { |format| return $~[1] if format.match url }
+
+        nil # no match
+      end
+
       # parse prices: used by web_detail and mobile_detail parser
       def parse_price_block(trs)
         @ebook_full_price = -1      # 电子书定价

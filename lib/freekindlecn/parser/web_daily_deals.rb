@@ -13,13 +13,15 @@ module FreeKindleCN
           # daily deals
           @daily_asins = []
           doc.css('img[alt="立即购买"]').each do |img|
-            @daily_asins << img.parent['href'][%r{/gp/product/([A-Z0-9]+)/}, 1]
+            asin = asin_from_url(img.parent['href'])
+            @daily_asins << asin if asin
           end
 
           # weekly deals
           @weekly_asins = []
           doc.css('div.content a').each do |a|
-            @weekly_asins << a['href'][%r{/dp/([A-Z0-9]+)/}, 1]
+            asin = asin_from_url(a['href'])
+            @weekly_asins << asin if asin
           end
 
           @weekly_asins.uniq!
