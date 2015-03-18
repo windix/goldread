@@ -14,12 +14,13 @@ module FreeKindleCN
           if doc.css('p.infoText').text == '该商品目前无法进行购买'
             # book is temporary unavailable
             @parse_result = RESULT_FAILED
-            return false
+            false
 
           elsif doc.css('input[name="ASIN.0"]').length == 1
             # book is available
             parse_price_block(doc.css('div#kindle-price-block table tr'))
             true
+
           else
             # book is permanently unavailable -- the ASIN becomes invalid
             # but we need to verify it: the web dp page will be 404 if it is PERMANENTLY unavailable

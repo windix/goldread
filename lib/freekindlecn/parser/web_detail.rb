@@ -2,6 +2,8 @@ module FreeKindleCN
   module Parser
 
     class WebDetail < Base
+
+      # note the price are based in cents
       attr_reader :ebook_full_price,      # 纸书定价
                   :paperbook_full_price,  # 电子书定价
                   :paperbook_price,       # 纸书特价
@@ -13,6 +15,15 @@ module FreeKindleCN
 
       def parse
         parse_with_retry("http://www.amazon.cn/dp/#{@asin}") do |doc|
+          # verify asin from page and the asin passed in
+          if asin == 'ASIN'
+            # hack for testing -- set correct ASIN
+            @asin = parse_asin(doc)
+          elsif parse_asin(doc) != @asin
+            @parse_result = RESULT_FAILED
+            return false
+          end
+
           parse_price_block(doc.css('table.product tr'))
 
           parse_bindings(doc)
@@ -20,10 +31,16 @@ module FreeKindleCN
           parse_average_views(doc)
 
           parse_num_of_votes(doc)
+
+          true
         end
       end
 
       private
+
+      def parse_asin(doc)
+        asin_from_url(doc.at_css('link[rel=canonical]')['href']) rescue nil
+      end
 
       def parse_bindings(doc)
         # bindings do not contain current (kindle) asin
@@ -59,7 +76,7 @@ module FreeKindleCN
           book_url = tbody.at_css('td.tmm_bookTitle a')
 
           if book_url
-            @bindings[binding_type] = book_url['href'][%r{/dp/([A-Z0-9]+)/}, 1]
+            @bindings[binding_type] = asin_from_url(book_url['href'])
           else
             logger.debug "Cannot parse ASIN, skip..." if binding_type != :kindle
             next
@@ -69,12 +86,12 @@ module FreeKindleCN
 
       def parse_average_views(doc)
         # "平均4.5 星"" -> 4.5
-        @average_reviews = doc.at_css('table#productDetailsTable span.crAvgStars span.swSprite').content[/[\d\.]+/].to_f rescue 0.0
+        @average_reviews = doc.at_css('div#detail_bullets_id span.crAvgStars span.swSprite').content[/[\d\.]+/].to_f rescue 0.0
       end
 
       def parse_num_of_votes(doc)
         # "56 条商品评论" => 56
-        @num_of_votes = doc.at_css('table#productDetailsTable span.crAvgStars > a').content[/[\d,]+/].sub(',', '').to_i rescue 0
+        @num_of_votes = doc.at_css('div#detail_bullets_id span.crAvgStars > a').content[/[\d,]+/].sub(',', '').to_i rescue 0
       end
 
     end # class

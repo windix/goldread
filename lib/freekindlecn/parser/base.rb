@@ -27,6 +27,15 @@ module FreeKindleCN
         @asin = asin
       end
 
+      # inspect instance variables
+      def inspect
+        attributes = instance_variables
+          .collect { |v| v.to_s.sub('@', '').to_sym }
+          .delete_if { |v| v == :content } # remove content from result
+
+        Hash[ attributes.collect { |v| [ v, send(v) ] } ]
+      end
+
       protected
 
       def client(mobile)
@@ -78,6 +87,7 @@ module FreeKindleCN
             false
           else
             logger.debug "[#{@asin}] retry no.#{retry_times} Exception: #{e.message}"
+            logger.debug e.backtrace
             sleep 5
             retry
           end

@@ -1,6 +1,7 @@
-require __dir__ + "/../bootstrap"
-require "minitest/autorun"
+require_relative "../bootstrap"
+require 'minitest/autorun'
 require 'webmock/minitest'
+require 'yaml'
 
 class TestParser < MiniTest::Test
 
@@ -22,7 +23,7 @@ class TestParser < MiniTest::Test
   def test_web_list
     # WebList.url_for('bestsellers')
 
-    loop_through_fixtures('web_list') do
+    loop_through_fixtures('web_list') do |file_name|
       parser = WebList.new('bestsellers')
 
       assert_equal true, parser.parse
@@ -35,20 +36,33 @@ class TestParser < MiniTest::Test
     end
   end
 
+  def test_web_details
+    loop_through_fixtures('web_detail') do |file_path|
+      parser = FreeKindleCN::Parser.factory('web', 'ASIN')
+
+      assert_equal WebDetail::RESULT_SUCCESSFUL, parser.parse_result, 'parse_result'
+
+      # verify against data file
+      YAML.load_file("#{file_path}.yaml").each do |k, v|
+        assert_equal v, parser.send(k), k.to_s
+      end
+    end
+  end
+
   protected
 
   def loop_through_fixtures(name, &block)
     WebMock.enable!
-    Dir[__dir__ + "/fixture/#{name}/*html"].each do |file|
-      # logger.debug file
+    Dir[__dir__ + "/fixture/#{name}/*html"].each do |file_path|
+      # logger.debug file_path
 
       WebMock.reset!
 
       stub_request(:any, %r[www.amazon.cn/.*]).to_return(
-        :body => File.open(file)
+        :body => File.open(file_path)
       )
 
-      block.call
+      block.call file_path
     end
 
     # check with live page
