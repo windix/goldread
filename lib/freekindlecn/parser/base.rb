@@ -105,6 +105,10 @@ module FreeKindleCN
         nil # no match
       end
 
+      def parse_asin(doc)
+        asin_from_url(doc.at_css('link[rel=canonical]')['href']) rescue nil
+      end
+
       # parse prices: used by web_detail and mobile_detail parser
       def parse_price_block(trs)
         @ebook_full_price = -1      # 电子书定价

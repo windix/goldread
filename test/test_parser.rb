@@ -36,9 +36,22 @@ class TestParser < MiniTest::Test
     end
   end
 
-  def test_web_details
+  def test_web_detail
     loop_through_fixtures('web_detail') do |file_path|
       parser = FreeKindleCN::Parser.factory('web', 'ASIN')
+
+      assert_equal WebDetail::RESULT_SUCCESSFUL, parser.parse_result, 'parse_result'
+
+      # verify against data file
+      YAML.load_file("#{file_path}.yaml").each do |k, v|
+        assert_equal v, parser.send(k), k.to_s
+      end
+    end
+  end
+
+  def test_mobile_detail
+    loop_through_fixtures('mobile_detail') do |file_path|
+      parser = FreeKindleCN::Parser.factory('mobile', 'ASIN')
 
       assert_equal WebDetail::RESULT_SUCCESSFUL, parser.parse_result, 'parse_result'
 

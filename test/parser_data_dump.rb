@@ -10,6 +10,6 @@ stub_request(:any, %r[www.amazon.cn/.*]).to_return(
   :body => File.open(file_path)
 )
 
-parser = FreeKindleCN::Parser.factory('web', 'ASIN')
+parser = FreeKindleCN::Parser.factory('mobile', 'ASIN')
 
 puts parser.inspect.to_yaml

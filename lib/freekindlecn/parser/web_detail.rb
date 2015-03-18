@@ -38,10 +38,6 @@ module FreeKindleCN
 
       private
 
-      def parse_asin(doc)
-        asin_from_url(doc.at_css('link[rel=canonical]')['href']) rescue nil
-      end
-
       def parse_bindings(doc)
         # bindings do not contain current (kindle) asin
         @bindings = {}

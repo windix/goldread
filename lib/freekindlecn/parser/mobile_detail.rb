@@ -18,6 +18,16 @@ module FreeKindleCN
 
           elsif doc.css('input[name="ASIN.0"]').length == 1
             # book is available
+
+            # verify asin from page and the asin passed in
+            if asin == 'ASIN'
+              # hack for testing -- set correct ASIN
+              @asin = parse_asin(doc)
+            elsif parse_asin(doc) != @asin
+              @parse_result = RESULT_FAILED
+              return false
+            end
+
             parse_price_block(doc.css('div#kindle-price-block table tr'))
             true
 
@@ -26,7 +36,7 @@ module FreeKindleCN
             # but we need to verify it: the web dp page will be 404 if it is PERMANENTLY unavailable
             # return nil if HTTPClient.get("http://www.amazon.cn/dp/#{asin}").status_code == 404
 
-            @parser_result = RESULT_DELETED
+            @parse_result = RESULT_DELETED
             false
           end
         end
