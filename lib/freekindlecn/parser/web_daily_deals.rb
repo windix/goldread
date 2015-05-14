@@ -12,14 +12,14 @@ module FreeKindleCN
         parse_with_retry(@url) do |doc|
           # daily deals
           @daily_asins = []
-          doc.css('img[alt="立即购买"]').each do |img|
-            asin = asin_from_url(img.parent['href'])
+          doc.css('div.content').first.css('a').each do |a|
+            asin = asin_from_url(a['href'])
             @daily_asins << asin if asin
           end
 
           # weekly deals
           @weekly_asins = []
-          doc.css('div.content a').each do |a|
+          doc.css('div.content').last.css('a').each do |a|
             asin = asin_from_url(a['href'])
             @weekly_asins << asin if asin
           end
