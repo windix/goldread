@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'asin', "~> 2.0"
-gem 'httpclient', '~> 2.4.0'
+gem 'httpclient', '~> 2.6.0'
 gem 'nokogiri'
 gem "data_mapper", "~>1.2"
 gem "dm-mysql-adapter"

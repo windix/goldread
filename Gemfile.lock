@@ -99,11 +99,11 @@ GEM
       tzinfo
     hashie (2.0.5)
     httpauth (0.2.0)
-    httpclient (2.4.0)
+    httpclient (2.6.0.1)
     httpi (2.3.0)
       rack
     i18n (0.7.0)
-    json (1.8.0)
+    json (1.8.3)
     json_pure (1.8.0)
     jwt (0.1.8)
       multi_json (>= 1.5)
@@ -208,7 +208,7 @@ DEPENDENCIES
   douban_api!
   fb_graph
   hashie
-  httpclient (~> 2.4.0)
+  httpclient (~> 2.6.0)
   json
   log_buddy!
   minitest

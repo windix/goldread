@@ -1,0 +1,6 @@
+--- !ruby/hash:Hashie::Mash
+access_token: ***REMOVED***
+douban_user_name: ***REMOVED***
+douban_user_id: '***REMOVED***'
+expires_in: 604800
+refresh_token: ***REMOVED***
