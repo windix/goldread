@@ -6,7 +6,7 @@ gem 'nokogiri'
 gem "data_mapper", "~>1.2"
 gem "dm-mysql-adapter"
 gem "sinatra"
-gem "sinatra-index"
+gem "sinatra-index", :git => 'https://github.com/mxlje/sinatra-index'
 gem "twitter"
 gem "weibo_2"
 gem "thor"
