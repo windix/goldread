@@ -35,7 +35,7 @@ module FreeKindleCN
 #        erb :index
 #      end
 
-      get '/dp/:asin' do
+      get "/dp/:asin/?" do
         if Item.is_valid_asin?(params[:asin]) &&
           item = DB::Item.first(:asin => params[:asin])
 
