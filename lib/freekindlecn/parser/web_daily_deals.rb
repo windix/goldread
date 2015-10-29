@@ -12,7 +12,7 @@ module FreeKindleCN
         parse_with_retry(@url) do |doc|
           # daily deals
           @daily_asins = []
-          doc.css('div.unified_widget').first.css('a').each do |a|
+          doc.css('div.shogun-widget').first.css('a').each do |a|
             asin = asin_from_url(a['href'])
             @daily_asins << asin if asin
           end
