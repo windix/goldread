@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'sinatra/base'
 require 'sinatra-index'
 require 'erb'
@@ -16,7 +14,7 @@ module FreeKindleCN
       register Sinatra::Index
       use_static_index 'index.html'
 
-      set :views, "#{File.expand_path(File.dirname(__FILE__))}/views/home"
+      set :views, "#{__dir__}/views/home"
 
       helpers do
         # TODO shared from admin
@@ -37,7 +35,7 @@ module FreeKindleCN
 #        erb :index
 #      end
 
-      get '/dp/:asin' do
+      get "/dp/:asin/?" do
         if Item.is_valid_asin?(params[:asin]) &&
           item = DB::Item.first(:asin => params[:asin])
 
@@ -48,13 +46,11 @@ module FreeKindleCN
       end
 
       get '/oauth/weibo' do
-        require 'weibo_config'
         client = WeiboOAuth2::Client.new
         redirect client.authorize_url
       end
 
       get '/oauth/callback/weibo' do
-        require 'weibo_config'
         client = WeiboOAuth2::Client.new
         access_token = client.auth_code.get_token(params[:code])
 
@@ -62,12 +58,10 @@ module FreeKindleCN
       end
 
       get '/oauth/douban' do
-        require 'douban_config'
         redirect DoubanHelper.auth_url
       end
 
       get '/oauth/callback/douban' do
-        require 'douban_config'
         DoubanHelper.handle_callback(params[:code])
 
         "Done!"

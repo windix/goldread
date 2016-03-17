@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 require 'sinatra/base'
 require 'erb'
 require 'chartkick'
@@ -16,8 +14,8 @@ module FreeKindleCN
         register Sinatra::Reloader
       end
 
-      set :views, "#{File.expand_path(File.dirname(__FILE__))}/views/admin"
-      # set :public_folder, "#{File.expand_path(File.dirname(__FILE__))}/public"
+      set :views, "#{__dir__}/views/admin"
+      # set :public_folder, "#{__dir__}/public"
 
       helpers WillPaginate::Sinatra::Helpers
 
@@ -65,7 +63,7 @@ module FreeKindleCN
           end
 
           #discount = "(#{item.formatted_discount_rate}，省#{item.save_amount})"
-          url = "购买: http://goldread.net/dp/#{item.asin}"
+          url = "购买: #{Item.goldread_url(item.asin)}"
 
           "#{title_and_author} #{paper_book_price} / #{kindle_book_price} #{url}"
         end
@@ -198,8 +196,6 @@ module FreeKindleCN
       end
 
       post '/tweet' do
-        require 'updater'
-
         tweet = Tweet.new params[:tweet_text],
           params[:tweet_hashtag],
           params[:tweet_upload_picture] ? params[:tweet_image_url] : nil,

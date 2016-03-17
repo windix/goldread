@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'asin', "~> 2.0"
-gem 'httpclient', '~> 2.4.0'
+gem 'httpclient', '~> 2.6.0'
 gem 'nokogiri'
 gem "data_mapper", "~>1.2"
 gem "dm-mysql-adapter"
 gem "sinatra"
-gem "sinatra-index"
+gem "sinatra-index", :git => 'https://github.com/mxlje/sinatra-index'
 gem "twitter"
 gem "weibo_2"
 gem "thor"
@@ -28,4 +28,5 @@ group :development do
   gem "sinatra-contrib"
   gem "minitest"
   gem "pry"
+  gem "webmock"
 end

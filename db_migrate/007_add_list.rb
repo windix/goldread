@@ -1,5 +1,3 @@
-# encoding: UTF-8
-
 =begin
 
 CREATE TABLE IF NOT EXISTS `lists` (

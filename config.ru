@@ -1,4 +1,4 @@
-require './freekindlecn'
+require './bootstrap'
 require './web/home'
 require './web/admin'
 require 'sidekiq/web'
